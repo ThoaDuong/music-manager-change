@@ -8,9 +8,6 @@ musicManager.controller('songsController', function($scope, $location, songServi
         }
     }
     resetSong();
-    songService.getListSongs().then(function(data){
-        $scope.listSongs = data;
-    })
     $scope.isEdit = false;
     $scope.isCheck = {};
     $scope.isAll = {};

@@ -14,7 +14,6 @@ musicManager.controller('actionSongController', function($scope, $location, song
         $location.path("/manager");
     }
     $scope.onEditSong = function(song){
-        
         $scope.song.name = song.name;
         $scope.song.artist = song.artist;
         $scope.song.id = song.id;
