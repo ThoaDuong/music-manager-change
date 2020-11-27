@@ -1,0 +1,40 @@
+<div id="wrapper">
+    <header class="header">
+        <a class="header__logo" href="#">
+            <img src="./images//logo.png" alt="Logo">
+        </a>
+        <h1 class="header__title">Music Manager</h1>
+    </header>
+    <section class="banner">
+        <p class="banner__content">Without music, life would be a mistake</p>
+    </section>
+    <div class="main-content">
+        <aside class="aside">
+            <ul class="aside__menu">
+                <li class="aside__li">
+                    <a class="aside__link" href="#/manager">
+                        <i class="fas fa-compact-disc"></i> Songs
+                    </a>
+                </li>
+                <li class="aside__li">
+                    <a class="aside__link" href="#/playlist">
+                        <i class="fas fa-th-list"></i> Playlists
+                    </a>
+                </li>
+            </ul>
+        </aside>
+        <div class="content">
+            <article class="content__menu">
+                <a href="#" class="content__name">Home</a>
+                <i class="fas fa-angle-right"></i>
+                <a href="#" class="content__name">
+                    {{linkName}}
+                </a>
+            </article>
+            <div class="switch-view" ng-view></div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="footer__copyright">Copyright 2020, TMA Solutions</div>
+    </footer>
+</div>

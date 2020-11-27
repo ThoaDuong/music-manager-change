@@ -1,0 +1,51 @@
+<section class="manage">
+    <div class="bar">
+        <h3 class="bar__title">Manage songs</h3>
+        <div class="tools row">
+            <button class="tools__add col-12 col-sm-4"
+                ng-click="onClickAddSong()"><i class="fas fa-plus"></i> Add
+            </button>
+            <button class="tools__delete col-12 col-sm-4"
+                ng-click="onMultiDelete()"><i class="far fa-trash-alt"></i> Delete
+            </button>
+            <input class="tools__search col-12 col-sm-4" type="text" 
+                name="search" 
+                placeholder="Search"
+                ng-model="searchKeyWord">
+        </div>
+    </div>
+    
+    
+
+    <div class="table-responsive-sm">
+        <table width="100%" class="table table-hover">
+            <thead class="table__head">
+                <tr>
+                    <th><input type="checkbox" ng-change="onCheckAll(isAll)" ng-model="isAll['all']" ></th>
+                    <th>Name</th>
+                    <th>Artist</th>
+                    <th class="--padding">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="song in listSongs | filter:searchKeyWord:strict">
+                    <td><input ng-change="onSingleChange(song)" ng-model="isCheck[song.id]" type="checkbox"></td>
+                    <td>{{song.name}} </td>
+                    <td>{{song.artist}} </td>
+                    <td width="200px">
+                        <button ng-click="onEditSong(song)" class="btn table__edit">
+                            <i class="far fa-edit"></i>
+                            <span class="btn-name">Edit</span>
+                        </button>
+                        <button ng-click="onDeleteSong(song.id)" class="btn table__delete">
+                            <i class="far fa-trash-alt"></i>
+                            <span class="btn-name">Delete</span>
+                        </button>
+                    </td>
+                </tr>
+               
+    
+            </tbody>
+        </table>
+    </div>
+</section>

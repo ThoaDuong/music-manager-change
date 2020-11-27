@@ -1,0 +1,50 @@
+<section class="playlist">
+    <div class="row">
+        <div class="col-12 col-md-8 mx-auto">
+            <h3 class="playlist__title">Manage playlists</h3>
+
+
+            <!-- Button trigger modal -->
+            <button class="add-to-playlist" data-toggle="modal" data-target="#modalCenter">
+                <i class="far fa-plus-square"></i> Add To Playlist
+            </button>
+            
+            <!-- Modal -->
+            <div class="modal fade" id="modalCenter" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h4 class="modal-title" id="modalLongTitle">Add songs to playlist</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                        <div ng-include="'playlists/view/playlist.template.html'"></div>
+                    </div>
+                    <div class="modal-footer">
+                    <button class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button class="btn btn-primary" data-dismiss="modal" ng-click="onSaveChange()">Save changes</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+
+
+
+            <ul class="playlist__list">
+                <li class="playlist__li" ng-repeat="item in listPlaylists" data-toggle="collapse" data-target="#playlist{{item.id}}">
+                    <span><i class="fas fa-chevron-down"></i></span>
+                    <span class="font-weight-bold">
+                        {{item.name}}
+                    </span>
+
+                    <ul id="playlist{{item.id}}" class="collapse --custom-collapse">
+                        <li ng-repeat="song in item.songs"> - {{song.name}} </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>

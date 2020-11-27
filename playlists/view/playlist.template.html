@@ -1,0 +1,58 @@
+<div class="template">
+    <div class="row">
+        <div class="col-5">
+            <h5>List songs</h5>
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>
+                        <input type="checkbox" name="checkbox">
+                    </th>
+                    <th>Name</th>
+                    <th>Artist</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="song in listSongs">
+                      <td>
+                        <input type="checkbox" name="checkbox">
+                      </td>
+                    <td> {{song.name}} </td>
+                    <td> {{song.artist}} </td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+        <div class="col-2 text-center">
+            <div class="btn-group-vertical">
+                <button class="template__btn" ng-click="">
+                    Add <i class="fas fa-angle-right"></i>
+                </button>
+                <button class="template__btn">
+                    Add all <i class="fas fa-angle-double-right"></i>
+                </button>
+                <button class="template__btn">
+                    Remove <i class="fas fa-angle-left"></i>
+                </button>
+                <button class="template__btn">
+                    Remove all <i class="fas fa-angle-double-left"></i>
+                </button>
+            </div>
+        </div>
+        <div class="col-5">
+            <h5>List playlists</h5>
+            <table class="table table-hover w-100">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="playlist in listPlaylists">
+                    <td> {{playlist.name}} </td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+</div>

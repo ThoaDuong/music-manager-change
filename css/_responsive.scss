@@ -1,0 +1,53 @@
+
+@media screen and (max-width: 500px){
+    body{
+        .banner{
+            height: 150px;
+            &__content{
+                font-size: 16px!important;
+                line-height: 150px;
+            }
+        }
+        .table__edit{
+            padding: 3px 6px;
+        }
+    }
+    
+}
+@media screen and (max-width: 768px){
+    body{
+        .banner{
+            &__content{
+                font-size: 25px;
+            }
+        }
+        .manage{
+            .bar{
+                flex-direction: column;
+            }
+            .btn-name{
+                display: none;
+            }
+        }
+    }
+    
+}
+
+@media screen and (max-width: 992px){
+    body{
+        .main-content{
+            flex-direction: column;
+            .aside{
+                width: 100%;
+                padding: 0 10px;
+                &__menu{
+                    margin-bottom: 0;
+                }
+                &__li{
+                    display: inline-block;
+                }
+            }
+        }
+    }
+    
+}

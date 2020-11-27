@@ -1,0 +1,27 @@
+<div class="row form">
+    <div class="col-12 col-md-6 mx-auto">
+        <h3 class="form__title">Create Song</h3>
+        <form name="songForm" novalidate class="form-group">
+            <label>*Song Name</label>
+            <input name="songName" ng-model="song.name" type="text" class="form-control" required>
+            <p ng-show="songForm.songName.$touched && songForm.songName.$invalid" 
+            class="text-danger font-weight-bold">Song name cannot be empty.</p>
+            <label>Artist</label>
+            <input name="songArtist" ng-model="song.artist" type="text" class="form-control">
+            <hr>
+            <button class="btn form__btn-submit"
+                ng-show="isEdit"
+                ng-disabled="songForm.songName.$invalid"
+                ng-click="onApplyEditSong(song)"> Apply
+            </button>
+            <button class="btn form__btn-submit"
+                ng-show="!isEdit"
+                ng-disabled="songForm.songName.$invalid"
+                ng-click="onCreateSong()"> Create
+            </button>
+            <button class="btn form__btn-cancel"
+                ng-click="onCancelSubmit()">Cancel
+            </button>
+        </form>
+    </div>
+</div>

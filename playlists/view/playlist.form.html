@@ -1,0 +1,32 @@
+<div class="row playlist-form">
+    <div class="col-12 col-md-6 mx-auto">
+        <h3 class="form__title">Choose a Playlist</h3>
+        <ul class="playlist-form__list">
+            <li class="playlist-form__li" ng-repeat="item in listPlaylists" ng-click="onChoosePlaylist(item)">
+                <i class="fas fa-chevron-right"></i> {{item.name}}
+            </li>
+        </ul>
+        <div class="playlist-form__or">or</div>
+        <h3 class="form__title">Create a Playlist</h3>
+        <form name="songForm" novalidate class="form-group">
+            <label>*Playlist Name</label>
+            <input name="songName" ng-model="playlist.name" type="text" class="form-control" required>
+            <p ng-show="songForm.songName.$touched && songForm.songName.$invalid" 
+            class="text-danger font-weight-bold">Playlist name cannot be empty.</p>
+            <hr>
+            <button class="btn form__btn-submit"
+                ng-show="isEdit"
+                ng-disabled="songForm.songName.$invalid"
+                ng-click="onApplyEditPlaylist(playlist)"> Apply
+            </button>
+            <button class="btn form__btn-submit"
+                ng-show="!isEdit"
+                ng-disabled="songForm.songName.$invalid"
+                ng-click="onCreatePlaylist()"> Create
+            </button>
+            <button class="btn form__btn-cancel"
+                ng-click="onCancelSubmitPlaylist()">Cancel
+            </button>
+        </form>
+    </div>
+</div>
