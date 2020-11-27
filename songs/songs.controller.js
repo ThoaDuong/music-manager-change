@@ -1,4 +1,5 @@
 musicManager.controller('songsController', function($scope, $location, songService){
+    //Variable declaration of songs
     $scope.song;
     resetSong = function(){
         $scope.song = {
@@ -18,38 +19,9 @@ musicManager.controller('songsController', function($scope, $location, songServi
 
 
 
-
-    $scope.onClickAddSong = function(){
-        $location.path("/song");
-    }
-    $scope.onCreateSong = function(){
-        songService.addSong($scope.song).then(function(data){
-            $scope.listSongs.push(data);
-        })
-        resetSong();
-        $location.path("/manager");
-    }
-    $scope.onCancelSubmit = function(){
-        resetSong();
-        $location.path("/manager");
-    }
-    $scope.onEditSong = function(song){
-        $scope.song = {...song};
-        $scope.isEdit = true;
-        $location.path('/song')
-    }
-    $scope.onApplyEditSong = function(song){
-        $scope.song = song;
-        console.log('Scope', $scope.song);
-        $scope.$watch('song', function(oldValue, newValue){
-            console.log('Old', oldValue);
-            console.log('New', newValue);
-        })
-        songService.updateSong(song);
-        $scope.isEdit = false;
-        resetSong();
-        $location.path("/manager");
-    }
+    //Function declaration of songs
+    
+    
     var onConfirmDeleteSong = function(id){
         songService.deleteSong(id).then(function(item){
             $scope.listSongs.forEach((element, index) => {
@@ -81,20 +53,17 @@ musicManager.controller('songsController', function($scope, $location, songServi
             })
             $scope.isAll['all'] = false;
         }
-
     }
-    $scope.onSingleChange = function(songId){
-        if($scope.isCheck[songId]){
-            multiSelect.push({
-                id: songId
-            })
+    $scope.onSingleChange = function(song){
+        if($scope.isCheck[song.id]){
+            multiSelect.push(song);
             if(multiSelect.length == $scope.listSongs.length){
                 $scope.isAll = { all: true };
             }
         }
         else{
             multiSelect.forEach(function(ele, index){
-                if(ele.id == songId){
+                if(ele.id == song.id){
                     multiSelect.splice(index, 1);
                 }
             })
@@ -105,7 +74,7 @@ musicManager.controller('songsController', function($scope, $location, songServi
         if($scope.isAll['all']){
             multiSelect = [];
             $scope.listSongs.forEach(function(ele){
-                multiSelect.push({id: ele.id});
+                multiSelect.push(ele);
                 $scope.isCheck[ele.id] = true;
             })
         }
@@ -115,7 +84,5 @@ musicManager.controller('songsController', function($scope, $location, songServi
                 $scope.isCheck[ele.id] = false;
             })
         }
-    }
-    $scope.onAddToPlaylist = function(){
     }
 })
