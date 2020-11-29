@@ -2,7 +2,7 @@ musicManager.config(function($locationProvider, $stateProvider){
     $locationProvider.hashPrefix('');
     $stateProvider
     .state('home', {
-        url: '/',
+        url: '',
         templateUrl: 'songs/view/songs.view.html',
         controller: 'songsController',
     })
@@ -21,9 +21,14 @@ musicManager.config(function($locationProvider, $stateProvider){
         templateUrl: 'playlists/view/playlists.html',
         controller: 'playlistsController',
     })
-    .state('playlist.add', {
+    .state('playlist-add', {
         url: '/add-playlist',
         templateUrl: 'playlists/view/playlist.form.html',
         controller: 'playlistsController',
+    })
+    .state('playlist-create', {
+        url: '/create-playlist',
+        templateUrl: 'playlists/action/playlist.template.html',
+        controller: 'playlistActionController',
     })
 })

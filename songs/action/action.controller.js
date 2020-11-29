@@ -1,4 +1,4 @@
-musicManager.controller('actionSongController', function($scope, $location, songService){
+musicManager.controller('actionSongController', function($scope, $location, songService, $rootScope){
     $scope.onClickAddSong = function(){
         $location.path("/song");
     }
@@ -13,13 +13,6 @@ musicManager.controller('actionSongController', function($scope, $location, song
         resetSong();
         $location.path("/manager");
     }
-    $scope.onEditSong = function(song){
-        $scope.song.name = song.name;
-        $scope.song.artist = song.artist;
-        $scope.song.id = song.id;
-        $scope.isEdit = true;
-        $location.path('/song');
-    }
     $scope.onApplyEditSong = function(song){
         $scope.listSongs.forEach(function(ele){
             if(ele.id === song.id){
@@ -28,8 +21,9 @@ musicManager.controller('actionSongController', function($scope, $location, song
             }
         })
         songService.updateSong(song);
-        $scope.isEdit = false;
+        $rootScope.isEdit = false;
         resetSong();
         $location.path("/manager");
     }
+    
 })

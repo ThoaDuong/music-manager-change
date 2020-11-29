@@ -10,7 +10,7 @@
             </button>
             
             <!-- Modal -->
-            <div class="modal fade" id="modalCenter" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+            <!-- <div class="modal fade" id="modalCenter" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -20,7 +20,7 @@
                     </button>
                     </div>
                     <div class="modal-body">
-                        <div ng-include="'playlists/view/playlist.template.html'"></div>
+                        <div class="template-wrapper" ng-include="'playlists/action/playlist.template.html'"></div>
                     </div>
                     <div class="modal-footer">
                     <button class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -28,12 +28,42 @@
                     </div>
                 </div>
                 </div>
-            </div>
+            </div> -->
 
 
 
 
-            <ul class="playlist__list">
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>
+                        <input type="checkbox" name="checkbox">
+                    </th>
+                    <th>Name</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="playlist in listPlaylists">
+                      <td>
+                        <input type="checkbox" name="checkbox">
+                      </td>
+                    <td> {{playlist.name}} </td>
+                    <td width="200px">
+                        <button ng-click="onEditSong(song)" class="btn table__edit">
+                            <i class="far fa-edit"></i>
+                            <span class="btn-name">Edit</span>
+                        </button>
+                        <button ng-click="onDeleteSong(song.id)" class="btn table__delete">
+                            <i class="far fa-trash-alt"></i>
+                            <span class="btn-name">Delete</span>
+                        </button>
+                    </td>
+                  </tr>
+                </tbody>
+            </table>
+
+            <!-- <ul class="playlist__list">
                 <li class="playlist__li" ng-repeat="item in listPlaylists" data-toggle="collapse" data-target="#playlist{{item.id}}">
                     <span><i class="fas fa-chevron-down"></i></span>
                     <span class="font-weight-bold">
@@ -44,7 +74,7 @@
                         <li ng-repeat="song in item.songs"> - {{song.name}} </li>
                     </ul>
                 </li>
-            </ul>
+            </ul> -->
         </div>
     </div>
 </section>

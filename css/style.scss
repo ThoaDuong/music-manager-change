@@ -179,11 +179,11 @@ html, body{
         }
         .modal-dialog,
         .modal-content {
-            height: 70%;
+            // height: 70%;
         }
         .modal-body {
             max-height: calc(100% - 120px);
-            overflow-y: hidden;
+            // overflow-y: hidden;
         }
     }
     .playlist-form{

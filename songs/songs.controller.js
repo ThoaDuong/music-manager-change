@@ -1,23 +1,17 @@
-musicManager.controller('songsController', function($scope, $location, songService){
-    //Variable declaration of songs
-    $scope.song;
-    resetSong = function(){
-        $scope.song = {
-            name: '',
-            artist: ''
-        }
-    }
-    resetSong();
-    $scope.isEdit = false;
+musicManager.controller('songsController', function($scope, $location, songService, $rootScope){
     $scope.isCheck = {};
     $scope.isAll = {};
     var multiSelect = [];
    
 
-
-
-    //Function declaration of songs
     
+    $scope.onEditSong = function(song){
+        $scope.song.name = song.name;
+        $scope.song.artist = song.artist;
+        $scope.song.id = song.id;
+        $rootScope.isEdit = true;
+        $location.path('/song');
+    }
     
     var onConfirmDeleteSong = function(id){
         songService.deleteSong(id).then(function(item){
@@ -81,5 +75,8 @@ musicManager.controller('songsController', function($scope, $location, songServi
                 $scope.isCheck[ele.id] = false;
             })
         }
+    }
+    $scope.onChangeSearch = function(keyWord){
+        $scope.searchKeyWord = keyWord;
     }
 })

@@ -6,7 +6,7 @@
                 <thead>
                   <tr>
                     <th>
-                        <input type="checkbox" name="checkbox">
+                        <th><input type="checkbox" ng-change="onCheckAll(isAll)" ng-model="isAll['all']" ></th>
                     </th>
                     <th>Name</th>
                     <th>Artist</th>
@@ -14,9 +14,7 @@
                 </thead>
                 <tbody>
                   <tr ng-repeat="song in listSongs">
-                      <td>
-                        <input type="checkbox" name="checkbox">
-                      </td>
+                    <td><input ng-change="onSingleChange(song)" ng-model="isCheck[song.id]" type="checkbox"></td>
                     <td> {{song.name}} </td>
                     <td> {{song.artist}} </td>
                   </tr>
@@ -41,16 +39,24 @@
         </div>
         <div class="col-5">
             <h5>List playlists</h5>
-            <table class="table table-hover w-100">
+            <table class="table table-hover">
                 <thead>
                   <tr>
+                    <th>
+                        <input type="checkbox" name="checkbox">
+                    </th>
                     <th>Name</th>
+                    <th>Artist</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr ng-repeat="playlist in listPlaylists">
-                    <td> {{playlist.name}} </td>
-                  </tr>
+                  <!-- <tr ng-repeat="song in listSongs">
+                      <td>
+                        <input type="checkbox" name="checkbox">
+                      </td>
+                    <td> {{song.name}} </td>
+                    <td> {{song.artist}} </td>
+                  </tr> -->
                 </tbody>
               </table>
         </div>

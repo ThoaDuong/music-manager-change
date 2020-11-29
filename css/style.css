@@ -269,14 +269,8 @@ html, body {
   max-width: 80%;
 }
 
-.main-content .playlist .modal-dialog,
-.main-content .playlist .modal-content {
-  height: 70%;
-}
-
 .main-content .playlist .modal-body {
   max-height: calc(100% - 120px);
-  overflow-y: hidden;
 }
 
 .main-content .playlist-form__or {
