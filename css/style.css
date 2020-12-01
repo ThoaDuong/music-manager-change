@@ -265,14 +265,6 @@ html, body {
   outline: none;
 }
 
-.main-content .playlist .modal-lg {
-  max-width: 80%;
-}
-
-.main-content .playlist .modal-body {
-  max-height: calc(100% - 120px);
-}
-
 .main-content .playlist-form__or {
   text-align: center;
   width: 100%;
@@ -324,7 +316,7 @@ html, body {
 
 .main-content .template .table {
   display: block;
-  max-height: 70%;
+  height: 55vh;
   overflow-y: scroll;
 }
 
@@ -371,5 +363,18 @@ html, body {
   text-align: center;
   color: #442c2e;
   font-weight: 600;
+}
+
+.custom-table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.playlist-table thead {
+  width: 100%;
 }
 /*# sourceMappingURL=style.css.map */

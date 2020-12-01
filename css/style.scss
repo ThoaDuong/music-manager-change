@@ -174,17 +174,17 @@ html, body{
                 outline: none;
             }
         }
-        .modal-lg{
-            max-width: 80%;
-        }
-        .modal-dialog,
-        .modal-content {
-            // height: 70%;
-        }
-        .modal-body {
-            max-height: calc(100% - 120px);
-            // overflow-y: hidden;
-        }
+        // .modal-lg{
+        //     max-width: 80%;
+        // }
+        // .modal-dialog,
+        // .modal-content {
+        //     // height: 70%;
+        // }
+        // .modal-body {
+        //     max-height: calc(100% - 120px);
+        //     // overflow-y: hidden;
+        // }
     }
     .playlist-form{
         &__or{
@@ -232,7 +232,7 @@ html, body{
         }
         .table{
             display: block;
-            max-height: 70%;
+            height: 55vh;
             overflow-y: scroll;
         }
     }
@@ -273,4 +273,17 @@ html, body{
     }
 }
 
+
+.custom-table{
+    table-layout: fixed;
+    width: 100%;
+}
+.cursor-pointer{
+    cursor: pointer;
+}
+.playlist-table{
+    thead{
+        width: 100%;
+    }
+}
 

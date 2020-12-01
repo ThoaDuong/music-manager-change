@@ -33,8 +33,8 @@ musicManager.service('playlistService', function($http){
         })
     }
     this.deletePlaylist = function(id){
-        // return $http.delete(this.url + '/song/' + id).then(function(res){
-        //     return res.data;
-        // })
+        return $http.delete(this.url + '/playlist/' + id).then(function(res){
+            return res.data;
+        })
     }
 })

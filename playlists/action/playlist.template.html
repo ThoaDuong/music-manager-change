@@ -1,64 +1,92 @@
 <div class="template">
     <div class="row">
+        <div class="col-4 mb-4">
+            <form name="playlistForm">
+                <label>Playlist name</label>
+                <input ng-model="playlistName" name="playlistName" type="text"  class="form-control" placeholder="Enter your playlist's name" required>
+                <p  ng-show="playlistForm.playlistName.$touched && playlistForm.playlistName.$invalid" 
+                    class="text-danger font-weight-bold">Playlist name cannot be empty.
+                </p>
+            </form>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-5">
             <h5>List songs</h5>
-            <table class="table table-hover">
-                <thead>
-                  <tr>
-                    <th>
-                        <th><input type="checkbox" ng-change="onCheckAll(isAll)" ng-model="isAll['all']" ></th>
-                    </th>
-                    <th>Name</th>
-                    <th>Artist</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr ng-repeat="song in listSongs">
-                    <td><input ng-change="onSingleChange(song)" ng-model="isCheck[song.id]" type="checkbox"></td>
-                    <td> {{song.name}} </td>
-                    <td> {{song.artist}} </td>
-                  </tr>
-                </tbody>
-              </table>
+            <div class="table-responsive-sm playlist-table">
+                <table class="table table-hover table-condensed table-bordered">
+                    <thead>
+                      <tr>
+                        <th><input type="checkbox" ng-change="onCheckAll()" ng-model="isAll['all']" ></th>
+                        <th>Name</th>
+                        <th>Artist</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="song in defaultSongs">
+                        <td><input ng-change="onSingleChange(song)" ng-model="isCheck[song.id]" type="checkbox"></td>
+                        <td> {{song.name}} </td>
+                        <td> {{song.artist}} </td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </div>
         </div>
         <div class="col-2 text-center">
             <div class="btn-group-vertical">
-                <button class="template__btn" ng-click="">
+                <button ng-click="onAddASong()" class="template__btn" ng-click="">
                     Add <i class="fas fa-angle-right"></i>
                 </button>
-                <button class="template__btn">
+                <button ng-click="onAddAllSongs()" class="template__btn">
                     Add all <i class="fas fa-angle-double-right"></i>
                 </button>
-                <button class="template__btn">
+                <button ng-click="onRemoveASong()" class="template__btn">
                     Remove <i class="fas fa-angle-left"></i>
                 </button>
-                <button class="template__btn">
+                <button ng-click="onRemoveAllSongs()" class="template__btn">
                     Remove all <i class="fas fa-angle-double-left"></i>
                 </button>
             </div>
         </div>
         <div class="col-5">
             <h5>List playlists</h5>
-            <table class="table table-hover">
-                <thead>
-                  <tr>
-                    <th>
-                        <input type="checkbox" name="checkbox">
-                    </th>
-                    <th>Name</th>
-                    <th>Artist</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <!-- <tr ng-repeat="song in listSongs">
-                      <td>
-                        <input type="checkbox" name="checkbox">
-                      </td>
-                    <td> {{song.name}} </td>
-                    <td> {{song.artist}} </td>
-                  </tr> -->
-                </tbody>
-              </table>
+            <div class="table-responsive-sm playlist-table">
+                <table class="table table-hover table-condensed table-bordered custom-table">
+                    <thead>
+                      <tr>
+                        <th>
+                            <input type="checkbox" name="checkbox" ng-change="onCheckAllRemove()" ng-model="isAllRemove['all']">
+                        </th>
+                        <th>Name</th>
+                        <th>Artist</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="song in selectedSongs">
+                          <td>
+                            <input type="checkbox" name="checkbox" ng-change="onSingleChangeRemove(song)" ng-model="isCheckRemove[song.id]">
+                          </td>
+                        <td> {{song.name}} </td>
+                        <td> {{song.artist}} </td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </div>
         </div>
+    </div>
+    <div class="text-center my-3">
+        <button class="btn btn-danger"
+            ng-click="onCancelCreatePlaylist()">Cancel
+        </button>
+        <button class="btn btn-success"
+        ng-show="!isEditPlaylist"
+            ng-click="onCreatePlaylist()" 
+            ng-disabled="playlistForm.playlistName.$invalid">Create
+        </button>
+        <button class="btn btn-success"
+            ng-show="isEditPlaylist"
+            ng-click="onApplyEditPlaylist()" 
+            ng-disabled="playlistForm.playlistName.$invalid">Apply
+        </button>
     </div>
 </div>

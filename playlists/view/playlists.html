@@ -2,79 +2,49 @@
     <div class="row">
         <div class="col-12 col-md-8 mx-auto">
             <h3 class="playlist__title">Manage playlists</h3>
-
-
-            <!-- Button trigger modal -->
-            <button class="add-to-playlist" data-toggle="modal" data-target="#modalCenter">
-                <i class="far fa-plus-square"></i> Add To Playlist
-            </button>
-            
-            <!-- Modal -->
-            <!-- <div class="modal fade" id="modalCenter" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <h4 class="modal-title" id="modalLongTitle">Add songs to playlist</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="template-wrapper" ng-include="'playlists/action/playlist.template.html'"></div>
-                    </div>
-                    <div class="modal-footer">
-                    <button class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button class="btn btn-primary" data-dismiss="modal" ng-click="onSaveChange()">Save changes</button>
-                    </div>
-                </div>
-                </div>
-            </div> -->
-
-
-
-
-            <table class="table table-hover">
-                <thead>
-                  <tr>
-                    <th>
-                        <input type="checkbox" name="checkbox">
-                    </th>
-                    <th>Name</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr ng-repeat="playlist in listPlaylists">
-                      <td>
-                        <input type="checkbox" name="checkbox">
-                      </td>
-                    <td> {{playlist.name}} </td>
-                    <td width="200px">
-                        <button ng-click="onEditSong(song)" class="btn table__edit">
-                            <i class="far fa-edit"></i>
-                            <span class="btn-name">Edit</span>
-                        </button>
-                        <button ng-click="onDeleteSong(song.id)" class="btn table__delete">
-                            <i class="far fa-trash-alt"></i>
-                            <span class="btn-name">Delete</span>
-                        </button>
-                    </td>
-                  </tr>
-                </tbody>
-            </table>
-
-            <!-- <ul class="playlist__list">
-                <li class="playlist__li" ng-repeat="item in listPlaylists" data-toggle="collapse" data-target="#playlist{{item.id}}">
-                    <span><i class="fas fa-chevron-down"></i></span>
-                    <span class="font-weight-bold">
-                        {{item.name}}
-                    </span>
-
-                    <ul id="playlist{{item.id}}" class="collapse --custom-collapse">
-                        <li ng-repeat="song in item.songs"> - {{song.name}} </li>
-                    </ul>
-                </li>
-            </ul> -->
+            <div>
+                <a ng-href="#/create-playlist" class="add-to-playlist float-left">
+                    <i class="far fa-plus-square"></i> Add To Playlist
+                </a>
+                <button class="btn table__delete float-right" ng-click="onDeletePlaylistMultiSelected()">
+                    <i class="far fa-trash-alt"></i>
+                    Delete
+                </button>
+            </div>
+        </div>
+        <div class="col-12 col-md-8 mx-auto">
+            <h5>List playlists</h5>
+            <div class="table-responsive-sm manage">
+                <table width="100%" class="table table-hover table-condensed table-bordered">
+                    <thead class="table__head">
+                      <tr>
+                        <th class="text-center"><input type="checkbox" ng-change="onCheckAll(isAll)" ng-model="isAll['all']" ></th>
+                        <th>Name</th>
+                        <th class="text-center">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="playlist in listPlaylistsDefault" ng-click="onViewDetailPlaylist(playlist)"> 
+                          <td width="60px" class="text-center">
+                            <input ng-change="onSingleChange(playlist)" ng-model="isCheck[playlist.id]" type="checkbox">
+                          </td>
+                        <td data-toggle="modal" data-target="#detail" class="cursor-pointer"> {{playlist.name}} </td>
+                        <td class="text-center" width="205px">
+                            <button ng-click="onEditPlaylist(playlist)" class="btn table__edit">
+                                <i class="far fa-edit"></i>
+                                <span class="btn-name">Edit</span>
+                            </button>
+                            <button ng-click="onDeletePlaylist(playlist.id)" class="btn table__delete">
+                                <i class="far fa-trash-alt"></i>
+                                <span class="btn-name">Delete</span>
+                            </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- Model -->
+            <div ng-include="'playlists/view/playlistDetail.html'"></div>
         </div>
     </div>
 </section>

@@ -1,5 +1,9 @@
 musicManager.config(function($locationProvider, $stateProvider){
     $locationProvider.hashPrefix('');
+    // $locationProvider.html5Mode({
+    //     enabled: false,
+    //     requireBase: false,
+    //   });
     $stateProvider
     .state('home', {
         url: '',
@@ -16,17 +20,22 @@ musicManager.config(function($locationProvider, $stateProvider){
         templateUrl: 'songs/view/songs.form.html',
         controller: 'actionSongController',
     })
+    .state('song-edit', {
+        url: '/song/:song_id',
+        templateUrl: 'songs/view/songs.form.html',
+        controller: 'actionSongController',
+    })
     .state('playlist', {
         url: '/playlist',
         templateUrl: 'playlists/view/playlists.html',
         controller: 'playlistsController',
     })
-    .state('playlist-add', {
+    .state('add-playlist', {
         url: '/add-playlist',
         templateUrl: 'playlists/view/playlist.form.html',
         controller: 'playlistsController',
     })
-    .state('playlist-create', {
+    .state('create-playlist', {
         url: '/create-playlist',
         templateUrl: 'playlists/action/playlist.template.html',
         controller: 'playlistActionController',
