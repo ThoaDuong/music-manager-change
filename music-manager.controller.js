@@ -6,20 +6,20 @@
 
     /** @ngInject */
     function ControllerCtrl($scope, songService, playlistService, $rootScope){
-
         songService.getListSongs().then(function(data){
             $rootScope.listSongsDefault = data;
         })
         playlistService.getListPlaylists().then(function(data){
             $rootScope.listPlaylistsDefault = data;
         })
+        $rootScope.linkName = 'Song';
+        $rootScope.currentPage = 1;
+
 
         init();
-
         function init(){
         }
         
-        $rootScope.linkName = 'Song';
 
         //Define song edit
         $rootScope.song = {
@@ -36,7 +36,6 @@
             }
             $rootScope.isEdit = false;
         }
-        
         //Define playlist edit
         $rootScope.playlistEdit = {
             id: -1,
@@ -53,9 +52,7 @@
             $rootScope.isEditPlaylist = false;
         }
 
-
-
-
+        //Onchange checkbox
         $rootScope.onHandleSingleChange = function(song, isCheck, isAll, arrMultiSelect, arrListSongs){
             if(isCheck[song.id]){
                 arrMultiSelect.push(song);

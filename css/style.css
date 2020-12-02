@@ -374,7 +374,83 @@ html, body {
   cursor: pointer;
 }
 
-.playlist-table thead {
+.playlist-table .thead {
   width: 100%;
+}
+
+.custom-pagination {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+ul.pagination {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  border: solid 1px #CCCCCC;
+  border-radius: 5px;
+}
+
+ul.pagination li.pagination-page {
+  border-right: solid 1px #CCCCCC;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+li.pagination-page.ng-scope.active {
+  background-color: #fedbd0;
+}
+
+li.pagination-page.ng-scope a {
+  color: #999;
+}
+
+li.pagination-page.ng-scope.active a {
+  color: #FFF;
+  font-weight: bold;
+}
+
+ul.pagination li.pagination-prev {
+  border-right: solid 1px #CCCCCC;
+  padding: 10px;
+}
+
+ul.pagination li.pagination-prev a {
+  color: #442c2e;
+}
+
+ul.pagination li.pagination-next {
+  border-right: solid 1px #CCCCCC;
+  padding: 10px;
+}
+
+ul.pagination li.pagination-next a {
+  color: #442c2e;
+}
+
+ul.pagination li.pagination-first {
+  border-right: solid 1px #CCCCCC;
+  padding: 10;
+}
+
+ul.pagination li.pagination-first a {
+  color: #442c2e;
+}
+
+ul.pagination li.pagination-last {
+  padding: 10px;
+}
+
+ul.pagination li.pagination-last a {
+  color: #F90;
+}
+
+ul.pagination li {
+  padding: 10px;
 }
 /*# sourceMappingURL=style.css.map */

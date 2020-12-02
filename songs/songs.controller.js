@@ -4,18 +4,42 @@
     musicManager.controller('songsController', ControllerCtrl)
 
     /** @ngInject */
-    function ControllerCtrl($scope, $location, songService, $rootScope, $log) {
+    function ControllerCtrl($scope, $location, songService, playlistService, $rootScope) {
 
         $scope.isCheck = {};
         $scope.isAll = {};
         var multiSelect = [];
-        $scope.listSongs = $rootScope.listSongsDefault;
-        $scope.listPlaylists = $rootScope.listPlaylistsDefault;
+       
 
         init();
 
         function init() {
+            console.log('test current page', $rootScope.currentPage);
+            
         }
+
+        playlistService.getListPlaylists().then(function(data){
+            $scope.listPlaylists = data;
+        })
+        songService.getListSongs().then(function(data){
+            $scope.listSongs = data;
+
+            //Pagination
+            $scope.totalItems = $scope.listSongs.length;
+            $scope.itemsPerPage = 6;
+        
+            $scope.$watch('currentPage', function() {
+                $rootScope.setPagingData($rootScope.currentPage, $scope.listSongs);
+            }, true);
+            $scope.pageChanged = function(value){
+                $rootScope.currentPage = value;
+            }
+        })
+        $rootScope.setPagingData = function(page, arrSongs) {
+            $rootScope.currentPage = page;
+            $rootScope.paginationSongs = arrSongs.slice((page - 1) * $scope.itemsPerPage, page * $scope.itemsPerPage);
+        }
+        
 
 
         $scope.onEditSong = function (song) {
@@ -33,6 +57,7 @@
                         $scope.listSongs.splice(index, 1);
                     }
                 });
+                $rootScope.setPagingData($rootScope.currentPage, $scope.listSongs);
             })
             $scope.listPlaylists.forEach(playlist => {
                 playlist.songs.forEach((element, index) => {
@@ -54,7 +79,6 @@
                 })
             }
         }
-
         $scope.onMultiDelete = function () {
             var isSure = confirm('Are you sure you want to delete selected songs?');
             if (isSure) {

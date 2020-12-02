@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-4 mb-4">
             <form name="playlistForm">
-                <label>Playlist name</label>
+                <h5>Playlist name</h5>
                 <input ng-model="playlistName" name="playlistName" type="text"  class="form-control" placeholder="Enter your playlist's name" required>
                 <p  ng-show="playlistForm.playlistName.$touched && playlistForm.playlistName.$invalid" 
                     class="text-danger font-weight-bold">Playlist name cannot be empty.
@@ -15,7 +15,7 @@
             <h5>List songs</h5>
             <div class="table-responsive-sm playlist-table">
                 <table class="table table-hover table-condensed table-bordered">
-                    <thead>
+                    <thead class="thead">
                       <tr>
                         <th><input type="checkbox" ng-change="onCheckAll()" ng-model="isAll['all']" ></th>
                         <th>Name</th>
@@ -52,7 +52,7 @@
             <h5>List playlists</h5>
             <div class="table-responsive-sm playlist-table">
                 <table class="table table-hover table-condensed table-bordered custom-table">
-                    <thead>
+                    <thead class="thead">
                       <tr>
                         <th>
                             <input type="checkbox" name="checkbox" ng-change="onCheckAllRemove()" ng-model="isAllRemove['all']">
@@ -75,18 +75,18 @@
         </div>
     </div>
     <div class="text-center my-3">
-        <button class="btn btn-danger"
-            ng-click="onCancelCreatePlaylist()">Cancel
-        </button>
-        <button class="btn btn-success"
+        <button class="btn form__btn-submit"
         ng-show="!isEditPlaylist"
             ng-click="onCreatePlaylist()" 
             ng-disabled="playlistForm.playlistName.$invalid">Create
         </button>
-        <button class="btn btn-success"
+        <button class="btn form__btn-submit"
             ng-show="isEditPlaylist"
             ng-click="onApplyEditPlaylist()" 
             ng-disabled="playlistForm.playlistName.$invalid">Apply
+        </button>
+        <button class="btn form__btn-cancel"
+        ng-click="onCancelCreatePlaylist()">Cancel
         </button>
     </div>
 </div>

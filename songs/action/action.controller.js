@@ -34,7 +34,10 @@
                     ele.artist = song.artist;
                 }
             })
-            songService.updateSong(song);
+            songService.updateSong(song).then(data => {
+                $rootScope.setPagingData($rootScope.currentPage, $scope.listSongs);
+            });
+            
             $scope.listPlaylists.forEach(playlist => {
                 playlist.songs.forEach(element => {
                     if(element.id === song.id){
