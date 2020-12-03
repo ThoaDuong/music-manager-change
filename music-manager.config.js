@@ -16,9 +16,6 @@ musicManager.run(function($rootScope) {
         if(str_current === 'song' && (str_next === 'playlist' || str_next === 'manager')){
             $rootScope.resetSong();
         }
-        if(str_current === 'song'){
-            // $rootScope.currentPage = 1;
-        }
 
     });
 });

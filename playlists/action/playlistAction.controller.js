@@ -68,7 +68,6 @@
         }
         
 
-
         $scope.onAddASong = function(){
             if(multiSelect.length <= 0){
                 return;
@@ -136,11 +135,12 @@
             }
             playlistService.addPlaylist(newPlaylist).then(data => {
                 $rootScope.listPlaylistsDefault.push(data);
+                $rootScope.setPaginationData($rootScope.currentPagePlaylist, $rootScope.listPlaylistsDefault);
+                $location.path('/playlist');
             })
             
             multiSelect = [];
             multiSelectRemove = [];
-            $location.path('/playlist');
         }
         $scope.onCancelCreatePlaylist = function(){
             multiSelect = [];
@@ -160,22 +160,28 @@
                 name: $scope.playlistName,
                 songs: $scope.selectedSongs,
             }
+            console.log('Before', updatePlaylist);
             playlistService.updatePlaylist(updatePlaylist).then(data => {
-                $rootScope.listPlaylistsDefault.forEach(root => {
-                    if(root.id === data.id){
-                        root.name = data.name;
-                        root.songs = data.songs;
+                console.log('Test update', data);
+                console.log('After', updatePlaylist);
+                //$rootScope.listPlaylistsDefault.forEach(root => {
+                    // if(root.id === data.id){
+                    //     root.name = data.name;
+                    //     root.songs = data.songs;
 
-                        $rootScope.playlistEdit = {
-                            id: -1,
-                            name: '',
-                            songs: [],
-                        }
-                        $rootScope.isEditPlaylist = false;
-                        $location.path('playlist');
-                    }
-                })
-            })
+                    //     $rootScope.setPaginationData($rootScope.currentPagePlaylist, $rootScope.listPlaylistsDefault);
+                        
+                    // }
+                //})
+
+                $rootScope.playlistEdit = {
+                    id: -1,
+                    name: '',
+                    songs: [],
+                }
+                $rootScope.isEditPlaylist = false;
+                $location.path('playlist');
+            });
             
         }
 

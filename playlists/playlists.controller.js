@@ -9,22 +9,42 @@
         $scope.isAll = {};
         var multiSelect = [];
         $scope.listPlaylist = $rootScope.listPlaylistsDefault;
-
         init();
-
         function init() {
-            if($scope.listPlaylist){
-                $scope.detailPlaylist = $scope.listPlaylist[0];
-            }
-            
+            // if($scope.listPlaylist){
+            //     $scope.detailPlaylist = $scope.listPlaylist[0];
+            // }
         }
+
+        playlistService.getListPlaylists().then(function(data){
+            $scope.listPlaylists = data;
+
+            //Pagination
+            $scope.totalItems = $scope.listPlaylists.length;
+            $scope.itemsPerPage = 5 ;
+            $scope.currentPagePlaylist = $rootScope.currentPagePlaylist;
+        
+            $scope.$watch('currentPagePlaylist', function() {
+                $rootScope.setPaginationData($rootScope.currentPagePlaylist, $scope.listPlaylists);
+                
+            }, true);
+            $scope.pageChanged = function(value){
+                $rootScope.currentPagePlaylist = value;
+            }
+        })
+        $rootScope.setPaginationData = function(page, arrPlaylists) {
+            $rootScope.currentPagePlaylist = page;
+            $rootScope.paginationPlaylists = arrPlaylists.slice((page - 1) * $scope.itemsPerPage, page * $scope.itemsPerPage);
+        }
+        
 
         var onHandleDeletePlaylist = function (id) {
             playlistService.deletePlaylist(id).then(data => {
-                $rootScope.listPlaylistsDefault.forEach((element, index) => {
+                $scope.listPlaylists.forEach((element, index) => {
                     if (element.id === data.id) {
-                        $rootScope.listPlaylistsDefault.splice(index, 1);
+                        $scope.listPlaylists.splice(index, 1);
                     }
+                    $rootScope.setPaginationData($rootScope.currentPagePlaylist, $scope.listPlaylists);
                 });
             })
         }
@@ -69,7 +89,6 @@
         $scope.onViewDetailPlaylist = function(playlist){
             $scope.detailPlaylist = playlist;
         }
-
     }
 
 }());

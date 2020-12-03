@@ -24,7 +24,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr ng-repeat="playlist in listPlaylistsDefault" ng-click="onViewDetailPlaylist(playlist)"> 
+                      <tr ng-repeat="playlist in paginationPlaylists" ng-click="onViewDetailPlaylist(playlist)"> 
                           <td width="60px" class="text-center">
                             <input ng-change="onSingleChange(playlist)" ng-model="isCheck[playlist.id]" type="checkbox">
                           </td>
@@ -42,6 +42,13 @@
                       </tr>
                     </tbody>
                 </table>
+                <div class="custom-pagination">
+                    <ul ng-change="pageChanged(currentPagePlaylist)" 
+                        uib-pagination total-items="totalItems" 
+                        data-ng-model="currentPagePlaylist" 
+                        items-per-page="itemsPerPage">
+                    </ul>
+                </div>
             </div>
             <!-- Model -->
             <div ng-include="'playlists/view/playlistDetail.html'"></div>

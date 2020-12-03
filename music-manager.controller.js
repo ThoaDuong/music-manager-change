@@ -14,6 +14,7 @@
         })
         $rootScope.linkName = 'Song';
         $rootScope.currentPage = 1;
+        $rootScope.currentPagePlaylist = 1;
 
 
         init();

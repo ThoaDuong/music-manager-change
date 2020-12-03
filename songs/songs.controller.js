@@ -9,24 +9,20 @@
         $scope.isCheck = {};
         $scope.isAll = {};
         var multiSelect = [];
-       
+        $scope.listSongs =$rootScope.listSongsDefault;
 
         init();
 
         function init() {
-            console.log('test current page', $rootScope.currentPage);
-            
         }
 
-        playlistService.getListPlaylists().then(function(data){
-            $scope.listPlaylists = data;
-        })
         songService.getListSongs().then(function(data){
             $scope.listSongs = data;
 
             //Pagination
             $scope.totalItems = $scope.listSongs.length;
             $scope.itemsPerPage = 6;
+            $scope.currentPage = $rootScope.currentPage;
         
             $scope.$watch('currentPage', function() {
                 $rootScope.setPagingData($rootScope.currentPage, $scope.listSongs);
@@ -55,17 +51,22 @@
                 $scope.listSongs.forEach((element, index) => {
                     if (element.id === item.id) {
                         $scope.listSongs.splice(index, 1);
+                        console.log('Test list songs', $scope.listSongs);
+                        $rootScope.setPagingData($rootScope.currentPage, $scope.listSongs);
                     }
                 });
-                $rootScope.setPagingData($rootScope.currentPage, $scope.listSongs);
+                
+
+                $rootScope.listPlaylistsDefault.forEach(playlist => {
+                    playlist.songs.forEach((element, index) => {
+                        if (element.id === id) {
+                            playlist.songs.splice(index, 1);
+                            $rootScope.setPaginationData($rootScope.currentPagePlaylist, $rootScope.listPlaylistsDefault);
+                        }
+                    });
+                });
             })
-            $scope.listPlaylists.forEach(playlist => {
-                playlist.songs.forEach((element, index) => {
-                    if (element.id === id) {
-                        playlist.songs.splice(index, 1);
-                    }
-                });
-            });
+            
         }
         $scope.onDeleteSong = function (id) {
             var isSure = confirm('Are you sure you want to delete this song?');

@@ -19,6 +19,7 @@
         $scope.onCreateSong = function(){
             songService.addSong($scope.song).then(function(data){
                 $scope.listSongs.push(data);
+                $rootScope.setPagingData($rootScope.currentPage, $scope.listSongs);
             })
             $rootScope.resetSong();
             $location.path("/manager");

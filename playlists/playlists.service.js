@@ -26,7 +26,7 @@ musicManager.service('playlistService', function($http){
             headers: {
                 'Content-Type': 'application/json'
             },
-            data: playlist
+            data: playlist,
         }
         return $http(request).then(function(res){
             return res.data;
