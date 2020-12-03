@@ -1,4 +1,16 @@
-musicManager.run(function($rootScope) {
+musicManager.run(function($rootScope, songService, playlistService) {
+    songService.getListSongs().then(function(data){
+        $rootScope.listSongsDefault = data;
+    })
+    playlistService.getListPlaylists().then(function(data){
+        $rootScope.listPlaylistsDefault = data;
+    })
+    $rootScope.linkName = 'Song';
+    $rootScope.currentPage = 1;
+    $rootScope.currentPagePlaylist = 1;
+
+
+
     $rootScope.$on("$locationChangeStart", function(event, next, current) { 
         //Change path
         var str_next = next.substr(next.lastIndexOf('/') + 1);

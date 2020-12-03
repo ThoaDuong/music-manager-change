@@ -1,3 +1,4 @@
+
 (function () {
     'use strict';
 
@@ -9,7 +10,7 @@
         $scope.isCheck = {};
         $scope.isAll = {};
         var multiSelect = [];
-        $scope.listSongs =$rootScope.listSongsDefault;
+        $scope.listSongs = $rootScope.listSongsDefault;
 
         init();
 
@@ -18,14 +19,16 @@
 
         songService.getListSongs().then(function(data){
             $scope.listSongs = data;
+            $rootScope.listSongsDefault = data;
+            // console.log('of songs', $rootScope.listSongsDefault);
 
             //Pagination
-            $scope.totalItems = $scope.listSongs.length;
+            $scope.totalItems = $rootScope.listSongsDefault.length;
             $scope.itemsPerPage = 6;
             $scope.currentPage = $rootScope.currentPage;
         
             $scope.$watch('currentPage', function() {
-                $rootScope.setPagingData($rootScope.currentPage, $scope.listSongs);
+                $rootScope.setPagingData($rootScope.currentPage, $rootScope.listSongsDefault);
             }, true);
             $scope.pageChanged = function(value){
                 $rootScope.currentPage = value;
@@ -48,20 +51,21 @@
 
         var onConfirmDeleteSong = function (id) {
             songService.deleteSong(id).then(function (item) {
-                $scope.listSongs.forEach((element, index) => {
+                $rootScope.listSongsDefault.forEach((element, index) => {
                     if (element.id === item.id) {
-                        $scope.listSongs.splice(index, 1);
-                        console.log('Test list songs', $scope.listSongs);
-                        $rootScope.setPagingData($rootScope.currentPage, $scope.listSongs);
+                        $rootScope.listSongsDefault.splice(index, 1);
+                        $rootScope.setPagingData($rootScope.currentPage, $rootScope.listSongsDefault);
                     }
                 });
-                
 
                 $rootScope.listPlaylistsDefault.forEach(playlist => {
                     playlist.songs.forEach((element, index) => {
                         if (element.id === id) {
                             playlist.songs.splice(index, 1);
-                            $rootScope.setPaginationData($rootScope.currentPagePlaylist, $rootScope.listPlaylistsDefault);
+                            playlistService.updatePlaylist(playlist).then(data => {
+                                console.log('Update playlist', data);
+                            })
+                            // $rootScope.setPaginationData($rootScope.currentPagePlaylist, $rootScope.listPlaylistsDefault);
                         }
                     });
                 });

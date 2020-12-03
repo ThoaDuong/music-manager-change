@@ -5,10 +5,10 @@
     musicManager.controller('actionSongController', ControllerCtrl)
 
     /** @ngInject */
-    function ControllerCtrl($scope, $location, songService, $rootScope){
+    function ControllerCtrl($scope, $location, songService, playlistService, $rootScope){
         init();
-        $scope.listSongs = $rootScope.listSongsDefault;
-        $scope.listPlaylists = $rootScope.listPlaylistsDefault;
+        // $scope.listSongs = $rootScope.listSongsDefault;
+        // $scope.listPlaylists = $rootScope.listPlaylistsDefault;
 
         function init(){
         }
@@ -18,32 +18,35 @@
         }
         $scope.onCreateSong = function(){
             songService.addSong($scope.song).then(function(data){
-                $scope.listSongs.push(data);
-                $rootScope.setPagingData($rootScope.currentPage, $scope.listSongs);
+                $rootScope.listSongsDefault.push(data);
+                $rootScope.setPagingData($rootScope.currentPage, $rootScope.listSongsDefault);
+                $location.path("/manager");
+                $rootScope.resetSong();
             })
-            $rootScope.resetSong();
-            $location.path("/manager");
         }
         $scope.onCancelSubmit = function(){
             $rootScope.resetSong();
             $location.path("/manager");
         }
         $scope.onApplyEditSong = function(song){
-            $scope.listSongs.forEach(function(ele){
+            $rootScope.listSongsDefault.forEach(function(ele){
                 if(ele.id === song.id){
                     ele.name = song.name;
                     ele.artist = song.artist;
+                    songService.updateSong(song).then(() => {
+                        songService.getListSongs().then(data => {
+                            $rootScope.setPagingData($rootScope.currentPage, data);
+                        })
+                    });
                 }
             })
-            songService.updateSong(song).then(data => {
-                $rootScope.setPagingData($rootScope.currentPage, $scope.listSongs);
-            });
             
-            $scope.listPlaylists.forEach(playlist => {
+            $rootScope.listPlaylistsDefault.forEach(playlist => {
                 playlist.songs.forEach(element => {
                     if(element.id === song.id){
                         element.name = song.name;
                         element.artist = song.artist;
+                        playlistService.updatePlaylist(playlist);
                     }
                 });
             });

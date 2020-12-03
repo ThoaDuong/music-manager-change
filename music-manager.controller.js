@@ -5,17 +5,7 @@
     musicManager.controller('managerController', ControllerCtrl)
 
     /** @ngInject */
-    function ControllerCtrl($scope, songService, playlistService, $rootScope){
-        songService.getListSongs().then(function(data){
-            $rootScope.listSongsDefault = data;
-        })
-        playlistService.getListPlaylists().then(function(data){
-            $rootScope.listPlaylistsDefault = data;
-        })
-        $rootScope.linkName = 'Song';
-        $rootScope.currentPage = 1;
-        $rootScope.currentPagePlaylist = 1;
-
+    function ControllerCtrl($scope, $rootScope){
 
         init();
         function init(){
