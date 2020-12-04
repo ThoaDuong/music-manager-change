@@ -3,7 +3,7 @@ musicManager.service('playlistService', function($http){
 
     this.getListPlaylists = function(){
         return  $http.get(this.url + '/playlist').then(function(res){
-            return res.data;
+            return res.data.reverse();
         })
     }
     this.addPlaylist = function(playlist){
@@ -19,22 +19,18 @@ musicManager.service('playlistService', function($http){
             return res.data;
         })
     }
-    this.updatePlaylist = function(playlist){
-        var request = {
-            method: 'PUT',
-            url: this.url + '/playlist/' + playlist.id,
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            data: playlist,
-        }
-        return $http(request).then(function(res){
-            return res.data;
-        })
-    }
+    
     this.deletePlaylist = function(id){
         return $http.delete(this.url + '/playlist/' + id).then(function(res){
             return res.data;
         })
     }
+
+    this.updatePlaylist = function(playlist){
+        return this.deletePlaylist(playlist.id).then(() => {
+            return this.addPlaylist(playlist).then(data => {
+                return data;
+            });
+        }) 
+    }   
 })

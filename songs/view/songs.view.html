@@ -15,8 +15,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="song in paginationSongs | filter:searchKeyWord:strict">
-                <!-- <tr ng-repeat="song in listSongsDefault | filter:searchKeyWord:strict"> -->
+                <tr ng-repeat="song in paginationSongs = (listSongsDefault | filter : searchKeyWord | limitTo: itemsPerPage : itemsPerPage*(currentPage-1))">
                     <td width="60px" class="text-center"><input ng-change="onSingleChange(song)" ng-model="isCheck[song.id]" type="checkbox"></td>
                     <td>{{song.name}} </td>
                     <td>{{song.artist}} </td>

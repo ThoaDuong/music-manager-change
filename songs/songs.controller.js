@@ -5,41 +5,41 @@
     musicManager.controller('songsController', ControllerCtrl)
 
     /** @ngInject */
-    function ControllerCtrl($scope, $location, songService, playlistService, $rootScope) {
+    function ControllerCtrl($scope, $location, songService, playlistService, $rootScope, $http) {
 
         $scope.isCheck = {};
         $scope.isAll = {};
         var multiSelect = [];
-        $scope.listSongs = $rootScope.listSongsDefault;
+        
 
         init();
 
         function init() {
+            songService.getListSongs().then(function(data){
+                $scope.listSongsDefault = data;
+    
+                //Pagination
+                $scope.totalItems = $scope.listSongsDefault.length;
+                $scope.itemsPerPage = 6;
+                $scope.currentPage = 1;
+            
+                $scope.$watch('currentPage', function() {
+                    setPagingData($scope.currentPage, $scope.listSongsDefault);
+                }, true);
+                $scope.pageChanged = function(value){
+                    $scope.currentPage = value;
+                }
+            })
+            playlistService.getListPlaylists().then(data => {
+                $scope.listPlaylistsDefault = data;
+            })
         }
-
-        songService.getListSongs().then(function(data){
-            $scope.listSongs = data;
-            $rootScope.listSongsDefault = data;
-            // console.log('of songs', $rootScope.listSongsDefault);
-
-            //Pagination
-            $scope.totalItems = $rootScope.listSongsDefault.length;
-            $scope.itemsPerPage = 6;
-            $scope.currentPage = $rootScope.currentPage;
         
-            $scope.$watch('currentPage', function() {
-                $rootScope.setPagingData($rootScope.currentPage, $rootScope.listSongsDefault);
-            }, true);
-            $scope.pageChanged = function(value){
-                $rootScope.currentPage = value;
-            }
-        })
-        $rootScope.setPagingData = function(page, arrSongs) {
-            $rootScope.currentPage = page;
+        var setPagingData = function(page, arrSongs) {
+            $scope.currentPage = page;
             $rootScope.paginationSongs = arrSongs.slice((page - 1) * $scope.itemsPerPage, page * $scope.itemsPerPage);
         }
         
-
 
         $scope.onEditSong = function (song) {
             $rootScope.song.name = song.name;
@@ -51,21 +51,17 @@
 
         var onConfirmDeleteSong = function (id) {
             songService.deleteSong(id).then(function (item) {
-                $rootScope.listSongsDefault.forEach((element, index) => {
+                $scope.listSongsDefault.forEach((element, index) => {
                     if (element.id === item.id) {
-                        $rootScope.listSongsDefault.splice(index, 1);
-                        $rootScope.setPagingData($rootScope.currentPage, $rootScope.listSongsDefault);
+                        $scope.listSongsDefault.splice(index, 1);
                     }
                 });
 
-                $rootScope.listPlaylistsDefault.forEach(playlist => {
+                $scope.listPlaylistsDefault.forEach(playlist => {
                     playlist.songs.forEach((element, index) => {
                         if (element.id === id) {
                             playlist.songs.splice(index, 1);
-                            playlistService.updatePlaylist(playlist).then(data => {
-                                console.log('Update playlist', data);
-                            })
-                            // $rootScope.setPaginationData($rootScope.currentPagePlaylist, $rootScope.listPlaylistsDefault);
+                            playlistService.updatePlaylist(playlist);
                         }
                     });
                 });
@@ -95,10 +91,10 @@
             }
         }
         $scope.onSingleChange = function (song) {
-            $rootScope.onHandleSingleChange(song, $scope.isCheck, $scope.isAll, multiSelect, $rootScope.listSongsDefault);
+            $rootScope.onHandleSingleChange(song, $scope.isCheck, $scope.isAll, multiSelect, $scope.listSongsDefault);
         }
         $scope.onCheckAll = function () {
-            multiSelect = $rootScope.onHandleCheckAll($scope.isCheck, $scope.isAll, multiSelect, $rootScope.listSongsDefault);
+            multiSelect = $rootScope.onHandleCheckAll($scope.isCheck, $scope.isAll, multiSelect, $scope.listSongsDefault);
         }
         $scope.onChangeSearch = function (keyWord) {
             $scope.searchKeyWord = keyWord;

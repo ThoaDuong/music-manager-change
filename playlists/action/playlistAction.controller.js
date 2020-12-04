@@ -4,11 +4,9 @@
     musicManager.controller('playlistActionController', ControllerCtrl)
 
     /** @ngInject */
-    function ControllerCtrl($scope, $rootScope, $location, playlistService){
+    function ControllerCtrl($scope, $rootScope, $location, playlistService, songService){
         
-        $scope.defaultSongs = [].concat($rootScope.listSongsDefault);
         $scope.selectedSongs = [];
-
         //Add: Left to right
         $scope.isCheck = {};
         $scope.isAll = {};
@@ -21,18 +19,27 @@
         init();
 
         function init(){
-            if($rootScope.playlistEdit.id !== -1){
-                $scope.selectedSongs = $rootScope.playlistEdit.songs;
-                $scope.playlistName = $rootScope.playlistEdit.name;
+            playlistService.getListPlaylists().then(data => {
+                $scope.listPlaylistsDefault = data;
+            })
+            songService.getListSongs().then(data => {
+                $scope.listSongsDefault = data;
 
-                $rootScope.playlistEdit.songs.forEach(root => {
-                    $scope.defaultSongs.forEach((element, index) => {
-                        if(root.id === element.id){
-                            $scope.defaultSongs.splice(index, 1);
-                        }
+                $scope.defaultSongs = data;
+                if($rootScope.playlistEdit.id !== -1){
+                    $scope.selectedSongs = $rootScope.playlistEdit.songs;
+                    $scope.playlistName = $rootScope.playlistEdit.name;
+    
+                    $rootScope.playlistEdit.songs.forEach(root => {
+                        $scope.defaultSongs.forEach((element, index) => {
+                            if(root.id === element.id){
+                                $scope.defaultSongs.splice(index, 1);
+                            }
+                        });
                     });
-                });
-            }
+                }
+            })
+
         }
 
         var resetIsCheck = function(arr, isCheck){
@@ -134,8 +141,7 @@
                 songs: $scope.selectedSongs,
             }
             playlistService.addPlaylist(newPlaylist).then(data => {
-                $rootScope.listPlaylistsDefault.push(data);
-                $rootScope.setPaginationData($rootScope.currentPagePlaylist, $rootScope.listPlaylistsDefault);
+                $scope.listPlaylistsDefault.push(data);
                 $location.path('/playlist');
             })
             
@@ -160,20 +166,7 @@
                 name: $scope.playlistName,
                 songs: $scope.selectedSongs,
             }
-            console.log('Before', updatePlaylist);
-            playlistService.updatePlaylist(updatePlaylist).then(data => {
-                console.log('Test update', data);
-                console.log('After', updatePlaylist);
-                //$rootScope.listPlaylistsDefault.forEach(root => {
-                    // if(root.id === data.id){
-                    //     root.name = data.name;
-                    //     root.songs = data.songs;
-
-                    //     $rootScope.setPaginationData($rootScope.currentPagePlaylist, $rootScope.listPlaylistsDefault);
-                        
-                    // }
-                //})
-
+            playlistService.updatePlaylist(updatePlaylist).then(() => {
                 $rootScope.playlistEdit = {
                     id: -1,
                     name: '',

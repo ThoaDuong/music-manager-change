@@ -8,43 +8,37 @@
         $scope.isCheck = {};
         $scope.isAll = {};
         var multiSelect = [];
-        $scope.listPlaylist = $rootScope.listPlaylistsDefault;
+        
         init();
         function init() {
-            // if($scope.listPlaylist){
-            //     $scope.detailPlaylist = $scope.listPlaylist[0];
-            // }
+            playlistService.getListPlaylists().then(function(data){
+                $scope.listPlaylistsDefault = data;
+    
+                //Pagination
+                $scope.totalItems = $scope.listPlaylistsDefault.length;
+                $scope.itemsPerPage = 5 ;
+                $scope.currentPagePlaylist = 1;
+            
+                $scope.$watch('currentPagePlaylist', function() {
+                    setPaginationData($scope.currentPagePlaylist, $scope.listPlaylistsDefault);
+                }, true);
+                $scope.pageChanged = function(value){
+                    $scope.currentPagePlaylist = value;
+                }
+            })
         }
-
-        playlistService.getListPlaylists().then(function(data){
-            $scope.listPlaylists = data;
-
-            //Pagination
-            $scope.totalItems = $scope.listPlaylists.length;
-            $scope.itemsPerPage = 5 ;
-            $scope.currentPagePlaylist = $rootScope.currentPagePlaylist;
-        
-            $scope.$watch('currentPagePlaylist', function() {
-                $rootScope.setPaginationData($rootScope.currentPagePlaylist, $scope.listPlaylists);
-                
-            }, true);
-            $scope.pageChanged = function(value){
-                $rootScope.currentPagePlaylist = value;
-            }
-        })
-        $rootScope.setPaginationData = function(page, arrPlaylists) {
-            $rootScope.currentPagePlaylist = page;
+        var setPaginationData = function(page, arrPlaylists) {
+            $scope.currentPagePlaylist = page;
             $rootScope.paginationPlaylists = arrPlaylists.slice((page - 1) * $scope.itemsPerPage, page * $scope.itemsPerPage);
         }
         
 
         var onHandleDeletePlaylist = function (id) {
             playlistService.deletePlaylist(id).then(data => {
-                $scope.listPlaylists.forEach((element, index) => {
+                $scope.listPlaylistsDefault.forEach((element, index) => {
                     if (element.id === data.id) {
-                        $scope.listPlaylists.splice(index, 1);
+                        $scope.listPlaylistsDefault.splice(index, 1);
                     }
-                    $rootScope.setPaginationData($rootScope.currentPagePlaylist, $scope.listPlaylists);
                 });
             })
         }
@@ -80,10 +74,10 @@
             $location.path('/create-playlist');
         }
         $scope.onSingleChange = function (song) {
-            $rootScope.onHandleSingleChange(song, $scope.isCheck, $scope.isAll, multiSelect, $rootScope.listPlaylistsDefault);
+            $rootScope.onHandleSingleChange(song, $scope.isCheck, $scope.isAll, multiSelect, $scope.listPlaylistsDefault);
         }
         $scope.onCheckAll = function () {
-            multiSelect = $rootScope.onHandleCheckAll($scope.isCheck, $scope.isAll, multiSelect, $rootScope.listPlaylistsDefault);
+            multiSelect = $rootScope.onHandleCheckAll($scope.isCheck, $scope.isAll, multiSelect, $scope.listPlaylistsDefault);
         }
 
         $scope.onViewDetailPlaylist = function(playlist){

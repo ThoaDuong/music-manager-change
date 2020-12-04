@@ -10,6 +10,7 @@
                     <i class="far fa-trash-alt"></i>
                     Delete
                 </button>
+                <input ng-model="keyWordPlaylist" class="float-right form-control col-3 mr-2" type="text" placeholder="Search">
             </div>
         </div>
         <div class="col-12 col-md-8 mx-auto">
@@ -24,7 +25,8 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr ng-repeat="playlist in paginationPlaylists" ng-click="onViewDetailPlaylist(playlist)"> 
+                      <tr ng-repeat="playlist in paginationPlaylists = (listPlaylistsDefault | filter: {name: keyWordPlaylist} | limitTo: itemsPerPage: itemsPerPage*(currentPagePlaylist-1))" 
+                      ng-click="onViewDetailPlaylist(playlist)"> 
                           <td width="60px" class="text-center">
                             <input ng-change="onSingleChange(playlist)" ng-model="isCheck[playlist.id]" type="checkbox">
                           </td>

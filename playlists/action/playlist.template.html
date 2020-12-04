@@ -14,6 +14,7 @@
         <div class="col-5">
             <h5>List songs</h5>
             <div class="table-responsive-sm playlist-table">
+                <input type="text" ng-model="keyWordSong" class="form-control mb-2" placeholder="Search">
                 <table class="table table-hover table-condensed table-bordered">
                     <thead class="thead">
                       <tr>
@@ -23,7 +24,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr ng-repeat="song in defaultSongs">
+                      <tr ng-repeat="song in defaultSongs | filter:keyWordSong:strict">
                         <td><input ng-change="onSingleChange(song)" ng-model="isCheck[song.id]" type="checkbox"></td>
                         <td> {{song.name}} </td>
                         <td> {{song.artist}} </td>
@@ -51,6 +52,7 @@
         <div class="col-5">
             <h5>List playlists</h5>
             <div class="table-responsive-sm playlist-table">
+                <input type="text" ng-model="keyWordPlaylist" class="form-control mb-2" placeholder="Search">
                 <table class="table table-hover table-condensed table-bordered custom-table">
                     <thead class="thead">
                       <tr>
@@ -62,7 +64,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr ng-repeat="song in selectedSongs">
+                      <tr ng-repeat="song in selectedSongs | filter:keyWordPlaylist:strict">
                           <td>
                             <input type="checkbox" name="checkbox" ng-change="onSingleChangeRemove(song)" ng-model="isCheckRemove[song.id]">
                           </td>

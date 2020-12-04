@@ -3,7 +3,7 @@ musicManager.service('songService', function($http){
 
     this.getListSongs = function(){
         return  $http.get(this.url + '/song').then(function(res){
-            return res.data;
+            return res.data.reverse();
         })
     }
     this.addSong = function(song){
