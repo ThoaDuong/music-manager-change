@@ -1,5 +1,6 @@
 musicManager.service('playlistService', function($http){
     this.url = 'https://5fb73d8d8e07f00016642927.mockapi.io';
+    // this.url = 'http://localhost:3000';
 
     this.getListPlaylists = function(){
         return  $http.get(this.url + '/playlist').then(function(res){
@@ -13,7 +14,10 @@ musicManager.service('playlistService', function($http){
             headers: {
                 'Content-Type': 'application/json'
             },
-            data: playlist,
+            data: {
+                name: playlist.name,
+                songs: playlist.songs
+            },
         }
         return $http(request).then(function(res){
             return res.data;
@@ -27,6 +31,17 @@ musicManager.service('playlistService', function($http){
     }
 
     this.updatePlaylist = function(playlist){
+        // var request = {
+        //     method: 'PUT',
+        //     url: this.url + '/playlist/' + playlist.id,
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     },
+        //     data: playlist,
+        // }
+        // return $http(request).then(function(res){
+        //     return res.data;
+        // })
         return this.deletePlaylist(playlist.id).then(() => {
             return this.addPlaylist(playlist).then(data => {
                 return data;

@@ -8,7 +8,8 @@
         <table width="100%" class="table table-hover table-condensed table-bordered">
             <thead class="table__head">
                 <tr>
-                    <th width="60px" class="text-center"><input type="checkbox" ng-change="onCheckAll(isAll)" ng-model="isAll['all']" ></th>
+                    <th width="60px" class="text-center"><input type="checkbox" ng-change="onCheckAll(isAll)"
+                            ng-model="isAll['all']"></th>
                     <th>Name</th>
                     <th>Artist</th>
                     <th class="text-center">Actions</th>
@@ -16,7 +17,9 @@
             </thead>
             <tbody>
                 <tr ng-repeat="song in paginationSongs = (listSongsDefault | filter : searchKeyWord | limitTo: itemsPerPage : itemsPerPage*(currentPage-1))">
-                    <td width="60px" class="text-center"><input ng-change="onSingleChange(song)" ng-model="isCheck[song.id]" type="checkbox"></td>
+                    <td width="60px" class="text-center">
+                        <input ng-change="onSingleChange(song)" ng-model="isCheck[song.id]" type="checkbox">
+                    </td>
                     <td>{{song.name}} </td>
                     <td>{{song.artist}} </td>
                     <td width="205px" class="text-center">
@@ -24,16 +27,26 @@
                             <i class="far fa-edit"></i>
                             <span class="btn-name">Edit</span>
                         </button>
-                        <button ng-click="onDeleteSong(song.id)" class="btn table__delete">
+                        <button class="btn table__delete" data-toggle="modal" data-target="#deleteModalSong-{{song.id}}">
                             <i class="far fa-trash-alt"></i>
                             <span class="btn-name">Delete</span>
                         </button>
+                        <dialog-directive 
+                            id="song.id" 
+                            title="Song"
+                            content=" Are you sure you want to delete this song?"
+                            function="onDeleteSong(song.id)">
+                        </dialog-directive>
                     </td>
-                </tr>   
+                </tr>
             </tbody>
         </table>
         <div class="custom-pagination">
-            <ul ng-change="pageChanged(currentPage)" uib-pagination total-items="totalItems" data-ng-model="currentPage" items-per-page="itemsPerPage"></ul>
+            <ul ng-change="pageChanged(currentPage)" 
+                uib-pagination total-items="totalItems" 
+                data-ng-model="currentPage"
+                items-per-page="itemsPerPage">
+            </ul>
         </div>
 
     </div>

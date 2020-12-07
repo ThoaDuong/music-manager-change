@@ -5,7 +5,7 @@
     musicManager.controller('songsController', ControllerCtrl)
 
     /** @ngInject */
-    function ControllerCtrl($scope, $location, songService, playlistService, $rootScope, $http) {
+    function ControllerCtrl($scope, $location, songService, playlistService, $rootScope) {
 
         $scope.isCheck = {};
         $scope.isAll = {};
@@ -37,9 +37,8 @@
         
         var setPagingData = function(page, arrSongs) {
             $scope.currentPage = page;
-            $rootScope.paginationSongs = arrSongs.slice((page - 1) * $scope.itemsPerPage, page * $scope.itemsPerPage);
+            $scope.paginationSongs = arrSongs.slice((page - 1) * $scope.itemsPerPage, page * $scope.itemsPerPage);
         }
-        
 
         $scope.onEditSong = function (song) {
             $rootScope.song.name = song.name;
@@ -56,7 +55,6 @@
                         $scope.listSongsDefault.splice(index, 1);
                     }
                 });
-
                 $scope.listPlaylistsDefault.forEach(playlist => {
                     playlist.songs.forEach((element, index) => {
                         if (element.id === id) {
@@ -69,26 +67,20 @@
             
         }
         $scope.onDeleteSong = function (id) {
-            var isSure = confirm('Are you sure you want to delete this song?');
-            if (isSure) {
-                onConfirmDeleteSong(id);
-                //check the deleted item is in multiSelect. if true, remove it.
-                multiSelect.forEach(function (ele, index) {
-                    if (ele.id == id) {
-                        multiSelect.splice(index, 1);
-                    }
-                })
-            }
+            onConfirmDeleteSong(id);
+            //check the deleted item is in multiSelect. if true, remove it.
+            multiSelect.forEach(function (ele, index) {
+                if (ele.id == id) {
+                    multiSelect.splice(index, 1);
+                }
+            })
         }
         $scope.onMultiDelete = function () {
-            var isSure = confirm('Are you sure you want to delete selected songs?');
-            if (isSure) {
-                multiSelect.forEach(function (ele) {
-                    onConfirmDeleteSong(ele.id);
-                    multiSelect = [];
-                })
-                $scope.isAll['all'] = false;
-            }
+            multiSelect.forEach(function (ele) {
+                onConfirmDeleteSong(ele.id);
+                multiSelect = [];
+            })
+            $scope.isAll['all'] = false;
         }
         $scope.onSingleChange = function (song) {
             $rootScope.onHandleSingleChange(song, $scope.isCheck, $scope.isAll, multiSelect, $scope.listSongsDefault);

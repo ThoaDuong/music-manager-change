@@ -62,42 +62,7 @@ html, body{
             }
         }
         .manage{
-            .bar{
-                display: flex;
-                justify-content: space-between;
-                margin-bottom: 10px;
-                &__title{
-                    color: $pink900;
-                }
-                .tools{
-                    margin-right: 0;
-                    margin-left: 0;
-                    &__add{
-                        border: 1px solid $pink900;
-                        padding: 5px 10px;
-                        color: $pink900;
-                        background-color: transparent;
-                        font-weight: 400;
-                        font-size: 16px;
-                        &:active{
-                            outline: none;
-                            box-shadow: none;
-                        }
-                        &:focus{
-                            outline: none;
-                            box-shadow: none;
-                        }
-                    }
-                    &__delete{
-                        @extend .tools__add;
-                    }
-                    &__search{
-                        border: 1px solid $pink900;
-                        padding: 5px 10px;
-                        font-size: 16px;
-                    }
-                }
-            }
+            
             .--padding{
                 padding: 12px 24px;
             }
@@ -149,6 +114,10 @@ html, body{
         }
     }
     .playlist{
+        .playlist-head{
+            display: flex;
+            justify-content: space-between;
+        }
         &__title{
             color: $pink900;
         }
@@ -174,17 +143,6 @@ html, body{
                 outline: none;
             }
         }
-        // .modal-lg{
-        //     max-width: 80%;
-        // }
-        // .modal-dialog,
-        // .modal-content {
-        //     // height: 70%;
-        // }
-        // .modal-body {
-        //     max-height: calc(100% - 120px);
-        //     // overflow-y: hidden;
-        // }
     }
     .playlist-form{
         &__or{
@@ -270,6 +228,45 @@ html, body{
         text-align: center;
         color: $pink900;
         font-weight: 600;
+    }
+}
+
+
+
+.bar{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    &__title{
+        color: $pink900;
+    }
+    .tools{
+        margin-right: 0;
+        margin-left: 0;
+        &__add{
+            border: 1px solid $pink900;
+            padding: 5px 10px;
+            color: $pink900;
+            background-color: transparent;
+            font-weight: 400;
+            font-size: 16px;
+            &:active{
+                outline: none;
+                box-shadow: none;
+            }
+            &:focus{
+                outline: none;
+                box-shadow: none;
+            }
+        }
+        &__delete{
+            @extend .tools__add;
+        }
+        &__search{
+            border: 1px solid $pink900;
+            padding: 5px 10px;
+            font-size: 16px;
+        }
     }
 }
 

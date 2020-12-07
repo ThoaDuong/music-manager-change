@@ -31,7 +31,6 @@
             $scope.currentPagePlaylist = page;
             $rootScope.paginationPlaylists = arrPlaylists.slice((page - 1) * $scope.itemsPerPage, page * $scope.itemsPerPage);
         }
-        
 
         var onHandleDeletePlaylist = function (id) {
             playlistService.deletePlaylist(id).then(data => {
@@ -43,11 +42,10 @@
             })
         }
 
+        $scope.onClickAddPlaylist = function(){
+            $location.path('/create-playlist');
+        }
         $scope.onDeletePlaylist = function (playlist_id) {
-            var isSure = confirm('Are you sure you want to delete this playlist?');
-            if (!isSure) {
-                return;
-            }
             onHandleDeletePlaylist(playlist_id);
             multiSelect.forEach(function (ele, index) {
                 if (ele.id === playlist_id) {
@@ -56,10 +54,6 @@
             })
         }
         $scope.onDeletePlaylistMultiSelected = function () {
-            var isSure = confirm('Are you sure you want to delete selected playlists?');
-            if (!isSure) {
-                return;
-            }
             multiSelect.forEach(element => {
                 onHandleDeletePlaylist(element.id);
             });

@@ -1,5 +1,6 @@
 musicManager.service('songService', function($http){
     this.url = 'https://5fb73d8d8e07f00016642927.mockapi.io';
+    // this.url = 'http://localhost:3000';
 
     this.getListSongs = function(){
         return  $http.get(this.url + '/song').then(function(res){
@@ -13,7 +14,10 @@ musicManager.service('songService', function($http){
             headers: {
                 'Content-Type': 'application/json'
             },
-            data: song
+            data: {
+                name: song.name,
+                artist: song.artist,
+            }
         }
         return $http(request).then(function(res){
             return res.data;

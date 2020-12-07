@@ -1,54 +1,79 @@
 {
-  "songs": [
+  "song": [
     {
-      "name": "abc",
-      "artist": "def",
-      "id": "D-XBfG-"
+      "id": 2,
+      "name": "Happy new year 2020",
+      "artist": "abc"
     },
     {
-      "name": "abc",
-      "artist": "def",
-      "id": "56-ICeO"
+      "id": 6,
+      "name": "vbvc chinh úa",
+      "artist": "vcbvc"
     },
     {
-      "name": "abc",
-      "artist": "def",
-      "id": "udBM8vK"
+      "name": "fsg",
+      "artist": "dfg",
+      "id": 8
     },
     {
-      "name": "abc",
-      "artist": "def",
-      "id": "qJvh2sc"
+      "id": 9,
+      "name": "zzz edt ttt",
+      "artist": "zzz"
     },
     {
-      "name": "abc",
-      "artist": "def",
-      "id": "UXFYPtv"
+      "name": "Abc song",
+      "artist": "aba",
+      "id": 10
+    }
+  ],
+  "playlist": [
+    {
+      "id": 1,
+      "name": "Tao playlist abc",
+      "songs": [
+        {
+          "name": "Happy new year 2020",
+          "artist": "abc",
+          "id": 2
+        }
+      ]
     },
     {
-      "name": "abc",
-      "artist": "def",
-      "id": "Ixtq3Nh"
+      "name": "Tat ca",
+      "songs": [
+        {
+          "name": "Bai hat xyz - phoi moi",
+          "artist": "xyz",
+          "id": 3
+        },
+        {
+          "name": "Happy new year 2020",
+          "artist": "abc",
+          "id": 2
+        },
+        {
+          "name": "Hoa hai duong",
+          "artist": "Jack",
+          "id": 1
+        }
+      ],
+      "id": 2
     },
     {
-      "name": "abc",
-      "artist": "def",
-      "id": "_OdnSpe"
-    },
-    {
-      "name": "abc",
-      "artist": "def",
-      "id": "ho10LZc"
-    },
-    {
-      "name": "abc",
-      "artist": "def",
-      "id": "Cb54XFA"
-    },
-    {
-      "name": "abc",
-      "artist": "def",
-      "id": "dQsGBXb"
+      "id": 3,
+      "name": "Mot bai",
+      "songs": [
+        {
+          "name": "Bai hat xyz - phoi moi",
+          "artist": "xyz",
+          "id": 3
+        },
+        {
+          "name": "Happy new year 2020",
+          "artist": "abc",
+          "id": 2
+        }
+      ]
     }
   ]
 }

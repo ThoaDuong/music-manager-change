@@ -23,13 +23,13 @@
   body .banner__content {
     font-size: 25px;
   }
-  body .manage .bar {
+  body .bar {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
   }
-  body .manage .btn-name {
+  body .btn-name {
     display: none;
   }
 }
@@ -135,52 +135,6 @@ html, body {
   color: #fedbd0;
 }
 
-.main-content .content .manage .bar {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  margin-bottom: 10px;
-}
-
-.main-content .content .manage .bar__title {
-  color: #442c2e;
-}
-
-.main-content .content .manage .bar .tools {
-  margin-right: 0;
-  margin-left: 0;
-}
-
-.main-content .content .manage .bar .tools__add, .main-content .content .manage .bar .tools__delete {
-  border: 1px solid #442c2e;
-  padding: 5px 10px;
-  color: #442c2e;
-  background-color: transparent;
-  font-weight: 400;
-  font-size: 16px;
-}
-
-.main-content .content .manage .bar .tools__add:active, .main-content .content .manage .bar .tools__delete:active {
-  outline: none;
-  -webkit-box-shadow: none;
-          box-shadow: none;
-}
-
-.main-content .content .manage .bar .tools__add:focus, .main-content .content .manage .bar .tools__delete:focus {
-  outline: none;
-  -webkit-box-shadow: none;
-          box-shadow: none;
-}
-
-.main-content .content .manage .bar .tools__search {
-  border: 1px solid #442c2e;
-  padding: 5px 10px;
-  font-size: 16px;
-}
-
 .main-content .content .manage .--padding {
   padding: 12px 24px;
 }
@@ -232,6 +186,15 @@ html, body {
 .main-content .content .form__btn-cancel:hover:not([disabled]) {
   border: 1px solid #cc3131;
   color: #cc3131;
+}
+
+.main-content .playlist .playlist-head {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 .main-content .playlist__title {
@@ -363,6 +326,52 @@ html, body {
   text-align: center;
   color: #442c2e;
   font-weight: 600;
+}
+
+.bar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.bar__title {
+  color: #442c2e;
+}
+
+.bar .tools {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.bar .tools__add, .bar .tools__delete {
+  border: 1px solid #442c2e;
+  padding: 5px 10px;
+  color: #442c2e;
+  background-color: transparent;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.bar .tools__add:active, .bar .tools__delete:active {
+  outline: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.bar .tools__add:focus, .bar .tools__delete:focus {
+  outline: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.bar .tools__search {
+  border: 1px solid #442c2e;
+  padding: 5px 10px;
+  font-size: 16px;
 }
 
 .custom-table {
