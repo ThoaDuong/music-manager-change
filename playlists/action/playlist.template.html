@@ -1,62 +1,77 @@
 <div class="template">
     <div class="row">
-        <div class="col-4 mb-4">
+        <div class="col-12 col-md-5 mb-2">
             <form name="playlistForm">
-                <h5>Playlist name</h5>
-                <input ng-model="playlistName" name="playlistName" type="text"  class="form-control" placeholder="Enter your playlist's name" required>
-                <p  ng-show="playlistForm.playlistName.$touched && playlistForm.playlistName.$invalid" 
-                    class="text-danger font-weight-bold">Playlist name cannot be empty.
-                </p>
+                <fieldset class="border-color py-3 px-4">
+                    <legend class="w-auto">
+                        <h3 ng-show="!isEdit" class="form__title">Playlist information</h3>
+                    </legend>
+                    <label>Playlist name</label>
+                    <input ng-model="playlistName" name="playlistName" type="text"  class="form-control" placeholder="Enter your playlist's name" required>
+                    <p  ng-show="playlistForm.playlistName.$touched && playlistForm.playlistName.$invalid" 
+                        class="text-danger font-weight-bold">Playlist name cannot be empty.
+                    </p>
+                    <label class="mt-2">Kinds of music</label>
+                    <select class="form-control" ng-init="playlistKinds = listKindsOfMusic[0]" ng-model="playlistKinds" name="playlistKinds">
+                        <option ng-repeat="item in listKindsOfMusic">{{item}}</option>
+                    </select>
+                </fieldset>
             </form>
         </div>
     </div>
+    <div class="col-12">
+        <!-- <hr> -->   
+        <h3 class="px-2 mt-3">Songs of playlist information</h3>
+    </div>
     <div class="row">
-        <div class="col-5">
-            <h5>List songs</h5>
+        <div class="col-12 col-md-5">
             <div class="table-responsive-sm playlist-table">
                 <input type="text" ng-model="keyWordSong" class="form-control mb-2" placeholder="Search">
-                <table class="table table-hover table-condensed table-bordered">
-                    <thead class="thead">
+                <table class="table table-striped table-condensed table-bordered">
+                    <thead class="table__head" >
                       <tr>
-                        <th><input type="checkbox" ng-change="onCheckAll()" ng-model="isAll['all']" ></th>
+                        <th width="60px" class="text-center"><input type="checkbox" ng-change="onCheckAll()" ng-model="isAll['all']" ></th>
                         <th>Name</th>
                         <th>Artist</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr ng-repeat="song in defaultSongs | filter:keyWordSong:strict">
-                        <td><input ng-change="onSingleChange(song)" ng-model="isCheck[song.id]" type="checkbox"></td>
-                        <td> {{song.name}} </td>
-                        <td> {{song.artist}} </td>
-                      </tr>
-                    </tbody>
+                        <span ng-if="isNoItemDefault" class="no-item">No items to show</span>
+
+                        <tr ng-repeat="song in defaultSongs | filter:keyWordSong:strict">
+                          <td width="60px" class="text-center"><input ng-change="onSingleChange(song)" ng-model="isCheck[song.id]" type="checkbox"></td>
+                          <td> {{song.name}} </td>
+                          <td> {{song.artist}} </td>
+                        </tr>
+                      </tbody>
                   </table>
             </div>
         </div>
-        <div class="col-2 text-center">
+        <div class="col-12 col-md-2 text-center m-auto">
             <div class="btn-group-vertical">
-                <button ng-click="onAddASong()" class="template__btn" ng-click="">
+                <button ng-click="onAddSelectedSong()" class="template__btn" ng-click="">
                     Add <i class="fas fa-angle-right"></i>
                 </button>
                 <button ng-click="onAddAllSongs()" class="template__btn">
                     Add all <i class="fas fa-angle-double-right"></i>
                 </button>
-                <button ng-click="onRemoveASong()" class="template__btn">
-                    Remove <i class="fas fa-angle-left"></i>
+                <button ng-click="onRemoveSelectedSong()" class="template__btn">
+                    <i class="fas fa-angle-left"></i> 
+                    Remove
                 </button>
                 <button ng-click="onRemoveAllSongs()" class="template__btn">
-                    Remove all <i class="fas fa-angle-double-left"></i>
+                    <i class="fas fa-angle-double-left"></i> 
+                    Remove all
                 </button>
             </div>
         </div>
-        <div class="col-5">
-            <h5>List playlists</h5>
+        <div class="col-12 col-md-5">
             <div class="table-responsive-sm playlist-table">
                 <input type="text" ng-model="keyWordPlaylist" class="form-control mb-2" placeholder="Search">
-                <table class="table table-hover table-condensed table-bordered custom-table">
-                    <thead class="thead">
+                <table class="table table-striped table-condensed table-bordered custom-table">
+                    <thead class="table__head">
                       <tr>
-                        <th>
+                        <th width="60px" class="text-center">
                             <input type="checkbox" name="checkbox" ng-change="onCheckAllRemove()" ng-model="isAllRemove['all']">
                         </th>
                         <th>Name</th>
@@ -64,8 +79,10 @@
                       </tr>
                     </thead>
                     <tbody>
+                        <span ng-if="isNoItemSelected" class="no-item">No items to show</span>
+
                       <tr ng-repeat="song in selectedSongs | filter:keyWordPlaylist:strict">
-                          <td>
+                          <td width="60px" class="text-center">
                             <input type="checkbox" name="checkbox" ng-change="onSingleChangeRemove(song)" ng-model="isCheckRemove[song.id]">
                           </td>
                         <td> {{song.name}} </td>
@@ -76,19 +93,22 @@
             </div>
         </div>
     </div>
-    <div class="text-center my-3">
-        <button class="btn form__btn-submit"
-        ng-show="!isEditPlaylist"
+    <div class="text-right my-3">
+        <button class="btn btn-primary active"
+            ng-show="!isEditPlaylist"
             ng-click="onCreatePlaylist()" 
-            ng-disabled="playlistForm.playlistName.$invalid">Create
+            ng-disabled="playlistForm.playlistName.$invalid">
+            <i class="far fa-plus-square"></i> Create
         </button>
-        <button class="btn form__btn-submit"
+        <button class="btn btn-primary active"
             ng-show="isEditPlaylist"
             ng-click="onApplyEditPlaylist()" 
-            ng-disabled="playlistForm.playlistName.$invalid">Apply
-        </button>
-        <button class="btn form__btn-cancel"
-        ng-click="onCancelCreatePlaylist()">Cancel
+            ng-disabled="playlistForm.playlistName.$invalid">
+            <i class="far fa-edit"></i> Apply
+        </button>   
+        <button class="btn btn-secondary active"
+            ng-click="onCancelCreatePlaylist()">
+            <i class="fas fa-times"></i> Cancel
         </button>
     </div>
 </div>

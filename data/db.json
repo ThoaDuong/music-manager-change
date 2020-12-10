@@ -1,79 +1,163 @@
 {
   "song": [
     {
-      "id": 2,
-      "name": "Happy new year 2020",
-      "artist": "abc"
+      "id": 1,
+      "name": "Hồng nhan - remix",
+      "artist": "Jack"
     },
     {
-      "id": 6,
-      "name": "vbvc chinh úa",
-      "artist": "vcbvc"
+      "name": "Người lạ ơi",
+      "artist": "Karik",
+      "id": 2
     },
     {
-      "name": "fsg",
-      "artist": "dfg",
+      "name": "Truyền thái y",
+      "artist": "Ngô Kiến Huy",
+      "id": 3
+    },
+    {
+      "id": 4,
+      "name": "Bạc phận",
+      "artist": "Jack"
+    },
+    {
+      "name": "Ok",
+      "artist": "Binz",
+      "id": 5
+    },
+    {
+      "name": "Chạy ngay đi",
+      "artist": "Sơn Tùng M-TP",
+      "id": 6
+    },
+    {
+      "name": "Sao cũng được",
+      "artist": "Binz",
+      "id": 7
+    },
+    {
+      "name": "Em gì ơi",
+      "artist": "Jack",
       "id": 8
     },
     {
       "id": 9,
-      "name": "zzz edt ttt",
-      "artist": "zzz"
+      "name": "Ghen",
+      "artist": "Min - Erik"
     },
     {
-      "name": "Abc song",
-      "artist": "aba",
+      "name": "Hơn cả yêu",
+      "artist": "Đức Phúc",
       "id": 10
+    },
+    {
+      "name": "Rời bỏ",
+      "artist": "Hòa Minzy",
+      "id": 11
+    },
+    {
+      "name": "Anh ơi ở lại",
+      "artist": "Chi Pu",
+      "id": 12
+    },
+    {
+      "name": "Có chắc yêu là đây",
+      "artist": "Sơn Tùng M-TP",
+      "id": 13
+    },
+    {
+      "name": "Một cú lừa",
+      "artist": "Bích Phương",
+      "id": 14
+    },
+    {
+      "id": 15,
+      "name": "Đi du đưa đi",
+      "artist": "Bích Phương"
+    },
+    {
+      "id": 16,
+      "name": "Blackjack",
+      "artist": "Double B"
     }
   ],
   "playlist": [
     {
-      "id": 1,
-      "name": "Tao playlist abc",
+      "name": "Đom đóm",
+      "kinds": "R&B",
       "songs": [
         {
-          "name": "Happy new year 2020",
-          "artist": "abc",
-          "id": 2
-        }
-      ]
-    },
-    {
-      "name": "Tat ca",
-      "songs": [
-        {
-          "name": "Bai hat xyz - phoi moi",
-          "artist": "xyz",
-          "id": 3
-        },
-        {
-          "name": "Happy new year 2020",
-          "artist": "abc",
-          "id": 2
-        },
-        {
-          "name": "Hoa hai duong",
+          "name": "Em gì ơi",
           "artist": "Jack",
-          "id": 1
+          "id": 8
+        },
+        {
+          "id": 4,
+          "name": "Bạc phận",
+          "artist": "Jack"
+        },
+        {
+          "id": 1,
+          "name": "Hồng nhan - remix",
+          "artist": "Jack"
         }
       ],
-      "id": 2
+      "id": 1
     },
     {
-      "id": 3,
-      "name": "Mot bai",
+      "id": 2,
+      "kinds": "R&B",
+      "name": "Nhạc việt",
       "songs": [
         {
-          "name": "Bai hat xyz - phoi moi",
-          "artist": "xyz",
-          "id": 3
+          "name": "Sao cũng được",
+          "artist": "Binz",
+          "id": 7
         },
         {
-          "name": "Happy new year 2020",
-          "artist": "abc",
+          "name": "Ok",
+          "artist": "Binz",
+          "id": 5
+        },
+        {
+          "name": "Người lạ ơi",
+          "artist": "Karik",
           "id": 2
+        },
+        {
+          "id": 9,
+          "name": "Ghen",
+          "artist": "Min - Erik"
         }
       ]
+    },
+    {
+      "name": "Ngẫu nhiên",
+      "kinds": "Pop",
+      "songs": [
+        {
+          "name": "Đi du đưa đi",
+          "artist": "Bích Phương",
+          "id": 15
+        },
+        {
+          "name": "Một cú lừa",
+          "artist": "Bích Phương",
+          "id": 14
+        },
+        {
+          "name": "Có chắc yêu là đây",
+          "artist": "Sơn Tùng M-TP",
+          "id": 13
+        }
+      ],
+      "id": 3
+    },
+    {
+      "name": "Bài hát yêu thích",
+      "kinds": "R&B",
+      "songs": [],
+      "id": 4
     }
   ]
 }

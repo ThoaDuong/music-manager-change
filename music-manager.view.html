@@ -11,12 +11,12 @@
     <div class="main-content">
         <aside class="aside">
             <ul class="aside__menu">
-                <li class="aside__li">
+                <li class="aside__li {{linkName == 'Song' ? 'aside-active' : ''}}">
                     <a class="aside__link" href="#/manager">
                         <i class="fas fa-compact-disc"></i> Songs
                     </a>
                 </li>
-                <li class="aside__li">
+                <li class="aside__li {{linkName == 'Playlist' ? 'aside-active' : ''}}">
                     <a class="aside__link" href="#/playlist">
                         <i class="fas fa-th-list"></i> Playlists
                     </a>
@@ -24,15 +24,15 @@
             </ul>
         </aside>
         <div class="content">
-            <article class="content__menu">
-                <a href="#" class="content__name">Home</a>
-                <i class="fas fa-angle-right"></i>
-                <a href="#" class="content__name">
-                    {{linkName}}
-                </a>
-            </article>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mt-2">
+                  <li class="breadcrumb-item"><a href="#/manager">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page"> {{linkName}} </li>
+                </ol>
+              </nav>
             <ui-view></ui-view>
         </div>
+        
     </div>
     <footer class="footer">
         <div class="footer__copyright">Copyright 2020, TMA Solutions</div>

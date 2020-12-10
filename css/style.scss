@@ -61,6 +61,9 @@ html, body{
                 color: $pink100;
             }
         }
+        .content-active{
+            color: $pink100;
+        }
         .manage{
             
             .--padding{
@@ -75,7 +78,7 @@ html, body{
             &__edit{
                 border: 1px solid $orange;
                 border-radius: 0;
-                color: $pink900;
+                color: $orange;
                 &:hover{
                     background-color: $orange;
                     color: white;
@@ -84,19 +87,26 @@ html, body{
             &__delete{
                 @extend .table__edit;
                 border: 1px solid $red;
+                color: $red;
                 &:hover{
                     background-color: $red;
                 }
             }
         }
         .form{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 50vh;
             &__title{
                 color: $pink900;
+                margin-bottom: 0;
             }
             &__btn-submit{
                 border-radius: 0;
                 background-color: $green;
                 color: white;
+                border-radius: 5px;
                 &:hover:not([disabled]){
                     background-color: #fff;
                     border: 1px solid $green;
@@ -120,6 +130,8 @@ html, body{
         }
         &__title{
             color: $pink900;
+            margin-bottom: 0;
+            margin-left: .75rem;
         }
         &__list{
             list-style: none;
@@ -182,17 +194,23 @@ html, body{
     .template{
         &__btn{
             width: 100%;
-            padding: 10px;
+            padding: 6px 12px;
             background-color: $pink100;
             color: $pink900;
             border: none;
             margin: 5px 0;
         }
-        .table{
-            display: block;
-            height: 55vh;
-            overflow-y: scroll;
+        tbody {
+            display:block;
+            height:40vh;
+            overflow:auto;
         }
+        thead, tbody tr {
+            display:table;
+            width:100%;
+            table-layout:fixed;
+        }
+
     }
     .aside{
         flex-shrink: 0;
@@ -201,6 +219,7 @@ html, body{
         &__li{
             transition: ease-in-out .2s;
             list-style: none;
+            margin: 5px;
             &:hover{
                 background-color: $pink100;
             }
@@ -219,11 +238,17 @@ html, body{
                 color: $pink900;
             }
         }
+        .aside-active{
+            background-color: $pink100;
+            a{
+                color: $pink900;
+            }
+        }
     }
 }
 .footer{
     background-color: $pink50;
-    padding: 20px 10px;
+    padding: 25px 10px;
     &__copyright{
         text-align: center;
         color: $pink900;
@@ -239,41 +264,49 @@ html, body{
     margin-bottom: 10px;
     &__title{
         color: $pink900;
+        margin-bottom: 0;
     }
-    .tools{
-        margin-right: 0;
-        margin-left: 0;
-        &__add{
-            border: 1px solid $pink900;
-            padding: 5px 10px;
-            color: $pink900;
-            background-color: transparent;
-            font-weight: 400;
-            font-size: 16px;
-            &:active{
-                outline: none;
-                box-shadow: none;
-            }
-            &:focus{
-                outline: none;
-                box-shadow: none;
-            }
+}
+.tools{
+    margin-right: 0;
+    margin-left: 0;
+    &__add{
+        border: 1px solid $pink900;
+        padding: 5px 10px;
+        color: $pink900;
+        background-color: transparent;
+        font-weight: 400;
+        font-size: 16px;
+        &:active{
+            outline: none;
+            box-shadow: none;
         }
-        &__delete{
-            @extend .tools__add;
+        &:focus{
+            outline: none;
+            box-shadow: none;
         }
-        &__search{
-            border: 1px solid $pink900;
-            padding: 5px 10px;
-            font-size: 16px;
-        }
+    }
+    &__delete{
+        @extend .tools__add;
+    }
+    &__search{
+        border: 1px solid $pink900;
+        padding: 0px 10px;
+        font-size: 15px;
+        border-radius: 3px;
+        margin-left: 5px;
     }
 }
 
-
+.border-color{
+    border: 1px solid $pink900;
+}
 .custom-table{
     table-layout: fixed;
     width: 100%;
+}
+.table td, .table th {
+    padding: 6px 15px;
 }
 .cursor-pointer{
     cursor: pointer;
@@ -284,89 +317,84 @@ html, body{
     }
 }
 
+tbody {
+    display: block;
+    height: 40vh;
+    overflow: auto;
+}
+.custom-tbody {
+    display: block;
+    height: auto;
+    overflow: auto;
+    max-height: 40vh;
+    min-height: 80px;
+}
+thead, tbody tr {
+    display:table;
+    width:100%;
+    table-layout:fixed;
+}
+.border-none{
+    border: none;
+}
+//Custom model
+.detail-name{
+    font-weight: 700;
+    color: $pink900;
+}
+.modal-footer>* {
+    font-size: 15px;
+    padding: 5px 10px;
+}
+.modal-footer{
+    padding: .25rem .75rem !important;
+}
+.dialog-content{
+    font-size: 18px;
+    font-weight: 600;
+    color: $pink900;
+}
+.btn{
+    padding: .275rem .75rem;
+}
+
 // custom pagination
 .custom-pagination{
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
+    height: 50px;
 }
-ul.pagination
-    {
-        width: fit-content;
-      border:solid 1px #CCCCCC;
-      border-radius:5px;    
+.number-select{
+    margin-right: 10px;
+    margin-top: 4px;
+    select:focus{
+        outline: none;
     }
-
-    ul.pagination li.pagination-page 
-    {
-      border-right:solid 1px #CCCCCC;
-      padding-left:15px;
-      padding-right:15px;
-    }
-
-    li.pagination-page.ng-scope.active
-    {
-      background-color:$pink100;
-    }
-
-    li.pagination-page.ng-scope a
-    {   
-      color:#999;
-    }
-
-
-    li.pagination-page.ng-scope.active a
-    {   
-      color:#FFF;
-      font-weight:bold;
-    }
-
-    ul.pagination li.pagination-prev
-    {
-      border-right:solid 1px #CCCCCC;
-      padding:10px;
-    }
-
-    ul.pagination li.pagination-prev a
-    {
-      color:$pink900;   
-    }
-
-    ul.pagination li.pagination-next
-    {
-      border-right:solid 1px #CCCCCC;
-      padding:10px;
-    }
-
-    ul.pagination li.pagination-next a
-    {
-      color:$pink900;   
-    }
-
-    ul.pagination li.pagination-first
-    {
-      border-right:solid 1px #CCCCCC;
-      padding:10;       
-    }
-
-    ul.pagination li.pagination-first a
-    {
-      color:$pink900;   
-    }
+}
+.page-link{
+    padding: .3rem .75rem;
+}
+.no-item{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: $pink900;
+    font-weight: 600;
+    border: 1px solid $pink900;
+    padding: 3px 15px;
+    background-color: $pink50;
+}
+.no-item-detail{
+    @extend .no-item;
+    top: 56%;
+    transform: translate(-50%, 0%);
+}
+input[type=text]:focus{
+    outline: none;
+    box-shadow: none;
+}
 
 
-    ul.pagination li.pagination-last
-    {
-      padding:10px;
-    }
-
-    ul.pagination li.pagination-last a
-    {
-      color:#F90;   
-    }
-
-    ul.pagination li
-    {   
-      padding:10px;
-    }
 

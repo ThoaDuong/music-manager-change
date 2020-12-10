@@ -8,11 +8,15 @@
         $scope.isCheck = {};
         $scope.isAll = {};
         var multiSelect = [];
+        $scope.isSingleSelectPlaylist = false;
+        $scope.isCheckAnyPlaylist = false;
+        $scope.numberOfItems = '10';
         
         init();
         function init() {
             playlistService.getListPlaylists().then(function(data){
                 $scope.listPlaylistsDefault = data;
+                $scope.isNoItemPlaylist = data.length <= 0 ? true : false;
     
                 //Pagination
                 $scope.totalItems = $scope.listPlaylistsDefault.length;
@@ -32,36 +36,20 @@
             $rootScope.paginationPlaylists = arrPlaylists.slice((page - 1) * $scope.itemsPerPage, page * $scope.itemsPerPage);
         }
 
-        var onHandleDeletePlaylist = function (id) {
-            playlistService.deletePlaylist(id).then(data => {
-                $scope.listPlaylistsDefault.forEach((element, index) => {
-                    if (element.id === data.id) {
-                        $scope.listPlaylistsDefault.splice(index, 1);
-                    }
-                });
-            })
-        }
-
         $scope.onClickAddPlaylist = function(){
             $location.path('/create-playlist');
         }
-        $scope.onDeletePlaylist = function (playlist_id) {
-            onHandleDeletePlaylist(playlist_id);
-            multiSelect.forEach(function (ele, index) {
-                if (ele.id === playlist_id) {
-                    multiSelect.splice(index, 1);
-                }
-            })
-        }
         $scope.onDeletePlaylistMultiSelected = function () {
             multiSelect.forEach(element => {
-                onHandleDeletePlaylist(element.id);
+                playlistService.deletePlaylist(element.id);
             });
         }
-        $scope.onEditPlaylist = function (playlist) {
+        $scope.onEditPlaylist = function () {
+            var playlist = multiSelect[0];
             $rootScope.playlistEdit = {
                 id: playlist.id,
                 name: playlist.name,
+                kinds: playlist.kinds,
                 songs: playlist.songs,
             }
             $rootScope.isEditPlaylist = true;
@@ -69,13 +57,26 @@
         }
         $scope.onSingleChange = function (song) {
             $rootScope.onHandleSingleChange(song, $scope.isCheck, $scope.isAll, multiSelect, $scope.listPlaylistsDefault);
+            $scope.isSingleSelectPlaylist = multiSelect.length === 1 ? true : false;
+            if(multiSelect.length > 0){
+                $scope.isCheckAnyPlaylist = true;
+            }
         }
         $scope.onCheckAll = function () {
             multiSelect = $rootScope.onHandleCheckAll($scope.isCheck, $scope.isAll, multiSelect, $scope.listPlaylistsDefault);
+
+            if($scope.isSingleSelectPlaylist){
+                $scope.isSingleSelectPlaylist = false;
+            }
+            $scope.isCheckAnyPlaylist = multiSelect.length <= 0 ? false : true;
         }
 
         $scope.onViewDetailPlaylist = function(playlist){
+            $scope.isNoItemDetailPlaylist = playlist.songs.length <= 0 ? true : false;
             $scope.detailPlaylist = playlist;
+        }
+        $scope.onChangeNumberOfItems = (number) => {
+            $scope.itemsPerPage = Number(number);
         }
     }
 

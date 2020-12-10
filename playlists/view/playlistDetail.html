@@ -1,9 +1,12 @@
 
 <div class="modal fade" id="detail" tabindex="-1" role="dialog" aria-labelledby="title" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="title">Detail of playlist: {{detailPlaylist.name}}</h5>
+            <h5 class="modal-title" id="title">
+                Detail of playlist: 
+                <span class="detail-name">{{detailPlaylist.name}}</span>
+            </h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -18,7 +21,9 @@
                             <th>Artist</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="custom-tbody">
+                        <span ng-if="isNoItemDetailPlaylist" class="no-item-detail">No items to show</span>
+                        
                         <tr ng-repeat="song in detailPlaylist.songs | filter:searchKeyWord:strict">
                             <td>{{song.name}} </td>
                             <td>{{song.artist}} </td>

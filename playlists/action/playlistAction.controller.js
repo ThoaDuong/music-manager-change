@@ -15,6 +15,10 @@
         $scope.isCheckRemove = {};
         $scope.isAllRemove = {};
         var multiSelectRemove = [];
+
+        $scope.listKindsOfMusic = [
+            'R&B', 'Rock', 'Hip Hop', 'Pop', 'EDM'
+        ]
         
         init();
 
@@ -24,11 +28,15 @@
             })
             songService.getListSongs().then(data => {
                 $scope.listSongsDefault = data;
-
                 $scope.defaultSongs = data;
+
+                $scope.isNoItemSelected = $scope.selectedSongs.length <= 0 ? true : false;
+                $scope.isNoItemDefault = $scope.defaultSongs.length <= 0 ? true : false;
                 if($rootScope.playlistEdit.id !== -1){
                     $scope.selectedSongs = $rootScope.playlistEdit.songs;
                     $scope.playlistName = $rootScope.playlistEdit.name;
+                    $scope.isNoItemSelected = $scope.selectedSongs.length <= 0 ? true : false;
+                    $scope.isNoItemDefault = $scope.defaultSongs.length <= 0 ? true : false;
     
                     $rootScope.playlistEdit.songs.forEach(root => {
                         $scope.defaultSongs.forEach((element, index) => {
@@ -75,26 +83,7 @@
         }
         
 
-        $scope.onAddASong = function(){
-            if(multiSelect.length <= 0){
-                return;
-            }
-            resetIsCheck([multiSelect[0]], $scope.isCheck);
-            $scope.defaultSongs.forEach((item, index) => {
-                if(item.id === multiSelect[0].id){
-                    $scope.defaultSongs.splice(index, 1);
-                }
-            });
-            $scope.selectedSongs = $scope.selectedSongs.concat(multiSelect[0]);
-            multiSelect.splice(0, 1);
-            if(multiSelect.length <= 0){
-                resetIsAll($scope.isAll);   
-            }
-        }
-        $scope.onAddAllSongs = function(){
-            resetIsCheck(multiSelect, $scope.isCheck);
-            resetIsAll($scope.isAll);
-
+        $scope.onAddSelectedSong = function(){
             multiSelect.forEach(element => {
                 $scope.defaultSongs.forEach((item, index) => {
                     if(element.id === item.id){
@@ -103,28 +92,24 @@
                 });
             });
             $scope.selectedSongs = $scope.selectedSongs.concat(multiSelect);
-            multiSelect = [];
-        }
-        $scope.onRemoveASong = function(){
-            if(multiSelectRemove.length <= 0){
-                return;
-            }
-            resetIsCheck([multiSelectRemove[0]], $scope.isCheckRemove);   
-            $scope.selectedSongs.forEach((item, index) => {
-                if(item.id === multiSelectRemove[0].id){
-                    $scope.selectedSongs.splice(index, 1);
-                }
-            });
-            $scope.defaultSongs = $scope.defaultSongs.concat(multiSelectRemove[0]);
-            multiSelectRemove.splice(0, 1);
-            if(multiSelectRemove.length <= 0){
-                resetIsAll($scope.isAllRemove);   
-            }
-        }
-        $scope.onRemoveAllSongs = function(){
-            resetIsCheck(multiSelectRemove, $scope.isCheckRemove);
-            resetIsAll($scope.isAllRemove);
 
+            resetIsCheck(multiSelect, $scope.isCheck);
+            resetIsAll($scope.isAll);
+            multiSelect = [];
+            $scope.isNoItemSelected = $scope.selectedSongs.length <= 0 ? true : false;
+            $scope.isNoItemDefault = $scope.defaultSongs.length <= 0 ? true : false;
+        }
+        $scope.onAddAllSongs = function(){
+            $scope.selectedSongs = $scope.selectedSongs.concat($scope.defaultSongs);
+            $scope.defaultSongs = [];
+            
+            resetIsCheck(multiSelect, $scope.isCheck);
+            resetIsAll($scope.isAll);
+            multiSelect = [];
+            $scope.isNoItemSelected = $scope.selectedSongs.length <= 0 ? true : false;
+            $scope.isNoItemDefault = $scope.defaultSongs.length <= 0 ? true : false;
+        }
+        $scope.onRemoveSelectedSong = function(){
             multiSelectRemove.forEach(element => {
                 $scope.selectedSongs.forEach((item, index) => {
                     if(element.id === item.id){
@@ -133,11 +118,27 @@
                     }
                 });
             });
+
+            resetIsCheck(multiSelectRemove, $scope.isCheckRemove);
+            resetIsAll($scope.isAllRemove);
             multiSelectRemove = [];
+            $scope.isNoItemSelected = $scope.selectedSongs.length <= 0 ? true : false;
+            $scope.isNoItemDefault = $scope.defaultSongs.length <= 0 ? true : false;
+        }
+        $scope.onRemoveAllSongs = function(){
+            $scope.defaultSongs = $scope.defaultSongs.concat($scope.selectedSongs);
+            $scope.selectedSongs = [];
+
+            resetIsCheck(multiSelectRemove, $scope.isCheckRemove);
+            resetIsAll($scope.isAllRemove);
+            multiSelectRemove = [];
+            $scope.isNoItemSelected = $scope.selectedSongs.length <= 0 ? true : false;
+            $scope.isNoItemDefault = $scope.defaultSongs.length <= 0 ? true : false;
         }
         $scope.onCreatePlaylist = function(){
             var newPlaylist = {
                 name: $scope.playlistName,
+                kinds: $scope.playlistKinds,
                 songs: $scope.selectedSongs,
             }
             playlistService.addPlaylist(newPlaylist).then(data => {
@@ -163,6 +164,7 @@
         $scope.onApplyEditPlaylist = function(){
             var updatePlaylist = {
                 id: $rootScope.playlistEdit.id,
+                kinds: $scope.playlistKinds,
                 name: $scope.playlistName,
                 songs: $scope.selectedSongs,
             }
@@ -170,6 +172,7 @@
                 $rootScope.playlistEdit = {
                     id: -1,
                     name: '',
+                    kinds: 'R&B',
                     songs: [],
                 }
                 $rootScope.isEditPlaylist = false;

@@ -1,4 +1,4 @@
-musicManager.run(function($rootScope) {
+musicManager.run(function($rootScope, $state) {
     $rootScope.linkName = 'Song';
     //Define song edit
     $rootScope.song = {
@@ -19,6 +19,7 @@ musicManager.run(function($rootScope) {
     $rootScope.playlistEdit = {
         id: -1,
         name: '',
+        kinds: 'R&B',
         songs: [],
     }
     $rootScope.isEditPlaylist = false;
@@ -26,6 +27,7 @@ musicManager.run(function($rootScope) {
         $rootScope.playlistEdit = {
             id: -1,
             name: '',
+            kinds: 'R&B',
             songs: [],
         }
         $rootScope.isEditPlaylist = false;
@@ -71,12 +73,13 @@ musicManager.run(function($rootScope) {
         //Change path
         var str_next = next.substr(next.lastIndexOf('/') + 1);
         var str_current = current.substr(next.lastIndexOf('/') + 1);
-        if(str_next === 'playlist'){
+        if(str_next === 'playlist' || str_next === 'create-playlist'){
             $rootScope.linkName = 'Playlist';
         }
         else{
             $rootScope.linkName = 'Song';
         }
+        
 
         if(str_current === 'create-playlist' && (str_next === 'playlist' || str_next === 'manager')){
             $rootScope.resetPlaylistEdit();
