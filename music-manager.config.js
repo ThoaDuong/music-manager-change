@@ -89,4 +89,6 @@ musicManager.run(function($rootScope, $state) {
         }
 
     });
+
+
 });
