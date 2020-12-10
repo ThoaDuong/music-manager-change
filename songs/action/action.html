@@ -2,10 +2,10 @@
 <button class="btn btn-primary btn-sm active"
 ng-click="onClickAddSong()">
     <i class="fas fa-plus"></i>
-    Add
+    {{'add' | i18next}}
 </button>
 <input class="tools__search" type="text" 
     name="search"
-    placeholder="Search"
+    placeholder="{{'search' | i18next}}"
     ng-model="searchKeyWord"
     ng-change="onChangeSearch(searchKeyWord)">

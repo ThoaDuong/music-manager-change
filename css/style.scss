@@ -249,6 +249,7 @@ html, body{
 .footer{
     background-color: $pink50;
     padding: 25px 10px;
+    z-index: 99;
     &__copyright{
         text-align: center;
         color: $pink900;
@@ -385,6 +386,7 @@ thead, tbody tr {
     border: 1px solid $pink900;
     padding: 3px 15px;
     background-color: $pink50;
+    width: fit-content;
 }
 .no-item-detail{
     @extend .no-item;

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="UTF-8">
@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="./css/style.css">
 </head>
 
-<body ng-app="managerApp" ng-controller="managerController">
-    <div ng-include="'music-manager.view.html'"></div>
+<body ng-app="managerApp" ng-controller="localeController">
+    <div ng-controller="managerController" ng-include="'music-manager.view.html'"></div>
 
 
     <script src="node_modules/angular/angular.min.js"></script>
@@ -37,8 +37,8 @@
 
     <script src="music-manager.module.js"></script>
     <script src="music-manager.route.js"></script>
-    <script src="music-manager.config.js"></script>
     <script src="locale/locale.js"></script>
+    <script src="music-manager.config.js"></script>
     <script src="music-manager.controller.js"></script>
     <script src="songs/songs.controller.js"></script>
     <script src="songs/songs.service.js"></script>

@@ -4,14 +4,14 @@
             <form name="playlistForm">
                 <fieldset class="border-color py-3 px-4">
                     <legend class="w-auto">
-                        <h3 ng-show="!isEdit" class="form__title">Playlist information</h3>
+                        <h3 ng-show="!isEdit" class="form__title">{{'infoPlaylist' | i18next}} </h3>
                     </legend>
-                    <label>Playlist name</label>
+                    <label>{{'name' | i18next}} </label>
                     <input ng-model="playlistName" name="playlistName" type="text"  class="form-control" placeholder="Enter your playlist's name" required>
                     <p  ng-show="playlistForm.playlistName.$touched && playlistForm.playlistName.$invalid" 
                         class="text-danger font-weight-bold">Playlist name cannot be empty.
                     </p>
-                    <label class="mt-2">Kinds of music</label>
+                    <label class="mt-2">{{'kinds' | i18next}} </label>
                     <select class="form-control" ng-init="playlistKinds = listKindsOfMusic[0]" ng-model="playlistKinds" name="playlistKinds">
                         <option ng-repeat="item in listKindsOfMusic">{{item}}</option>
                     </select>
@@ -21,7 +21,7 @@
     </div>
     <div class="col-12">
         <!-- <hr> -->   
-        <h3 class="px-2 mt-3">Songs of playlist information</h3>
+        <h3 class="px-2 mt-3">{{'infoSongs' | i18next}} </h3>
     </div>
     <div class="row">
         <div class="col-12 col-md-5">
@@ -31,12 +31,12 @@
                     <thead class="table__head" >
                       <tr>
                         <th width="60px" class="text-center"><input type="checkbox" ng-change="onCheckAll()" ng-model="isAll['all']" ></th>
-                        <th>Name</th>
-                        <th>Artist</th>
+                        <th>{{'name' | i18next}} </th>
+                        <th>{{'artist' | i18next}} </th>
                       </tr>
                     </thead>
                     <tbody>
-                        <span ng-if="isNoItemDefault" class="no-item">No items to show</span>
+                        <span ng-if="isNoItemDefault" class="no-item">{{'noItem' | i18next}} </span>
 
                         <tr ng-repeat="song in defaultSongs | filter:keyWordSong:strict">
                           <td width="60px" class="text-center"><input ng-change="onSingleChange(song)" ng-model="isCheck[song.id]" type="checkbox"></td>
@@ -50,18 +50,18 @@
         <div class="col-12 col-md-2 text-center m-auto">
             <div class="btn-group-vertical">
                 <button ng-click="onAddSelectedSong()" class="template__btn" ng-click="">
-                    Add <i class="fas fa-angle-right"></i>
+                    {{'add' | i18next}} <i class="fas fa-angle-right"></i>
                 </button>
                 <button ng-click="onAddAllSongs()" class="template__btn">
-                    Add all <i class="fas fa-angle-double-right"></i>
+                    {{'add' | i18next}} {{'all' | i18next}} <i class="fas fa-angle-double-right"></i>
                 </button>
                 <button ng-click="onRemoveSelectedSong()" class="template__btn">
                     <i class="fas fa-angle-left"></i> 
-                    Remove
+                    {{'remove' | i18next}}
                 </button>
                 <button ng-click="onRemoveAllSongs()" class="template__btn">
                     <i class="fas fa-angle-double-left"></i> 
-                    Remove all
+                    {{'remove' | i18next}} {{'all' | i18next}}
                 </button>
             </div>
         </div>
@@ -74,12 +74,12 @@
                         <th width="60px" class="text-center">
                             <input type="checkbox" name="checkbox" ng-change="onCheckAllRemove()" ng-model="isAllRemove['all']">
                         </th>
-                        <th>Name</th>
-                        <th>Artist</th>
+                        <th>{{'name' | i18next}} </th>
+                        <th>{{'artist' | i18next}} </th>
                       </tr>
                     </thead>
                     <tbody>
-                        <span ng-if="isNoItemSelected" class="no-item">No items to show</span>
+                        <span ng-if="isNoItemSelected" class="no-item">{{'noItem' | i18next}} </span>
 
                       <tr ng-repeat="song in selectedSongs | filter:keyWordPlaylist:strict">
                           <td width="60px" class="text-center">
@@ -98,17 +98,17 @@
             ng-show="!isEditPlaylist"
             ng-click="onCreatePlaylist()" 
             ng-disabled="playlistForm.playlistName.$invalid">
-            <i class="far fa-plus-square"></i> Create
+            <i class="far fa-plus-square"></i> {{'add' | i18next}}
         </button>
         <button class="btn btn-primary active"
             ng-show="isEditPlaylist"
             ng-click="onApplyEditPlaylist()" 
             ng-disabled="playlistForm.playlistName.$invalid">
-            <i class="far fa-edit"></i> Apply
+            <i class="far fa-edit"></i> {{'apply' | i18next}}
         </button>   
         <button class="btn btn-secondary active"
             ng-click="onCancelCreatePlaylist()">
-            <i class="fas fa-times"></i> Cancel
+            <i class="fas fa-times"></i> {{'cancel' | i18next}}
         </button>
     </div>
 </div>

@@ -4,6 +4,10 @@
             <img src="./images//logo.png" alt="Logo">
         </a>
         <h1 class="header__title">Music Manager</h1>
+        <select class="float-right mt-4 mr-3" ng-init="langValue='en'" ng-model="langValue" ng-change="onChangeLang(langValue)">
+            <option value="en">English</option>
+            <option value="vi">Vietnam</option>
+        </select>
     </header>
     <section class="banner">
         <p class="banner__content">Without music, life would be a mistake</p>
@@ -13,12 +17,12 @@
             <ul class="aside__menu">
                 <li class="aside__li {{linkName == 'Song' ? 'aside-active' : ''}}">
                     <a class="aside__link" href="#/manager">
-                        <i class="fas fa-compact-disc"></i> Songs
+                        <i class="fas fa-compact-disc"></i> {{'song' | i18next}}
                     </a>
                 </li>
                 <li class="aside__li {{linkName == 'Playlist' ? 'aside-active' : ''}}">
                     <a class="aside__link" href="#/playlist">
-                        <i class="fas fa-th-list"></i> Playlists
+                        <i class="fas fa-th-list"></i> {{'playlist' | i18next}}
                     </a>
                 </li>
             </ul>
@@ -26,7 +30,7 @@
         <div class="content">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mt-2">
-                  <li class="breadcrumb-item"><a href="#/manager">Home</a></li>
+                  <li class="breadcrumb-item"><a href="#/manager"> {{'home' | i18next}} </a></li>
                   <li class="breadcrumb-item active" aria-current="page"> {{linkName}} </li>
                 </ol>
               </nav>

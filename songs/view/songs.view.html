@@ -1,19 +1,19 @@
 <section class="manage col-12 col-lg-8 mx-auto">
     <div class="bar">
-        <h2 class="bar__title">Manage songs</h2>
+        <h2 class="bar__title">{{'manage' | i18next}} {{'song' | i18next}} </h2>
     </div>
     <div class="bar">
         <div>
             <button class="btn btn-primary btn-sm active"
             ng-click="onEditSong()" ng-disabled="!isSingleSelectSong">
                 <i class="far fa-edit"></i>
-                Edit
+                {{'edit' | i18next}}
             </button>
             <button class="btn btn-primary btn-sm active"
             ng-disabled="!isCheckAnySong"
             data-toggle="modal" data-target="#deleteModalSong--1">
                 <i class="far fa-trash-alt"></i>
-                Delete
+                {{'delete' | i18next}}
             </button>
             <dialog-directive 
                 id="-1" 
@@ -32,12 +32,12 @@
                 <tr>
                     <th width="60px" class="text-center"><input type="checkbox" ng-change="onCheckAll(isAll)"
                             ng-model="isAll['all']"></th>
-                    <th>Name</th>
-                    <th>Artist</th>
+                    <th>{{'name' | i18next}} </th>
+                    <th>{{'artist' | i18next}} </th>
                 </tr>
             </thead>
             <tbody>
-                <span ng-if="isNoItemSong" class="no-item">No items to show</span>
+                <span ng-if="isNoItemSong" class="no-item">{{'noItem' | i18next}} </span>
 
                 <tr ng-repeat="song in paginationSongs = (listSongsDefault | filter : searchKeyWord | limitTo: itemsPerPage : itemsPerPage*(currentPage-1))">
                     <td width="60px" class="text-center">
@@ -51,7 +51,7 @@
         <hr>
         <div class="custom-pagination">
             <div class="form-group number-select">
-                <label>Items per page:</label>
+                <label>{{'pagination' | i18next}}:</label>
                 <select class="" name="numberOfItems" ng-model="numberOfItems" ng-change="onChangeNumberOfItems(numberOfItems)">
                     <option value="5">5</option>
                     <option value="10">10</option>
@@ -64,7 +64,9 @@
                 data-ng-model="currentPage"
                 items-per-page="itemsPerPage"
                 class="pagination"
-                boundary-link-numbers="true">
+                boundary-link-numbers="true"
+                previous-text="{{'previous'|i18next}}"
+                next-text="{{'next'|i18next}}">
             </ul>
         </div>
 

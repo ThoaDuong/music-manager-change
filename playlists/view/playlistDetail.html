@@ -4,7 +4,7 @@
       <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title" id="title">
-                Detail of playlist: 
+                {{'detail' | i18next}}: 
                 <span class="detail-name">{{detailPlaylist.name}}</span>
             </h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -17,12 +17,12 @@
                 <table width="100%" class="table table-hover table-condensed table-bordered">
                     <thead class="table__head">
                         <tr>
-                            <th>Name</th>
-                            <th>Artist</th>
+                            <th>{{'name' | i18next}} </th>
+                            <th>{{'artist' | i18next}} </th>
                         </tr>
                     </thead>
                     <tbody class="custom-tbody">
-                        <span ng-if="isNoItemDetailPlaylist" class="no-item-detail">No items to show</span>
+                        <span ng-if="isNoItemDetailPlaylist" class="no-item-detail">{{'noItem' | i18next}} </span>
                         
                         <tr ng-repeat="song in detailPlaylist.songs | filter:searchKeyWord:strict">
                             <td>{{song.name}} </td>
@@ -33,7 +33,7 @@
             </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">{{'close' | i18next}} </button>
         </div>
       </div>
     </div>
