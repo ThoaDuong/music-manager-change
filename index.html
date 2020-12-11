@@ -12,12 +12,11 @@
 <body ng-app="managerApp" ng-controller="localeController">
     <div ng-controller="managerController" ng-include="'music-manager.view.html'"></div>
 
-
     <script src="node_modules/angular/angular.min.js"></script>
+    <script src="node_modules/ng-i18next/dist/ng-i18next.js"></script>
+    <script src="node_modules/i18next-xhr-backend/i18nextXHRBackend.js"></script>
     <script src="node_modules/angular-sanitize/angular-sanitize.js"></script>
     <script src="node_modules/i18next/i18next.js"></script>
-    <script src="node_modules/i18next-xhr-backend/i18nextXHRBackend.js"></script>
-    <script src="node_modules/ng-i18next/dist/ng-i18next.js"></script>
 
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.js"></script> -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
@@ -34,9 +33,9 @@
     <script src="https://cdn.jsdelivr.net/npm/ui-bootstrap4@3.0.5/dist/ui-bootstrap-tpls-3.0.5.min.js"></script>
 
     
-
     <script src="music-manager.module.js"></script>
     <script src="music-manager.route.js"></script>
+    <script src="constant/constants.js"></script>
     <script src="locale/locale.js"></script>
     <script src="music-manager.config.js"></script>
     <script src="music-manager.controller.js"></script>
@@ -47,5 +46,4 @@
     <script src="songs/action/action.controller.js"></script>
     <script src="playlists/action/playlistAction.controller.js"></script>
     <script src="dialog.directive.js"></script>
-    
 </html>

@@ -1,4 +1,5 @@
 
+
 (function(){
     'use strict';
 
@@ -14,6 +15,7 @@
                 en: {
                     translation: {
                         "home": "Home",
+                        "quote": "Without music, life would be a mistake.",
                         "songTxt": "Song",
                         "playlist": "Playlist",
                         "manage": "Manage",
@@ -37,11 +39,15 @@
                         "detail": "Detail of playlist",
                         "notEmpty": "Song name cannot be empty",
                         "apply": "Apply",
+                        'ok': "Ok",
+                        "delSong": "Are you sure you want to delete selected songs?",
+                        "delPlaylist": "Are you sure you want to delete selected playlists?"
                     }
                 },
                 vi: {
                     translation: {
                         "home": "Trang chủ",
+                        "quote": "Nếu thiếu đi âm nhạc, cuộc sống sẽ chẳng còn ý nghĩa.",
                         "songTxt": "Bài hát",
                         "playlist": "Danh sách phát",
                         "manage": "Quản lý",
@@ -65,6 +71,9 @@
                         "detail": "Chi tiết của danh sách phát",
                         "notEmpty": "Tên không được phép để trống",
                         "apply": "Áp dụng",
+                        'ok': "Đồng ý",
+                        "delSong": "Bạn có chắc chắn muốn xóa các bài hát đã chọn không?",
+                        "delPlaylist": "Bạn có chắc chắn muốn xóa các danh sách phát đã chọn không?"
                     }
                 }
             }
@@ -76,7 +85,7 @@
 }());
 
 
-////////////
+//////////////////
 
 
 (function(){
@@ -86,42 +95,19 @@
         .controller('localeController', ControllerCtrl)
 
     /** @ngInject */
-    function ControllerCtrl($scope, $i18next){
+    function ControllerCtrl($scope, $i18next, $http, CONSTANT){
         init();
-
         function init(){
+            $http.get(CONSTANT.LANGUAGE_URL).then(res => {
+                var lang = res.data.value;
+                $scope.langValue = lang;
+                $i18next.changeLanguage(lang);
+            })
         }
-
         $scope.onChangeLang = (lang) => {
             $i18next.changeLanguage(lang);
+            $http.put(url, { value: lang });
         }
-        i18next.on('languageChanged', () => {
-            $scope.home = $i18next.t('home');
-            $scope.songTxt = $i18next.t('songTxt');
-            $scope.playlist = $i18next.t('playlist');
-            $scope.manage = $i18next.t('manage');
-            $scope.edit = $i18next.t('edit');
-            $scope.delete = $i18next.t('delete');
-            $scope.add = $i18next.t('add');
-            $scope.remove = $i18next.t('remove');
-            $scope.all = $i18next.t('all');
-            $scope.search = $i18next.t('search');
-            $scope.cancel = $i18next.t('cancel');
-            $scope.close = $i18next.t('close');
-            $scope.name = $i18next.t('name');
-            $scope.artist = $i18next.t('artist');
-            $scope.pagination = $i18next.t('pagination');
-            $scope.previous = $i18next.t('previous');
-            $scope.next = $i18next.t('next');
-            $scope.kinds = $i18next.t('kinds');
-            $scope.infoPlaylist = $i18next.t('infoPlaylist');
-            $scope.infoSongs = $i18next.t('infoSongs');
-            $scope.noItem = $i18next.t('noItem');
-            $scope.detail = $i18next.t('detail');
-            $scope.notEmpty = $i18next.t('notEmpty');
-            $scope.apply = $i18next.t('apply');
-        });
-
     }
 
 }());

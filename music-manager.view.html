@@ -4,13 +4,13 @@
             <img src="./images//logo.png" alt="Logo">
         </a>
         <h1 class="header__title">Music Manager</h1>
-        <select class="float-right mt-4 mr-3" ng-init="langValue='en'" ng-model="langValue" ng-change="onChangeLang(langValue)">
-            <option value="en">English</option>
-            <option value="vi">Vietnam</option>
+        <select  class="float-right mt-3 mr-3 btn btn-primary dropdown-toggle" ng-model="langValue" ng-change="onChangeLang(langValue)">
+            <option class="bg-light text-primary" value="en">English</option>
+            <option class="bg-light text-primary" value="vi">Vietnam</option>
         </select>
     </header>
     <section class="banner">
-        <p class="banner__content">Without music, life would be a mistake</p>
+        <p class="banner__content">{{'quote' | i18next}} </p>
     </section>
     <div class="main-content">
         <aside class="aside">
@@ -31,11 +31,9 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mt-2">
                   <li class="breadcrumb-item"><a href="#/manager"> {{'home' | i18next}} </a></li>
-                  <li class="breadcrumb-item active" aria-current="page"> {{linkName}} </li>
+                  <li class="breadcrumb-item active" aria-current="page"> {{linkName === 'Song' ? 'songTxt' : 'playlist' | i18next}} </li>
                 </ol>
-              </nav>
-
-            <div ng-include="'locale/locale.html'"></div>
+            </nav>
 
             <ui-view></ui-view>
         </div>

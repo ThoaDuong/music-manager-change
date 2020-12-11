@@ -2,7 +2,7 @@
     <div class="row">
         <!-- col-md-8 mx-auto -->
         <div class="bar">
-            <h2 class="playlist__title">{{'manage' | i18next}} {{'playlist' | i18next}} </h2>
+            <h2 class="playlist__title">{{'manage' | i18next}} {{'playlist' | i18next | lowercase}} </h2>
         </div>
         <div class="col-12">
             <div class="bar">
@@ -21,7 +21,7 @@
                     <dialog-directive
                         id="-1"
                         title="Playlist"
-                        content="Are you sure you want to delete selected playlists?"
+                        content="{{'delPlaylist' | i18next}}"
                         function="onDeletePlaylistMultiSelected()">
                     </dialog-directive>
                 </div>
@@ -48,18 +48,16 @@
                     </thead>
                     <tbody>
                         <span ng-if="isNoItemPlaylist" class="no-item">{{'noItem' | i18next}} </span>
-
-                      <tr ng-repeat="playlist in paginationPlaylists = (listPlaylistsDefault | filter: {name: keyWordPlaylist} | limitTo: itemsPerPage: itemsPerPage*(currentPagePlaylist-1))" 
-                      ng-click="onViewDetailPlaylist(playlist)"> 
-                          <td width="60px" class="text-center">
-                            <input ng-change="onSingleChange(playlist)" ng-model="isCheck[playlist.id]" type="checkbox">
-                          </td>
-                        <td data-toggle="modal" data-target="#detail" class="cursor-pointer"> {{playlist.name}} </td>
-                        <td data-toggle="modal" data-target="#detail" class="cursor-pointer"> {{playlist.kinds}} </td>
-                      </tr>
+                        <tr ng-repeat="playlist in paginationPlaylists = (listPlaylistsDefault | filter: {name: keyWordPlaylist} | limitTo: itemsPerPage: itemsPerPage*(currentPagePlaylist-1))" 
+                        ng-click="onViewDetailPlaylist(playlist)"> 
+                            <td width="60px" class="text-center">
+                                <input ng-change="onSingleChange(playlist)" ng-model="isCheck[playlist.id]" type="checkbox">
+                            </td>
+                            <td data-toggle="modal" data-target="#detail" class="cursor-pointer"> {{playlist.name}} </td>
+                            <td data-toggle="modal" data-target="#detail" class="cursor-pointer"> {{playlist.kinds}} </td>
+                        </tr>
                     </tbody>
                 </table>
-                <hr>
                 <div class="custom-pagination">
                     <div class="form-group number-select">
                         <label>{{'pagination' | i18next}}:</label>

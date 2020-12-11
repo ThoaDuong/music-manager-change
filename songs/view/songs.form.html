@@ -3,8 +3,8 @@
         <form name="songForm" novalidate class="form-group">
             <fieldset class="border-color py-3 px-4">
                 <legend class="w-auto">
-                    <h3 ng-show="!isEdit" class="form__title">{{'add' | i18next}} {{'songTxt' | i18next}} </h3>
-                    <h3 ng-show="isEdit" class="form__title">{{'edit' | i18next}} {{'songTxt' | i18next}} </h3>
+                    <h3 ng-show="!isEdit" class="form__title">{{'add' | i18next}} {{'songTxt' | i18next | lowercase}} </h3>
+                    <h3 ng-show="isEdit" class="form__title">{{'edit' | i18next}} {{'songTxt' | i18next | lowercase}} </h3>
                 </legend>
                 <label>*{{'name' | i18next}}  </label>
                 <input name="songName" ng-model="song.name" type="text" class="form-control" required>
@@ -12,23 +12,22 @@
                 class="text-danger font-weight-bold">{{'notEmpty' | i18next}}.</p>
                 <label>{{'artist' | i18next}} </label>
                 <input name="songArtist" ng-model="song.artist" type="text" class="form-control">
-                <hr>
-                <div class="text-right">
+                <div class="text-right mt-4">
                     <button class="btn btn-primary active"
                         ng-show="!isEdit"
                         ng-disabled="songForm.songName.$invalid"
                         ng-click="onCreateSong()">
-                        <i class="far fa-plus-square"></i> {{'add' | i18next}}
+                        {{'add' | i18next}}
                     </button>
                     <button class="btn btn-primary active"
                         ng-show="isEdit"
                         ng-disabled="songForm.songName.$invalid"
                         ng-click="onApplyEditSong(song)">
-                        <i class="far fa-edit"></i> {{'apply' | i18next}}
+                        {{'apply' | i18next}}
                     </button>   
                     <button class="btn btn-secondary active"
                         ng-click="onCancelSubmit()">
-                        <i class="fas fa-times"></i> {{'cancel' | i18next}}
+                        {{'cancel' | i18next}}
                     </button>
                 </div>
             </fieldset>

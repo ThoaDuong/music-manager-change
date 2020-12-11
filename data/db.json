@@ -1,4 +1,10 @@
 {
+  "language": [
+    {
+      "value": "vi",
+      "id": 0
+    }
+  ],
   "song": [
     {
       "id": 1,
@@ -51,39 +57,9 @@
       "id": 10
     },
     {
-      "name": "Rời bỏ",
-      "artist": "Hòa Minzy",
-      "id": 11
-    },
-    {
-      "id": 12,
-      "name": "Anh ơi ở lại - live",
-      "artist": "Chi Pu"
-    },
-    {
-      "name": "Có chắc yêu là đây",
-      "artist": "Sơn Tùng M-TP",
-      "id": 13
-    },
-    {
-      "name": "Một cú lừa",
-      "artist": "Bích Phương",
-      "id": 14
-    },
-    {
-      "id": 15,
-      "name": "Đi du đưa đi",
-      "artist": "Bích Phương"
-    },
-    {
-      "id": 16,
-      "name": "Blackjack",
-      "artist": "Double B"
-    },
-    {
-      "id": 17,
-      "name": "Test 1",
-      "artist": "Test"
+      "id": 11,
+      "name": "Rời bỏ - live",
+      "artist": "Hòa Minzy"
     }
   ],
   "playlist": [
@@ -137,49 +113,26 @@
       ]
     },
     {
-      "name": "Ngẫu nhiên",
-      "kinds": "Pop",
+      "name": "Yêu thích",
+      "kinds": "Other",
       "songs": [
         {
-          "name": "Đi du đưa đi",
-          "artist": "Bích Phương",
-          "id": 15
-        },
-        {
-          "name": "Một cú lừa",
-          "artist": "Bích Phương",
-          "id": 14
-        },
-        {
-          "name": "Có chắc yêu là đây",
+          "name": "Chạy ngay đi",
           "artist": "Sơn Tùng M-TP",
-          "id": 13
+          "id": 6
+        },
+        {
+          "name": "Em gì ơi",
+          "artist": "Jack",
+          "id": 8
+        },
+        {
+          "id": 9,
+          "name": "Ghen",
+          "artist": "Min - Erik"
         }
       ],
       "id": 3
-    },
-    {
-      "name": "Bài hát yêu thích",
-      "kinds": "R&B",
-      "songs": [],
-      "id": 4
-    },
-    {
-      "name": "dfsfs",
-      "kinds": "R&B",
-      "songs": [
-        {
-          "id": 17,
-          "name": "Test 1",
-          "artist": "Test"
-        },
-        {
-          "id": 16,
-          "name": "Blackjack",
-          "artist": "Double B"
-        }
-      ],
-      "id": 5
     }
   ]
 }

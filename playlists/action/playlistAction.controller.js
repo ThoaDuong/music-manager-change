@@ -4,7 +4,7 @@
     musicManager.controller('playlistActionController', ControllerCtrl)
 
     /** @ngInject */
-    function ControllerCtrl($scope, $rootScope, $location, playlistService, songService){
+    function ControllerCtrl($scope, $rootScope, $location, playlistService, songService, CONSTANT){
         
         $scope.selectedSongs = [];
         //Add: Left to right
@@ -15,10 +15,8 @@
         $scope.isCheckRemove = {};
         $scope.isAllRemove = {};
         var multiSelectRemove = [];
-
-        $scope.listKindsOfMusic = [
-            'R&B', 'Rock', 'Hip Hop', 'Pop', 'EDM'
-        ]
+        
+        $scope.listKindsOfMusic = CONSTANT.LIST_KINDS_OF_MUSIC;
         
         init();
 

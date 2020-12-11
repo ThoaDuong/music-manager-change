@@ -1,8 +1,10 @@
-musicManager.service('songService', function($http){
+musicManager.service('songService', function($http, CONSTANT){
     // this.url = 'https://5fb73d8d8e07f00016642927.mockapi.io';
-    this.url = 'http://localhost:3000';
+    // this.url = 'http://localhost:3000';
+    this.url = CONSTANT.DB_URL;
 
     this.getListSongs = function(){
+
         return  $http.get(this.url + '/song').then(function(res){
             return res.data.reverse();
         })

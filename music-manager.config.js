@@ -1,4 +1,4 @@
-musicManager.run(function($rootScope, $state) {
+musicManager.run(function($rootScope) {
     $rootScope.linkName = 'Song';
     //Define song edit
     $rootScope.song = {

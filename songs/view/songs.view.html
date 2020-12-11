@@ -1,6 +1,6 @@
 <section class="manage col-12 col-lg-8 mx-auto">
     <div class="bar">
-        <h2 class="bar__title">{{'manage' | i18next}} {{'songTxt' | i18next}} </h2>
+        <h2 class="bar__title">{{'manage' | i18next}} {{'songTxt' | i18next | lowercase}} </h2>
     </div>
     <div class="bar">
         <div>
@@ -18,7 +18,7 @@
             <dialog-directive 
                 id="-1" 
                 title="Song"
-                content=" Are you sure you want to delete selected songs?"
+                content="{{'delSong' | i18next}}"
                 function="onMultiDelete()">
             </dialog-directive>
         </div>
@@ -48,7 +48,6 @@
                 </tr>
             </tbody>
         </table>
-        <hr>
         <div class="custom-pagination">
             <div class="form-group number-select">
                 <label>{{'pagination' | i18next}}:</label>

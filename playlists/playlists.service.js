@@ -1,6 +1,7 @@
-musicManager.service('playlistService', function($http){
+musicManager.service('playlistService', function($http, CONSTANT){
     // this.url = 'https://5fb73d8d8e07f00016642927.mockapi.io';
-    this.url = 'http://localhost:3000';
+    // this.url = 'http://localhost:3000';
+    this.url = CONSTANT.DB_URL;
 
     this.getListPlaylists = function(){
         return  $http.get(this.url + '/playlist').then(function(res){
