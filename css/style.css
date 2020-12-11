@@ -172,7 +172,10 @@ html, body {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  height: 50vh;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  min-height: 50vh;
 }
 
 .main-content .content .form__title {
@@ -512,6 +515,9 @@ thead, tbody tr {
   border: 1px solid #442c2e;
   padding: 3px 15px;
   background-color: #feeae6;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 
 .no-item-detail {

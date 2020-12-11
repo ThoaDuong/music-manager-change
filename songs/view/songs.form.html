@@ -3,14 +3,14 @@
         <form name="songForm" novalidate class="form-group">
             <fieldset class="border-color py-3 px-4">
                 <legend class="w-auto">
-                    <h3 ng-show="!isEdit" class="form__title">{{'add' | i18next}} {{'song' | i18next}} </h3>
-                    <h3 ng-show="isEdit" class="form__title">Edit Song</h3>
+                    <h3 ng-show="!isEdit" class="form__title">{{'add' | i18next}} {{'songTxt' | i18next}} </h3>
+                    <h3 ng-show="isEdit" class="form__title">{{'edit' | i18next}} {{'songTxt' | i18next}} </h3>
                 </legend>
-                <label>*Song Name</label>
+                <label>*{{'name' | i18next}}  </label>
                 <input name="songName" ng-model="song.name" type="text" class="form-control" required>
                 <p ng-show="songForm.songName.$touched && songForm.songName.$invalid" 
                 class="text-danger font-weight-bold">{{'notEmpty' | i18next}}.</p>
-                <label>Artist</label>
+                <label>{{'artist' | i18next}} </label>
                 <input name="songArtist" ng-model="song.artist" type="text" class="form-control">
                 <hr>
                 <div class="text-right">

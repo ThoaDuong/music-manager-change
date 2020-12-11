@@ -14,6 +14,7 @@
         $scope.isCheckAnySong = false;
         $scope.numberOfItems = '10';
         
+        
 
         init();
 
@@ -99,7 +100,6 @@
         $scope.onChangeNumberOfItems = (number) => {
             $scope.itemsPerPage = Number(number);
         }
-
     }
 
 }());

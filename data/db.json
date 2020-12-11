@@ -79,6 +79,11 @@
       "id": 16,
       "name": "Blackjack",
       "artist": "Double B"
+    },
+    {
+      "id": 17,
+      "name": "Test 1",
+      "artist": "Test"
     }
   ],
   "playlist": [
@@ -158,6 +163,23 @@
       "kinds": "R&B",
       "songs": [],
       "id": 4
+    },
+    {
+      "name": "dfsfs",
+      "kinds": "R&B",
+      "songs": [
+        {
+          "id": 17,
+          "name": "Test 1",
+          "artist": "Test"
+        },
+        {
+          "id": 16,
+          "name": "Blackjack",
+          "artist": "Double B"
+        }
+      ],
+      "id": 5
     }
   ]
 }

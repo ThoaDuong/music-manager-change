@@ -73,7 +73,9 @@
                     <ul ng-change="pageChanged(currentPagePlaylist)" 
                         uib-pagination total-items="totalItems" 
                         data-ng-model="currentPagePlaylist" 
-                        items-per-page="itemsPerPage">
+                        items-per-page="itemsPerPage"
+                        previous-text="{{'previous'|i18next}}"
+                        next-text="{{'next'|i18next}}">>
                     </ul>
                 </div>
             </div>

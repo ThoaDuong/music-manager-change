@@ -9,7 +9,7 @@
                     <label>{{'name' | i18next}} </label>
                     <input ng-model="playlistName" name="playlistName" type="text"  class="form-control" placeholder="Enter your playlist's name" required>
                     <p  ng-show="playlistForm.playlistName.$touched && playlistForm.playlistName.$invalid" 
-                        class="text-danger font-weight-bold">Playlist name cannot be empty.
+                        class="text-danger font-weight-bold">{{'notEmpty' | i18next}}.
                     </p>
                     <label class="mt-2">{{'kinds' | i18next}} </label>
                     <select class="form-control" ng-init="playlistKinds = listKindsOfMusic[0]" ng-model="playlistKinds" name="playlistKinds">
@@ -26,7 +26,7 @@
     <div class="row">
         <div class="col-12 col-md-5">
             <div class="table-responsive-sm playlist-table">
-                <input type="text" ng-model="keyWordSong" class="form-control mb-2" placeholder="Search">
+                <input type="text" ng-model="keyWordSong" class="form-control mb-2" placeholder="{{'search' | i18next}}">
                 <table class="table table-striped table-condensed table-bordered">
                     <thead class="table__head" >
                       <tr>
@@ -67,7 +67,7 @@
         </div>
         <div class="col-12 col-md-5">
             <div class="table-responsive-sm playlist-table">
-                <input type="text" ng-model="keyWordPlaylist" class="form-control mb-2" placeholder="Search">
+                <input type="text" ng-model="keyWordPlaylist" class="form-control mb-2" placeholder="{{'search' | i18next}}">
                 <table class="table table-striped table-condensed table-bordered custom-table">
                     <thead class="table__head">
                       <tr>

@@ -14,7 +14,7 @@
                 en: {
                     translation: {
                         "home": "Home",
-                        "song": "Song",
+                        "songTxt": "Song",
                         "playlist": "Playlist",
                         "manage": "Manage",
                         "edit": "Edit",
@@ -42,7 +42,7 @@
                 vi: {
                     translation: {
                         "home": "Trang chủ",
-                        "song": "Bài hát",
+                        "songTxt": "Bài hát",
                         "playlist": "Danh sách phát",
                         "manage": "Quản lý",
                         "edit": "Sửa",
@@ -63,7 +63,7 @@
                         "infoSongs": "Thông tin các bài hát của danh sách phát",
                         "noItem": "Không có mục nào để hiển thị",
                         "detail": "Chi tiết của danh sách phát",
-                        "notEmpty": "Tên bài hát không được phép để trống",
+                        "notEmpty": "Tên không được phép để trống",
                         "apply": "Áp dụng",
                     }
                 }
@@ -90,16 +90,14 @@
         init();
 
         function init(){
-            console.log('Run here');
         }
 
         $scope.onChangeLang = (lang) => {
             $i18next.changeLanguage(lang);
-            console.log('change', lang);
         }
         i18next.on('languageChanged', () => {
             $scope.home = $i18next.t('home');
-            $scope.song = $i18next.t('song');
+            $scope.songTxt = $i18next.t('songTxt');
             $scope.playlist = $i18next.t('playlist');
             $scope.manage = $i18next.t('manage');
             $scope.edit = $i18next.t('edit');

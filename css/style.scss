@@ -97,7 +97,8 @@ html, body{
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 50vh;
+            height: fit-content;
+            min-height: 50vh;
             &__title{
                 color: $pink900;
                 margin-bottom: 0;
@@ -249,7 +250,6 @@ html, body{
 .footer{
     background-color: $pink50;
     padding: 25px 10px;
-    z-index: 99;
     &__copyright{
         text-align: center;
         color: $pink900;

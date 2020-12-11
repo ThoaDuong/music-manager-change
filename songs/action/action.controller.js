@@ -14,7 +14,7 @@
             $location.path("/song");
         }
         $scope.onCreateSong = function(){
-            songService.addSong($scope.song);
+            songService.addSong($rootScope.song);
             $location.path("/manager");
             $rootScope.resetSong();
         }
