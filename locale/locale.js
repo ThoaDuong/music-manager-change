@@ -96,6 +96,7 @@
 
     /** @ngInject */
     function ControllerCtrl($scope, $i18next, $http, CONSTANT){
+        var url = CONSTANT.LANGUAGE_URL;
         init();
         function init(){
             $http.get(CONSTANT.LANGUAGE_URL).then(res => {
