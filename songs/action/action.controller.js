@@ -10,19 +10,13 @@
         function init(){
         }
 
-        $scope.onClickAddSong = function(){
-            $location.path("/song");
-        }
-        $scope.onCreateSong = function(){
-            songService.addSong($rootScope.song);
+
+        var onCreateSong = function(song){
+            songService.addSong(song);
             $location.path("/manager");
             $rootScope.resetSong();
         }
-        $scope.onCancelSubmit = function(){
-            $rootScope.resetSong();
-            $location.path("/manager");
-        }
-        $scope.onApplyEditSong = function(song){
+        var onApplyEditSong = function(song){
             songService.updateSong(song);
             playlistService.getListPlaylists().then(data => {
                 data.forEach(playlist => {
@@ -36,6 +30,17 @@
                 });
             })
             $rootScope.isEdit = false;
+            $rootScope.resetSong();
+            $location.path("/manager");
+        }
+        $scope.onSubmit = function(song){
+            if(song.id === -1){
+                onCreateSong(song);
+            }else{
+                onApplyEditSong(song);
+            }
+        }
+        $scope.onCancelSubmit = function(){
             $rootScope.resetSong();
             $location.path("/manager");
         }

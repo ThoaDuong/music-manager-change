@@ -22,7 +22,18 @@
                 function="onMultiDelete()">
             </dialog-directive>
         </div>
-        <div ng-include="'songs/action/action.html'" class="tools row" ng-controller="actionSongController">
+        <div class="tools row">
+            <button class="btn btn-primary btn-sm active"
+            ng-click="onClickAddSong()">
+                <i class="fas fa-plus"></i>
+                {{'add' | i18next}}
+            </button>
+            <input class="tools__search" type="text" 
+                name="search"
+                placeholder="{{'search' | i18next}}"
+                ng-model="searchKeyWord"
+                ng-change="onChangeSearch(searchKeyWord)">
+
         </div>
     </div>
     

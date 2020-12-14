@@ -56,11 +56,6 @@
         var resetIsAll = function(isAll){
             isAll['all'] = false;
         }
-        var checkAllIsTrue = function(arrSongs, arrSelected, isAll){
-            if(arrSelected.length !== arrSongs.length){
-                isAll['all'] = false;
-            }
-        }
 
 
         
@@ -133,7 +128,9 @@
             $scope.isNoItemSelected = $scope.selectedSongs.length <= 0 ? true : false;
             $scope.isNoItemDefault = $scope.defaultSongs.length <= 0 ? true : false;
         }
-        $scope.onCreatePlaylist = function(){
+
+        
+        var onCreatePlaylist = function(){
             var newPlaylist = {
                 name: $scope.playlistName,
                 kinds: $scope.playlistKinds,
@@ -147,19 +144,7 @@
             multiSelect = [];
             multiSelectRemove = [];
         }
-        $scope.onCancelCreatePlaylist = function(){
-            multiSelect = [];
-            multiSelectRemove = [];
-            $rootScope.playlistEdit = {
-                id: -1,
-                name: '',
-                songs: [],
-            }
-            $rootScope.isEditPlaylist = false;
-            $location.path('/playlist');
-        }
-
-        $scope.onApplyEditPlaylist = function(){
+        var onApplyEditPlaylist = function(){
             var updatePlaylist = {
                 id: $rootScope.playlistEdit.id,
                 kinds: $scope.playlistKinds,
@@ -177,6 +162,24 @@
                 $location.path('playlist');
             });
             
+        }
+        $scope.onSubmitPlaylist = function(){
+            if($rootScope.playlistEdit.id === -1){
+                onCreatePlaylist();
+            }else{
+                onApplyEditPlaylist();
+            }
+        }
+        $scope.onCancelCreatePlaylist = function(){
+            multiSelect = [];
+            multiSelectRemove = [];
+            $rootScope.playlistEdit = {
+                id: -1,
+                name: '',
+                songs: [],
+            }
+            $rootScope.isEditPlaylist = false;
+            $location.path('/playlist');
         }
 
     }

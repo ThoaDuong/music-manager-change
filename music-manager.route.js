@@ -10,13 +10,10 @@ musicManager.config(function($locationProvider, $stateProvider){
         url: '/manager',
         templateUrl: 'songs/view/songs.view.html',
         controller: 'songsController',
-        data: {
-            breadcrumb: 'Song',
-        }
     })
     .state('song', {
         url: '/song',
-        templateUrl: 'songs/view/songs.form.html',
+        templateUrl: 'songs/action/songs.form.html',
         controller: 'actionSongController',
     })
     .state('playlist', {

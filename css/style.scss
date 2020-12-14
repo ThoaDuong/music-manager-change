@@ -33,7 +33,7 @@ html, body{
     }
 }
 .banner{
-    height: 200px;
+    height: 180px;
     width: 100%;
     object-fit: cover;
     background: url('../images/cover.jpg') 50% 30%/ cover no-repeat scroll;
@@ -72,8 +72,8 @@ html, body{
         }
         .table{
             &__head{
-                background-color: $pink100;
-                color: $pink900;
+                background-color: $pink900;
+                color: $pink50;
             }
             &__edit{
                 border: 1px solid $orange;
@@ -102,6 +102,7 @@ html, body{
             &__title{
                 color: $pink900;
                 margin-bottom: 0;
+                font-weight: 600;
             }
             &__btn-submit{
                 border-radius: 0;
@@ -133,6 +134,7 @@ html, body{
             color: $pink900;
             margin-bottom: 0;
             margin-left: .75rem;
+            font-weight: 600;
         }
         &__list{
             list-style: none;
@@ -248,12 +250,13 @@ html, body{
     }
 }
 .footer{
-    background-color: $pink50;
-    padding: 25px 10px;
+    background-color: $pink100;
+    padding: 20px 10px;
     &__copyright{
         text-align: center;
         color: $pink900;
         font-weight: 600;
+        font-size: 18px;
     }
 }
 
@@ -266,6 +269,7 @@ html, body{
     &__title{
         color: $pink900;
         margin-bottom: 0;
+        font-weight: 600;
     }
 }
 .tools{

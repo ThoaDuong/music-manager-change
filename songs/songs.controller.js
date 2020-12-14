@@ -42,6 +42,8 @@
             $scope.paginationSongs = arrSongs.slice((page - 1) * $scope.itemsPerPage, page * $scope.itemsPerPage);
         }
 
+        
+
         $scope.onEditSong = function () {
             var song = multiSelect[0];
             $rootScope.song.name = song.name;
@@ -49,6 +51,9 @@
             $rootScope.song.id = song.id;
             $rootScope.isEdit = true;
             $location.path('/song');
+        }
+        $scope.onClickAddSong = function(){
+            $location.path("/song");
         }
 
         var onConfirmDeleteSong = function (id) {

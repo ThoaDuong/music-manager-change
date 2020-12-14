@@ -1,6 +1,6 @@
 <div class="row form">
     <div class="col-12 col-md-5 mx-auto">
-        <form name="songForm" novalidate class="form-group">
+        <form name="songForm" novalidate class="form-group" ng-submit="songForm.$valid && onSubmit(song)">
             <fieldset class="border-color py-3 px-4">
                 <legend class="w-auto">
                     <h3 ng-show="!isEdit" class="form__title">{{'add' | i18next}} {{'songTxt' | i18next | lowercase}} </h3>
@@ -8,21 +8,22 @@
                 </legend>
                 <label>*{{'name' | i18next}}  </label>
                 <input name="songName" ng-model="song.name" type="text" class="form-control" required>
-                <p ng-show="songForm.songName.$touched && songForm.songName.$invalid" 
-                class="text-danger font-weight-bold">{{'notEmpty' | i18next}}.</p>
+
+                <div ng-show="songForm.$submitted || songForm.songName.$touched">
+                    <div class="text-danger font-weight-bold" ng-show="songForm.songName.$error.required"> {{'notEmpty' | i18next}}. </div>
+                </div>
+
                 <label>{{'artist' | i18next}} </label>
                 <input name="songArtist" ng-model="song.artist" type="text" class="form-control">
                 <div class="text-right mt-4">
                     <button class="btn btn-primary active"
-                        ng-show="!isEdit"
-                        ng-disabled="songForm.songName.$invalid"
-                        ng-click="onCreateSong()">
+                        type="submit"
+                        ng-show="!isEdit">
                         {{'add' | i18next}}
                     </button>
                     <button class="btn btn-primary active"
-                        ng-show="isEdit"
-                        ng-disabled="songForm.songName.$invalid"
-                        ng-click="onApplyEditSong(song)">
+                        type="submit"
+                        ng-show="isEdit">
                         {{'apply' | i18next}}
                     </button>   
                     <button class="btn btn-secondary active"

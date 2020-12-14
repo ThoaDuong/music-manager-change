@@ -15,7 +15,7 @@
                 en: {
                     translation: {
                         "home": "Home",
-                        "quote": "Without music, life would be a mistake.",
+                        "quote": "Without music, life would be a mistake",
                         "songTxt": "Song",
                         "playlist": "Playlist",
                         "manage": "Manage",
@@ -47,7 +47,7 @@
                 vi: {
                     translation: {
                         "home": "Trang chủ",
-                        "quote": "Nếu thiếu đi âm nhạc, cuộc sống sẽ chẳng còn ý nghĩa.",
+                        "quote": "Nếu thiếu đi âm nhạc, cuộc sống sẽ chẳng còn ý nghĩa",
                         "songTxt": "Bài hát",
                         "playlist": "Danh sách phát",
                         "manage": "Quản lý",
