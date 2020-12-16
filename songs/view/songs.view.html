@@ -16,7 +16,7 @@
                 {{'delete' | i18next}}
             </button>
             <dialog-directive 
-                id="-1" 
+                id="-1"
                 title="Song"
                 content="{{'delSong' | i18next}}"
                 function="onMultiDelete()">
@@ -62,7 +62,7 @@
         <div class="custom-pagination">
             <div class="form-group number-select">
                 <label>{{'pagination' | i18next}}:</label>
-                <select class="" name="numberOfItems" ng-model="numberOfItems" ng-change="onChangeNumberOfItems(numberOfItems)">
+                <select name="numberOfItems" ng-model="numberOfItems" ng-change="onChangeNumberOfItems(numberOfItems)">
                     <option value="5">5</option>
                     <option value="10">10</option>
                     <option value="20">20</option>

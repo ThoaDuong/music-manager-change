@@ -58,8 +58,18 @@
     },
     {
       "id": 11,
-      "name": "Rời bỏ - live",
+      "name": "Rời bỏ",
       "artist": "Hòa Minzy"
+    },
+    {
+      "name": "Hoa vô sắc",
+      "artist": "Jack",
+      "id": 12
+    },
+    {
+      "name": "Có chắc yêu là đây",
+      "artist": "Sơn Tùng M-TP",
+      "id": 13
     }
   ],
   "playlist": [
@@ -113,7 +123,7 @@
       "songs": [
         {
           "id": 11,
-          "name": "Rời bỏ - live",
+          "name": "Rời bỏ",
           "artist": "Hòa Minzy"
         },
         {
@@ -170,6 +180,140 @@
         }
       ],
       "id": 5
+    },
+    {
+      "id": 6,
+      "kinds": "R&B",
+      "name": "Tạo mới",
+      "songs": [
+        {
+          "id": 11,
+          "name": "Rời bỏ",
+          "artist": "Hòa Minzy"
+        },
+        {
+          "name": "Hơn cả yêu",
+          "artist": "Đức Phúc",
+          "id": 10
+        },
+        {
+          "id": 9,
+          "name": "Ghen",
+          "artist": "Min - Erik"
+        },
+        {
+          "name": "Em gì ơi",
+          "artist": "Jack",
+          "id": 8
+        },
+        {
+          "name": "Sao cũng được",
+          "artist": "Binz",
+          "id": 7
+        },
+        {
+          "name": "Ok",
+          "artist": "Binz",
+          "id": 5
+        },
+        {
+          "name": "Người lạ ơi",
+          "artist": "Karik",
+          "id": 2
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "kinds": "R&B",
+      "name": "abc",
+      "songs": []
+    },
+    {
+      "id": 8,
+      "kinds": "R&B",
+      "name": "xyz",
+      "songs": [
+        {
+          "name": "Hoa vô sắc",
+          "artist": "Jack",
+          "id": 12
+        },
+        {
+          "id": 11,
+          "name": "Rời bỏ",
+          "artist": "Hòa Minzy"
+        },
+        {
+          "name": "Hơn cả yêu",
+          "artist": "Đức Phúc",
+          "id": 10
+        },
+        {
+          "name": "Em gì ơi",
+          "artist": "Jack",
+          "id": 8
+        },
+        {
+          "name": "Sao cũng được",
+          "artist": "Binz",
+          "id": 7
+        },
+        {
+          "name": "Chạy ngay đi",
+          "artist": "Sơn Tùng M-TP",
+          "id": 6
+        },
+        {
+          "name": "Ok",
+          "artist": "Binz",
+          "id": 5
+        },
+        {
+          "id": 1,
+          "name": "Hồng nhan - remix",
+          "artist": "Jack"
+        }
+      ]
+    },
+    {
+      "name": "Danh sách",
+      "kinds": "EDM",
+      "songs": [
+        {
+          "id": 9,
+          "name": "Ghen",
+          "artist": "Min - Erik"
+        },
+        {
+          "name": "Hơn cả yêu",
+          "artist": "Đức Phúc",
+          "id": 10
+        },
+        {
+          "id": 11,
+          "name": "Rời bỏ",
+          "artist": "Hòa Minzy"
+        }
+      ],
+      "id": 9
+    },
+    {
+      "name": "Nhạc việt",
+      "kinds": "Pop",
+      "songs": [
+        {
+          "name": "Hoa vô sắc",
+          "artist": "Jack",
+          "id": 12
+        },
+        {
+          "id": 11,
+          "name": "Rời bỏ",
+          "artist": "Hòa Minzy"
+        }
+      ],
+      "id": 10
     }
   ]
 }

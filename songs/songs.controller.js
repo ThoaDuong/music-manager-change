@@ -14,7 +14,6 @@
         $scope.isCheckAnySong = false;
         $scope.numberOfItems = '10';
         
-        
 
         init();
 
@@ -25,7 +24,7 @@
     
                 //Pagination
                 $scope.totalItems = $scope.listSongsDefault.length;
-                $scope.itemsPerPage = 10;
+                $scope.itemsPerPage = Number($scope.numberOfItems);
                 $scope.currentPage = 1;
             
                 $scope.$watch('currentPage', function() {
@@ -88,16 +87,14 @@
         $scope.onSingleChange = function (song) {
             $rootScope.onHandleSingleChange(song, $scope.isCheck, $scope.isAll, multiSelect, $scope.listSongsDefault);
             $scope.isSingleSelectSong = multiSelect.length === 1 ? true : false;
-            if(multiSelect.length > 0){
-                $scope.isCheckAnySong = true;
-            }
+            $scope.isCheckAnySong = multiSelect.length > 0 ? true : false;
         }
         $scope.onCheckAll = function () {
             multiSelect = $rootScope.onHandleCheckAll($scope.isCheck, $scope.isAll, multiSelect, $scope.listSongsDefault);
             if($scope.isSingleSelectSong){
                 $scope.isSingleSelectSong = false;
             }
-            $scope.isCheckAnySong = multiSelect.length <= 0 ? false : true;
+            $scope.isCheckAnySong = multiSelect.length > 0 ? true : false;
         }
         $scope.onChangeSearch = function (keyWord) {
             $scope.searchKeyWord = keyWord;
@@ -105,6 +102,7 @@
         $scope.onChangeNumberOfItems = (number) => {
             $scope.itemsPerPage = Number(number);
         }
+
     }
 
 }());

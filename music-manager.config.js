@@ -68,7 +68,6 @@ musicManager.run(function($rootScope) {
     }
 
 
-
     $rootScope.$on("$locationChangeStart", function(event, next, current) { 
         //Change path
         var str_next = next.substr(next.lastIndexOf('/') + 1);

@@ -20,13 +20,13 @@
     
                 //Pagination
                 $scope.totalItems = $scope.listPlaylistsDefault.length;
-                $scope.itemsPerPage = 5 ;
+                $scope.itemsPerPage = 10;
                 $scope.currentPagePlaylist = 1;
             
                 $scope.$watch('currentPagePlaylist', function() {
                     setPaginationData($scope.currentPagePlaylist, $scope.listPlaylistsDefault);
                 }, true);
-                $scope.pageChanged = function(value){
+                $scope.pageChangedPlaylist = function(value){
                     $scope.currentPagePlaylist = value;
                 }
             })
@@ -58,17 +58,14 @@
         $scope.onSingleChange = function (song) {
             $rootScope.onHandleSingleChange(song, $scope.isCheck, $scope.isAll, multiSelect, $scope.listPlaylistsDefault);
             $scope.isSingleSelectPlaylist = multiSelect.length === 1 ? true : false;
-            if(multiSelect.length > 0){
-                $scope.isCheckAnyPlaylist = true;
-            }
+            $scope.isCheckAnyPlaylist = multiSelect.length > 0 ? true : false;
         }
         $scope.onCheckAll = function () {
             multiSelect = $rootScope.onHandleCheckAll($scope.isCheck, $scope.isAll, multiSelect, $scope.listPlaylistsDefault);
-
             if($scope.isSingleSelectPlaylist){
                 $scope.isSingleSelectPlaylist = false;
             }
-            $scope.isCheckAnyPlaylist = multiSelect.length <= 0 ? false : true;
+            $scope.isCheckAnyPlaylist = multiSelect.length > 0 ? true : false;
         }
 
         $scope.onViewDetailPlaylist = function(playlist){

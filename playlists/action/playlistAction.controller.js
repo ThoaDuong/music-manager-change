@@ -45,7 +45,6 @@
                     });
                 }
             })
-
         }
 
         var resetIsCheck = function(arr, isCheck){

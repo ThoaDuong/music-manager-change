@@ -394,12 +394,18 @@ thead, tbody tr {
 }
 .no-item-detail{
     @extend .no-item;
-    top: 56%;
+    top: 46%;
     transform: translate(-50%, 0%);
 }
 input[type=text]:focus{
     outline: none;
     box-shadow: none;
+}
+
+.btn.btn-primary:disabled{
+    background-color: #222222;
+    border-color: #222222;
+    opacity: 0.2;
 }
 
 

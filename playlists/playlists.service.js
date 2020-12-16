@@ -44,10 +44,5 @@ musicManager.service('playlistService', function($http, CONSTANT){
         return $http(request).then(function(res){
             return res.data;
         })
-        // return this.deletePlaylist(playlist.id).then(() => {
-        //     return this.addPlaylist(playlist).then(data => {
-        //         return data;
-        //     });
-        // }) 
     }   
 })

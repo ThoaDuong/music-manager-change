@@ -11,7 +11,6 @@
         function init(){
         }
         
-        
     }
 
 }());
