@@ -62,11 +62,6 @@
       "artist": "Hòa Minzy"
     },
     {
-      "name": "Hoa vô sắc",
-      "artist": "Jack",
-      "id": 12
-    },
-    {
       "name": "Có chắc yêu là đây",
       "artist": "Sơn Tùng M-TP",
       "id": 13
@@ -233,11 +228,16 @@
       "id": 8,
       "kinds": "R&B",
       "name": "xyz",
+      "songs": []
+    },
+    {
+      "name": "Tất cả",
+      "kinds": "R&B",
       "songs": [
         {
-          "name": "Hoa vô sắc",
-          "artist": "Jack",
-          "id": 12
+          "name": "Có chắc yêu là đây",
+          "artist": "Sơn Tùng M-TP",
+          "id": 13
         },
         {
           "id": 11,
@@ -248,6 +248,11 @@
           "name": "Hơn cả yêu",
           "artist": "Đức Phúc",
           "id": 10
+        },
+        {
+          "id": 9,
+          "name": "Ghen",
+          "artist": "Min - Erik"
         },
         {
           "name": "Em gì ơi",
@@ -270,50 +275,27 @@
           "id": 5
         },
         {
+          "id": 4,
+          "name": "Bạc phận",
+          "artist": "Jack"
+        },
+        {
+          "name": "Truyền thái y",
+          "artist": "Ngô Kiến Huy",
+          "id": 3
+        },
+        {
+          "name": "Người lạ ơi",
+          "artist": "Karik",
+          "id": 2
+        },
+        {
           "id": 1,
           "name": "Hồng nhan - remix",
           "artist": "Jack"
         }
-      ]
-    },
-    {
-      "name": "Danh sách",
-      "kinds": "EDM",
-      "songs": [
-        {
-          "id": 9,
-          "name": "Ghen",
-          "artist": "Min - Erik"
-        },
-        {
-          "name": "Hơn cả yêu",
-          "artist": "Đức Phúc",
-          "id": 10
-        },
-        {
-          "id": 11,
-          "name": "Rời bỏ",
-          "artist": "Hòa Minzy"
-        }
       ],
       "id": 9
-    },
-    {
-      "name": "Nhạc việt",
-      "kinds": "Pop",
-      "songs": [
-        {
-          "name": "Hoa vô sắc",
-          "artist": "Jack",
-          "id": 12
-        },
-        {
-          "id": 11,
-          "name": "Rời bỏ",
-          "artist": "Hòa Minzy"
-        }
-      ],
-      "id": 10
     }
   ]
 }

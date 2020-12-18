@@ -6,21 +6,18 @@
 
     /** @ngInject */
     function ControllerCtrl($scope, $location, songService, playlistService, $rootScope) {
-
-        $scope.isCheck = {};
-        $scope.isAll = {};
-        var multiSelect = [];
+        $scope.multiSelect = [];
         $scope.isSingleSelectSong = false;
         $scope.isCheckAnySong = false;
         $scope.numberOfItems = '10';
-        
+
 
         init();
-
         function init() {
             songService.getListSongs().then(function(data){
                 $scope.listSongsDefault = data;
                 $scope.isNoItemSong = data.length <= 0 ? true : false;
+                $scope.arrTitle = Object.keys(data[0]);
     
                 //Pagination
                 $scope.totalItems = $scope.listSongsDefault.length;
@@ -37,14 +34,11 @@
         }
         
         var setPagingData = function(page, arrSongs) {
-            $scope.currentPage = page;
             $scope.paginationSongs = arrSongs.slice((page - 1) * $scope.itemsPerPage, page * $scope.itemsPerPage);
         }
 
-        
-
         $scope.onEditSong = function () {
-            var song = multiSelect[0];
+            var song = $scope.multiSelect[0];
             $rootScope.song.name = song.name;
             $rootScope.song.artist = song.artist;
             $rootScope.song.id = song.id;
@@ -68,41 +62,20 @@
                 });
             })
         }
-        $scope.onDeleteSong = function (id) {
-            onConfirmDeleteSong(id);
-            //check the deleted item is in multiSelect. if true, remove it.
-            multiSelect.forEach(function (ele, index) {
-                if (ele.id == id) {
-                    multiSelect.splice(index, 1);
-                }
-            })
-        }
+
         $scope.onMultiDelete = function () {
-            multiSelect.forEach(function (ele) {
+            $scope.multiSelect.forEach(function (ele) {
                 onConfirmDeleteSong(ele.id);
-                multiSelect = [];
+                $scope.multiSelect = [];
             })
-            $scope.isAll['all'] = false;
         }
-        $scope.onSingleChange = function (song) {
-            $rootScope.onHandleSingleChange(song, $scope.isCheck, $scope.isAll, multiSelect, $scope.listSongsDefault);
-            $scope.isSingleSelectSong = multiSelect.length === 1 ? true : false;
-            $scope.isCheckAnySong = multiSelect.length > 0 ? true : false;
-        }
-        $scope.onCheckAll = function () {
-            multiSelect = $rootScope.onHandleCheckAll($scope.isCheck, $scope.isAll, multiSelect, $scope.listSongsDefault);
-            if($scope.isSingleSelectSong){
-                $scope.isSingleSelectSong = false;
-            }
-            $scope.isCheckAnySong = multiSelect.length > 0 ? true : false;
-        }
+
         $scope.onChangeSearch = function (keyWord) {
             $scope.searchKeyWord = keyWord;
         }
         $scope.onChangeNumberOfItems = (number) => {
             $scope.itemsPerPage = Number(number);
         }
-
     }
 
 }());

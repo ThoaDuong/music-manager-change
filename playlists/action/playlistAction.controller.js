@@ -27,6 +27,7 @@
             songService.getListSongs().then(data => {
                 $scope.listSongsDefault = data;
                 $scope.defaultSongs = data;
+                $scope.arrTitle = Object.keys(data[0]);
 
                 $scope.isNoItemSelected = $scope.selectedSongs.length <= 0 ? true : false;
                 $scope.isNoItemDefault = $scope.defaultSongs.length <= 0 ? true : false;

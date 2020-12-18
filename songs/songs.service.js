@@ -21,9 +21,7 @@ musicManager.service('songService', function($http, CONSTANT){
                 artist: song.artist,
             }
         }
-        return $http(request).then(function(res){
-            return res.data;
-        })
+        return $http.post(this.url + '/song', request.data);
     }
     this.updateSong = function(song){
         var request = {

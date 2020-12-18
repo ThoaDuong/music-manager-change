@@ -9,11 +9,16 @@
         init();
         function init(){
         }
-
+        
 
         var onCreateSong = function(song){
-            songService.addSong(song);
-            $location.path("/manager");
+            songService.addSong(song).then((data)=>{
+                if(data){
+                   $location.url("/manager");
+                }
+            }, (err)=>{
+                console.log('Create song error');
+            });
             $rootScope.resetSong();
         }
         var onApplyEditSong = function(song){
