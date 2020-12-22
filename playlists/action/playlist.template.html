@@ -36,37 +36,16 @@
         <div class="col-12 col-md-5">
             <div class="table-responsive-sm playlist-table">
                 <input type="text" ng-model="keyWordSong" class="form-control mb-2" placeholder="{{'search' | i18next}}">
-                <table class="table table-striped table-condensed table-bordered">
-                    <thead class="table__head" >
-                      <tr>
-                        <th width="60px" class="text-center"><input type="checkbox" ng-change="onCheckAll()" ng-model="isAll['all']" ></th>
-                        <th>{{'name' | i18next}} </th>
-                        <th>{{'artist' | i18next}} </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                        <span ng-if="isNoItemDefault" class="no-item">{{'noItem' | i18next}} </span>
-
-                        <tr ng-repeat="song in defaultSongs | filter:keyWordSong:strict">
-                          <td width="60px" class="text-center"><input ng-change="onSingleChange(song)" ng-model="isCheck[song.id]" type="checkbox"></td>
-                          <td> {{song.name}} </td>
-                          <td> {{song.artist}} </td>
-                        </tr>
-                      </tbody>
-                  </table>
-                <!-- <table-directive
+                <table-directive
                     array = 'defaultSongs'
                     arr-pagination = 'defaultSongs'
                     arr-title = 'arrTitle'
                     is-no-item = 'isNoItemDefault'
                     search-key-word = 'keyWordSong'
                     multi-select = 'multiSelect'
-                    is-single-select-song = 'isSingleSelectPlaylist'
-                    is-check-any-song = 'isCheckAnyPlaylist'
-                    remove = 'songs'
-                    detail-playlist = 'detailPlaylist'
-                    no-item-detail = 'isNoItemDetailPlaylist'
-                ></table-directive> -->
+                    is-check = 'isCheck'
+                    is-all = 'isAll'
+                ></table-directive>
             </div>
         </div>
         <div class="col-12 col-md-2 text-center m-auto">
@@ -90,28 +69,16 @@
         <div class="col-12 col-md-5">
             <div class="table-responsive-sm playlist-table">
                 <input type="text" ng-model="keyWordPlaylist" class="form-control mb-2" placeholder="{{'search' | i18next}}">
-                <table class="table table-striped table-condensed table-bordered custom-table">
-                    <thead class="table__head">
-                      <tr>
-                        <th width="60px" class="text-center">
-                            <input type="checkbox" name="checkbox" ng-change="onCheckAllRemove()" ng-model="isAllRemove['all']">
-                        </th>
-                        <th>{{'name' | i18next}} </th>
-                        <th>{{'artist' | i18next}} </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                        <span ng-if="isNoItemSelected" class="no-item">{{'noItem' | i18next}} </span>
-
-                      <tr ng-repeat="song in selectedSongs | filter:keyWordPlaylist:strict">
-                          <td width="60px" class="text-center">
-                            <input type="checkbox" name="checkbox" ng-change="onSingleChangeRemove(song)" ng-model="isCheckRemove[song.id]">
-                          </td>
-                        <td> {{song.name}} </td>
-                        <td> {{song.artist}} </td>
-                      </tr>
-                    </tbody>
-                  </table>
+                  <table-directive
+                    array = 'selectedSongs'
+                    arr-pagination = 'selectedSongs'
+                    arr-title = 'arrTitle'
+                    is-no-item = 'isNoItemSelected'
+                    search-key-word = 'keyWordPlaylist'
+                    multi-select = 'multiSelectRemove'
+                    is-check = 'isCheckRemove'
+                    is-all = 'isAllRemove'
+                ></table-directive>
             </div>
         </div>
     </div>

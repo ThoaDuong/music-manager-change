@@ -14,24 +14,27 @@
                 arrPagination: '=',
                 arrTitle: '=',
                 isNoItem: '=',
-                searchKeyWord: '=',
-                itemsPerPage: '=',
-                currentPage : '=',
                 multiSelect: '=',
-                isSingleSelectSong: '=',
-                isCheckAnySong: '=',
+                searchKeyWord: '=',
+                isCheck: '=',
+                isAll: '=',
                 remove: '@',
-                detailPlaylist: '=',
-                noItemDetail: '=',  
+                itemsPerPage: '=?',
+                currentPage : '=?',
+                isSingleSelectSong: '=?',
+                isCheckAnySong: '=?',
+                detailPlaylist: '=?',
+                noItemDetail: '=?',  
+                select: '=',
             },
             link: function(scope){
-                scope.isCheck = {};
-                scope.isAll = {};
-
+                scope.select = []
                 scope.onSingleSelectChange = (song)=>{
-                    selectService.onHandleSingleChange(song, scope.isCheck, scope.isAll, scope.multiSelect, scope.array);
+                    scope.select = selectService.onHandleSingleChange(song, scope.isCheck, scope.isAll, scope.multiSelect, scope.array);
                     scope.isSingleSelectSong = scope.multiSelect.length === 1 ? true : false;
                     scope.isCheckAnySong = scope.multiSelect.length > 0 ? true : false;
+                    console.log('select', scope.select);
+                    
                 }
                 scope.onCheckAllSelectChange = function () {
                     scope.multiSelect = selectService.onHandleCheckAll(scope.isCheck, scope.isAll, scope.multiSelect, scope.array);
@@ -46,7 +49,6 @@
                         scope.detailPlaylist = playlist;
                     }
                 }
-                
             }
         }
     }

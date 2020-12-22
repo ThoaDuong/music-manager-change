@@ -8,17 +8,19 @@
             </th>
         </tr>
     </thead>
-    <tbody ng-if="arrPagination && array">
+    <tbody class="{{isNoItem ? 'custom-tbody': ''}}" ng-if="arrPagination && array">
         <span ng-if="isNoItem" class="no-item">{{'noItem' | i18next}} </span>
 
-        <tr ng-click="onViewDetailPlaylist(item)" 
-        ng-repeat="item in arrPagination = (array | filter : searchKeyWord | limitTo: itemsPerPage : itemsPerPage*(currentPage-1))">
+        <tr
+        ng-repeat="item in arrPagination = (array | filter : searchKeyWord | limitTo: itemsPerPage : itemsPerPage*(currentPage-1))"
+        ng-click="onViewDetailPlaylist(item)" 
+        >
             <td width="60px" class="text-center">
                 <input ng-change="onSingleSelectChange(item)" ng-model="isCheck[item.id]" type="checkbox">
             </td>
             <td data-toggle="modal" data-target="#detail" class="cursor-pointer" 
             ng-repeat="title in arrTitle" ng-if="title !== 'id' && title !== remove">
-                {{item[title]}} 
+                {{item[title]}}
             </td>
         </tr>
     </tbody>

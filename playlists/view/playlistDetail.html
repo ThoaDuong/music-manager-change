@@ -13,22 +13,13 @@
         </div>
         <div class="modal-body">
             <div class="table-responsive-sm">
-                <table width="100%" class="table table-hover table-condensed table-bordered">
-                    <thead class="table__head">
-                        <tr>
-                            <th>{{'name' | i18next}} </th>
-                            <th>{{'artist' | i18next}} </th>
-                        </tr>
-                    </thead>
-                    <tbody class="custom-tbody">
-                        <span ng-if="isNoItemDetailPlaylist" class="no-item-detail">{{'noItem' | i18next}} </span>
-                        
-                        <tr ng-repeat="song in detailPlaylist.songs | filter:searchKeyWord:strict">
-                            <td>{{song.name}} </td>
-                            <td>{{song.artist}} </td>
-                        </tr>   
-                    </tbody>
-                </table>
+                <table-directive
+                    array="detailPlaylist.songs"
+                    arr-pagination = 'detailPlaylist.songs'
+                    arr-title = 'arrTitleSong'
+                    is-no-item = 'isNoItemDetailPlaylist'
+                    >
+                </table-directive>
             </div>
         </div>
         <div class="modal-footer">

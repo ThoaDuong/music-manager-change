@@ -205,7 +205,7 @@ html, body{
         }
         tbody {
             display:block;
-            height:40vh;
+            height:32vh;
             overflow:auto;
         }
         thead, tbody tr {
@@ -391,6 +391,7 @@ thead, tbody tr {
     padding: 3px 15px;
     background-color: $pink50;
     width: fit-content;
+    margin-top: 20px;
 }
 .no-item-detail{
     @extend .no-item;

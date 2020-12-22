@@ -2,11 +2,13 @@
     'use strict';
 
     musicManager
-        .service('selectService', Service)
+        .factory('selectService', Factory)
 
     /** @ngInject */
-    function Service(){
-        this.onHandleSingleChange = function(song, isCheck, isAll, arrMultiSelect, arrListSongs){
+    function Factory(){
+        var factory = {};
+
+        factory.onHandleSingleChange = function(song, isCheck, isAll, arrMultiSelect, arrListSongs){
             if(isCheck[song.id]){
                 arrMultiSelect.push(song);
                 if(arrMultiSelect.length === arrListSongs.length){
@@ -21,8 +23,9 @@
                 })
                 isAll['all'] = false;
             }
+            return arrMultiSelect;
         }
-        this.onHandleCheckAll = function(isCheck, isAll, arrMultiSelect, arrListSongs){
+        factory.onHandleCheckAll = function(isCheck, isAll, arrMultiSelect, arrListSongs){
             if(isAll['all']){
                 arrMultiSelect = [];
                 arrListSongs.forEach(function(ele){
@@ -38,6 +41,9 @@
             }
             return arrMultiSelect;
         }
+
+        return factory;
+
     }
 
 }());

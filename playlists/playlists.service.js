@@ -39,7 +39,11 @@ musicManager.service('playlistService', function($http, CONSTANT){
             headers: {
                 'Content-Type': 'application/json'
             },
-            data: playlist,
+            data: {
+                name: playlist.name,
+                kinds: playlist.kinds,
+                songs: playlist.songs
+            },
         }
         return $http(request).then(function(res){
             return res.data;

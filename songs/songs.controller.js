@@ -6,12 +6,20 @@
 
     /** @ngInject */
     function ControllerCtrl($scope, $location, songService, playlistService, $rootScope) {
+        $scope.isCheck = {};
+        $scope.isAll = {};
         $scope.multiSelect = [];
         $scope.isSingleSelectSong = false;
         $scope.isCheckAnySong = false;
         $scope.numberOfItems = '10';
 
 
+        $scope.select = [];
+        $scope.$watch('multiSelect', function(){
+            console.log('value', $scope.select);
+        })
+
+        
         init();
         function init() {
             songService.getListSongs().then(function(data){
@@ -32,6 +40,8 @@
                 }
             })
         }
+        
+        
         
         var setPagingData = function(page, arrSongs) {
             $scope.paginationSongs = arrSongs.slice((page - 1) * $scope.itemsPerPage, page * $scope.itemsPerPage);

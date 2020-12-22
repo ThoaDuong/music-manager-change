@@ -4,7 +4,9 @@
     musicManager.controller('playlistsController', ControllerCtrl)
 
     /** @ngInject */
-    function ControllerCtrl($scope, $rootScope, playlistService, $location) {
+    function ControllerCtrl($scope, $rootScope, playlistService, songService, $location) {
+        $scope.isCheck = {};
+        $scope.isAll = {};
         $scope.multiSelect = [];
         $scope.isSingleSelectPlaylist = false;
         $scope.isCheckAnyPlaylist = false;
@@ -28,6 +30,9 @@
                 $scope.pageChangedPlaylist = function(value){
                     $scope.currentPagePlaylist = value;
                 }
+            })
+            songService.getListSongs().then((data)=>{
+                $scope.arrTitleSong = Object.keys(data[0]);
             })
         }
         var setPaginationData = function(page, arrPlaylists) {
