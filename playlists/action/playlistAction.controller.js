@@ -17,6 +17,11 @@
         $scope.multiSelectRemove = [];
         
         $scope.listKindsOfMusic = CONSTANT.LIST_KINDS_OF_MUSIC;
+
+        $scope.$watch('defaultSongs', function(){
+            $scope.isNoItemSelected = $scope.selectedSongs && $scope.selectedSongs.length <= 0 ? true : false;
+            $scope.isNoItemDefault = $scope.defaultSongs && $scope.defaultSongs.length <= 0 ? true : false;
+        }, true)
         
         init();
 
@@ -47,15 +52,6 @@
                 }
             })
         }
-
-        var resetIsCheck = function(arr, isCheck){
-            arr.forEach(element => {
-                isCheck[element.id] = false;
-            })
-        }
-        var resetIsAll = function(isAll){
-            isAll['all'] = false;
-        }
         
 
         $scope.onAddSelectedSong = function(){
@@ -67,22 +63,12 @@
                 });
             });
             $scope.selectedSongs = $scope.selectedSongs.concat($scope.multiSelect);
-
-            resetIsCheck($scope.multiSelect, $scope.isCheck);
-            resetIsAll($scope.isAll);
             $scope.multiSelect = [];
-            $scope.isNoItemSelected = $scope.selectedSongs.length <= 0 ? true : false;
-            $scope.isNoItemDefault = $scope.defaultSongs.length <= 0 ? true : false;
         }
         $scope.onAddAllSongs = function(){
-            $scope.selectedSongs = $scope.selectedSongs.concat($scope.defaultSongs);
             $scope.defaultSongs = [];
-            
-            resetIsCheck($scope.multiSelect, $scope.isCheck);
-            resetIsAll($scope.isAll);
+            $scope.selectedSongs = [].concat($scope.listSongsDefault);
             $scope.multiSelect = [];
-            $scope.isNoItemSelected = $scope.selectedSongs.length <= 0 ? true : false;
-            $scope.isNoItemDefault = $scope.defaultSongs.length <= 0 ? true : false;
         }
         $scope.onRemoveSelectedSong = function(){
             $scope.multiSelectRemove.forEach(element => {
@@ -94,22 +80,12 @@
                     }
                 });
             });
-
-            resetIsCheck($scope.multiSelectRemove, $scope.isCheckRemove);
-            resetIsAll($scope.isAllRemove);
             $scope.multiSelectRemove = [];
-            $scope.isNoItemSelected = $scope.selectedSongs.length <= 0 ? true : false;
-            $scope.isNoItemDefault = $scope.defaultSongs.length <= 0 ? true : false;
         }
         $scope.onRemoveAllSongs = function(){
-            $scope.defaultSongs = $scope.defaultSongs.concat($scope.selectedSongs);
+            $scope.defaultSongs = [].concat($scope.listSongsDefault);
             $scope.selectedSongs = [];
-
-            resetIsCheck($scope.multiSelectRemove, $scope.isCheckRemove);
-            resetIsAll($scope.isAllRemove);
             $scope.multiSelectRemove = [];
-            $scope.isNoItemSelected = $scope.selectedSongs.length <= 0 ? true : false;
-            $scope.isNoItemDefault = $scope.defaultSongs.length <= 0 ? true : false;
         }
 
         

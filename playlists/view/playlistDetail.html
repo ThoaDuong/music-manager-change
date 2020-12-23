@@ -1,4 +1,3 @@
-
 <div class="modal fade" id="detail" tabindex="-1" role="dialog" aria-labelledby="title" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
       <div class="modal-content">
@@ -14,16 +13,15 @@
         <div class="modal-body">
             <div class="table-responsive-sm">
                 <table-directive
+                    type = 'song'
                     array="detailPlaylist.songs"
                     arr-pagination = 'detailPlaylist.songs'
-                    arr-title = 'arrTitleSong'
-                    is-no-item = 'isNoItemDetailPlaylist'
                     >
                 </table-directive>
             </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">{{'close' | i18next}} </button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{'close' | i18next}} </button>
         </div>
       </div>
     </div>

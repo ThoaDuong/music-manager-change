@@ -8,11 +8,11 @@
     function Factory(){
         var factory = {};
 
-        factory.onHandleSingleChange = function(song, isCheck, isAll, arrMultiSelect, arrListSongs){
-            if(isCheck[song.id]){
+        factory.onHandleSingleChange = function(song, listChecked, arrMultiSelect, arrListSongs){
+            if(listChecked[song.id]){
                 arrMultiSelect.push(song);
                 if(arrMultiSelect.length === arrListSongs.length){
-                    isAll['all'] = true;
+                    listChecked['all'] = true;
                 }
             }
             else{
@@ -21,22 +21,22 @@
                         arrMultiSelect.splice(index, 1);
                     }
                 })
-                isAll['all'] = false;
+                listChecked['all'] = false;
             }
             return arrMultiSelect;
         }
-        factory.onHandleCheckAll = function(isCheck, isAll, arrMultiSelect, arrListSongs){
-            if(isAll['all']){
+        factory.onHandleCheckAll = function(listChecked, arrMultiSelect, arrListSongs){
+            if(listChecked['all']){
                 arrMultiSelect = [];
                 arrListSongs.forEach(function(ele){
                     arrMultiSelect.push(ele);
-                    isCheck[ele.id] = true;
+                    listChecked[ele.id] = true;
                 })
             }
             else{
                 arrMultiSelect = [];
                 arrListSongs.forEach(function(ele){
-                    isCheck[ele.id] = false;
+                    listChecked[ele.id] = false;
                 })
             }
             return arrMultiSelect;

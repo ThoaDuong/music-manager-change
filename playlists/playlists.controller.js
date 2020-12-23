@@ -4,20 +4,24 @@
     musicManager.controller('playlistsController', ControllerCtrl)
 
     /** @ngInject */
-    function ControllerCtrl($scope, $rootScope, playlistService, songService, $location) {
+    function ControllerCtrl($scope, $rootScope, playlistService, $location) {
         $scope.isCheck = {};
         $scope.isAll = {};
         $scope.multiSelect = [];
         $scope.isSingleSelectPlaylist = false;
         $scope.isCheckAnyPlaylist = false;
         $scope.numberOfItems = '10';
+        $scope.detailPlaylist = {};
+
+        $scope.$watch('multiSelect', function(){
+            $scope.isSingleSelectPlaylist = $scope.multiSelect.length === 1 ? true : false;
+            $scope.isCheckAnyPlaylist = $scope.multiSelect.length > 0 ? true : false;
+        }, true)
         
         init();
         function init() {
             playlistService.getListPlaylists().then(function(data){
                 $scope.listPlaylistsDefault = data;
-                $scope.isNoItemPlaylist = data.length <= 0 ? true : false;
-                $scope.arrTitle = Object.keys(data[0]);
     
                 //Pagination
                 $scope.totalItems = $scope.listPlaylistsDefault.length;
@@ -30,9 +34,6 @@
                 $scope.pageChangedPlaylist = function(value){
                     $scope.currentPagePlaylist = value;
                 }
-            })
-            songService.getListSongs().then((data)=>{
-                $scope.arrTitleSong = Object.keys(data[0]);
             })
         }
         var setPaginationData = function(page, arrPlaylists) {

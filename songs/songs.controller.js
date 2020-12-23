@@ -11,21 +11,18 @@
         $scope.multiSelect = [];
         $scope.isSingleSelectSong = false;
         $scope.isCheckAnySong = false;
-        $scope.numberOfItems = '10';
+        $scope.numberOfItems = '10';    
 
 
-        $scope.select = [];
         $scope.$watch('multiSelect', function(){
-            console.log('value', $scope.select);
-        })
-
+            $scope.isSingleSelectSong = $scope.multiSelect.length === 1 ? true : false;
+            $scope.isCheckAnySong = $scope.multiSelect.length > 0 ? true : false;
+        }, true)
         
         init();
         function init() {
             songService.getListSongs().then(function(data){
                 $scope.listSongsDefault = data;
-                $scope.isNoItemSong = data.length <= 0 ? true : false;
-                $scope.arrTitle = Object.keys(data[0]);
     
                 //Pagination
                 $scope.totalItems = $scope.listSongsDefault.length;

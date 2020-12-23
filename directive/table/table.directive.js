@@ -5,50 +5,58 @@
         .directive ('tableDirective', directive);
 
     /** @ngInject */
-    function directive(selectService) {
+    function directive(selectService, CONSTANT) {
         return {
             restrict: 'AE',
             templateUrl: 'directive/table/table.template.html',
             scope: {
                 array: '=',
-                arrPagination: '=',
-                arrTitle: '=',
-                isNoItem: '=',
                 multiSelect: '=',
+                detailPlaylist: '=',
+                type: '@',
                 searchKeyWord: '=',
-                isCheck: '=',
-                isAll: '=',
-                remove: '@',
-                itemsPerPage: '=?',
-                currentPage : '=?',
-                isSingleSelectSong: '=?',
-                isCheckAnySong: '=?',
-                detailPlaylist: '=?',
-                noItemDetail: '=?',  
-                select: '=',
+                arrPagination: '=',
+                itemsPerPage: '=',
+                currentPage : '=',
             },
             link: function(scope){
-                scope.select = []
+                scope.listChecked = {};
+                scope.array = [];
+                scope.arrTitle = [];
+
+                if(scope.type === 'song'){
+                    scope.arrTitle = CONSTANT.TITLE_SONG;
+                }
+                if(scope.type === 'playlist'){
+                    scope.arrTitle = CONSTANT.TITLE_PLAYLIST;
+                }
+                scope.$watch('array', function(newValue){
+                    scope.isNoItem = newValue.length <= 0 ? true : false;
+                })
                 scope.onSingleSelectChange = (song)=>{
-                    scope.select = selectService.onHandleSingleChange(song, scope.isCheck, scope.isAll, scope.multiSelect, scope.array);
-                    scope.isSingleSelectSong = scope.multiSelect.length === 1 ? true : false;
-                    scope.isCheckAnySong = scope.multiSelect.length > 0 ? true : false;
-                    console.log('select', scope.select);
-                    
+                    scope.multiSelect = selectService.onHandleSingleChange(song, scope.listChecked, scope.multiSelect, scope.array);
                 }
                 scope.onCheckAllSelectChange = function () {
-                    scope.multiSelect = selectService.onHandleCheckAll(scope.isCheck, scope.isAll, scope.multiSelect, scope.array);
-                    if(scope.isSingleSelectSong){
-                        scope.isSingleSelectSong = false;
-                    }
-                    scope.isCheckAnySong = scope.multiSelect.length > 0 ? true : false;
+                    scope.multiSelect = selectService.onHandleCheckAll(scope.listChecked, scope.multiSelect, scope.array);
                 }
                 scope.onViewDetailPlaylist = function(playlist){
                     if(playlist['songs']){
-                        scope.noItemDetail = playlist.songs.length <= 0 ? true : false;
                         scope.detailPlaylist = playlist;
                     }
                 }
+                //After add/remove -> set multiSelect = [] and this is newVal
+                scope.$watch('multiSelect', function(newVal, oldVal){
+                    if(oldVal && oldVal.length > 0){
+                        //Check if multiSelect is empty, check set false
+                        if(scope.multiSelect.length <= 0){
+                            oldVal.forEach(element => {
+                                scope.listChecked[element.id] = false;
+                            });
+                            scope.listChecked['all'] = false;
+                        }
+                        
+                    }
+                })
             }
         }
     }

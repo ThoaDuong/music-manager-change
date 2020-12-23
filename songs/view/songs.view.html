@@ -37,22 +37,15 @@
 
         </div>
     </div>
-    
     <div class="table-responsive-sm mt-2">
         <table-directive
+            type = 'song'
             array = 'listSongsDefault'
             arr-pagination = 'paginationSongs'
-            arr-title = 'arrTitle'
-            is-no-item = 'isNoItemSong'
+            multi-select = 'multiSelect'
             search-key-word = 'searchKeyWord'
             items-per-page = 'itemsPerPage'
             current-page = 'currentPage'
-            multi-select = 'multiSelect'
-            is-single-select-song = 'isSingleSelectSong'
-            is-check-any-song = 'isCheckAnySong'
-            is-check = 'isCheck'
-            is-all = 'isAll'
-            select = 'select'
         ></table-directive>
 
         <div class="custom-pagination">
@@ -74,6 +67,14 @@
                 previous-text="{{'previous'|i18next}}"
                 next-text="{{'next'|i18next}}">
             </ul>
+        </div>
+        <hr>
+        <div>
+            <pagination-directive
+                total-items = "totalItems"
+                items-per-page = "itemsPerPage"
+                current-page ="currentPage"
+            ></pagination-directive>
         </div>
 
     </div>

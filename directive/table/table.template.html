@@ -1,25 +1,24 @@
 <table width="100%" class="table table-striped table-condensed table-bordered border-none">
     <thead class="table__head">
         <tr>
-            <th width="60px" class="text-center"><input type="checkbox" ng-change="onCheckAllSelectChange()"
-                    ng-model="isAll['all']"></th>
-            <th ng-repeat="title in arrTitle" ng-if="title !== 'id' && title !== remove">
+            <th ng-if="multiSelect" width="60px" class="text-center"><input type="checkbox" ng-change="onCheckAllSelectChange()"
+                    ng-model="listChecked['all']"></th>
+            <th ng-repeat="title in arrTitle">
                 {{title | i18next}}
             </th>
         </tr>
     </thead>
     <tbody class="{{isNoItem ? 'custom-tbody': ''}}" ng-if="arrPagination && array">
         <span ng-if="isNoItem" class="no-item">{{'noItem' | i18next}} </span>
-
         <tr
-        ng-repeat="item in arrPagination = (array | filter : searchKeyWord | limitTo: itemsPerPage : itemsPerPage*(currentPage-1))"
-        ng-click="onViewDetailPlaylist(item)" 
+            ng-repeat="item in arrPagination = (array | filter : searchKeyWord | limitTo: itemsPerPage : itemsPerPage*(currentPage-1)) track by $index"
+            ng-click="onViewDetailPlaylist(item)"
         >
-            <td width="60px" class="text-center">
-                <input ng-change="onSingleSelectChange(item)" ng-model="isCheck[item.id]" type="checkbox">
+            <td ng-if="multiSelect" width="60px" class="text-center">
+                <input ng-change="onSingleSelectChange(item)" ng-model="listChecked[item.id]" type="checkbox">
             </td>
-            <td data-toggle="modal" data-target="#detail" class="cursor-pointer" 
-            ng-repeat="title in arrTitle" ng-if="title !== 'id' && title !== remove">
+            <td data-toggle="modal" data-target="#detail" class="{{type==='playlist'? 'cursor-pointer' : ''}}" 
+            ng-repeat="title in arrTitle">
                 {{item[title]}}
             </td>
         </tr>
