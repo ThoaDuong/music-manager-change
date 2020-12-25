@@ -10,8 +10,7 @@
         $scope.isAll = {};
         $scope.multiSelect = [];
         $scope.isSingleSelectSong = false;
-        $scope.isCheckAnySong = false;
-        $scope.numberOfItems = '10';    
+        $scope.isCheckAnySong = false;   
 
 
         $scope.$watch('multiSelect', function(){
@@ -22,33 +21,24 @@
         init();
         function init() {
             songService.getListSongs().then(function(data){
-                $scope.listSongsDefault = data;
+                $scope.listSongsDefault = data.reverse();
     
                 //Pagination
                 $scope.totalItems = $scope.listSongsDefault.length;
-                $scope.itemsPerPage = Number($scope.numberOfItems);
+                $scope.itemsPerPage = 10;
                 $scope.currentPage = 1;
             
                 $scope.$watch('currentPage', function() {
-                    setPagingData($scope.currentPage, $scope.listSongsDefault);
+                    $scope.paginationSongs = $scope.listSongsDefault.slice(($scope.currentPage - 1) * $scope.itemsPerPage, $scope.currentPage * $scope.itemsPerPage);
                 }, true);
-                $scope.pageChanged = function(value){
-                    $scope.currentPage = value;
-                }
             })
-        }
-        
-        
-        
-        var setPagingData = function(page, arrSongs) {
-            $scope.paginationSongs = arrSongs.slice((page - 1) * $scope.itemsPerPage, page * $scope.itemsPerPage);
         }
 
         $scope.onEditSong = function () {
             var song = $scope.multiSelect[0];
             $rootScope.song.name = song.name;
             $rootScope.song.artist = song.artist;
-            $rootScope.song.id = song.id;
+            $rootScope.song._id = song._id;
             $rootScope.isEdit = true;
             $location.path('/song');
         }
@@ -57,11 +47,15 @@
         }
 
         var onConfirmDeleteSong = function (id) {
-            songService.deleteSong(id);
+            songService.deleteSong(id).then(()=>{
+                songService.getListSongs().then(data=>{
+                    $scope.listSongsDefault = data.reverse();
+                });
+            });
             playlistService.getListPlaylists().then(data => {
                 data.forEach(playlist => {
                     playlist.songs.forEach((element, index) => {
-                        if (element.id === id) {
+                        if (element._id === id) {
                             playlist.songs.splice(index, 1);
                             playlistService.updatePlaylist(playlist);
                         }
@@ -69,20 +63,14 @@
                 });
             })
         }
-
         $scope.onMultiDelete = function () {
             $scope.multiSelect.forEach(function (ele) {
-                onConfirmDeleteSong(ele.id);
+                onConfirmDeleteSong(ele._id);
                 $scope.multiSelect = [];
             })
         }
-
         $scope.onChangeSearch = function (keyWord) {
             $scope.searchKeyWord = keyWord;
         }
-        $scope.onChangeNumberOfItems = (number) => {
-            $scope.itemsPerPage = Number(number);
-        }
     }
-
 }());

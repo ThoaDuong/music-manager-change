@@ -5,7 +5,7 @@ musicManager.service('playlistService', function($http, CONSTANT){
 
     this.getListPlaylists = function(){
         return  $http.get(this.url + '/playlist').then(function(res){
-            return res.data.reverse();
+            return res.data;
         })
     }
     this.addPlaylist = function(playlist){
@@ -35,7 +35,7 @@ musicManager.service('playlistService', function($http, CONSTANT){
     this.updatePlaylist = function(playlist){
         var request = {
             method: 'PUT',
-            url: this.url + '/playlist/' + playlist.id,
+            url: this.url + '/playlist/' + playlist._id,
             headers: {
                 'Content-Type': 'application/json'
             },

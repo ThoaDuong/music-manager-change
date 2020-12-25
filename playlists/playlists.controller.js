@@ -10,7 +10,6 @@
         $scope.multiSelect = [];
         $scope.isSingleSelectPlaylist = false;
         $scope.isCheckAnyPlaylist = false;
-        $scope.numberOfItems = '10';
         $scope.detailPlaylist = {};
 
         $scope.$watch('multiSelect', function(){
@@ -21,7 +20,7 @@
         init();
         function init() {
             playlistService.getListPlaylists().then(function(data){
-                $scope.listPlaylistsDefault = data;
+                $scope.listPlaylistsDefault = data.reverse();
     
                 //Pagination
                 $scope.totalItems = $scope.listPlaylistsDefault.length;
@@ -29,15 +28,9 @@
                 $scope.currentPagePlaylist = 1;
             
                 $scope.$watch('currentPagePlaylist', function() {
-                    setPaginationData($scope.currentPagePlaylist, $scope.listPlaylistsDefault);
+                    $scope.paginationPlaylists = $scope.listPlaylistsDefault.slice(($scope.currentPagePlaylist - 1) * $scope.itemsPerPage, $scope.currentPagePlaylist * $scope.itemsPerPage);
                 }, true);
-                $scope.pageChangedPlaylist = function(value){
-                    $scope.currentPagePlaylist = value;
-                }
             })
-        }
-        var setPaginationData = function(page, arrPlaylists) {
-            $scope.paginationPlaylists = arrPlaylists.slice((page - 1) * $scope.itemsPerPage, page * $scope.itemsPerPage);
         }
 
         $scope.onClickAddPlaylist = function(){
@@ -45,23 +38,19 @@
         }
         $scope.onDeletePlaylistMultiSelected = function () {
             $scope.multiSelect.forEach(element => {
-                playlistService.deletePlaylist(element.id);
+                playlistService.deletePlaylist(element._id);
             });
         }
         $scope.onEditPlaylist = function () {
             var playlist = $scope.multiSelect[0];
             $rootScope.playlistEdit = {
-                id: playlist.id,
+                _id: playlist._id,
                 name: playlist.name,
                 kinds: playlist.kinds,
                 songs: playlist.songs,
             }
             $rootScope.isEditPlaylist = true;
             $location.path('/create-playlist');
-        }
-
-        $scope.onChangeNumberOfItems = (number) => {
-            $scope.itemsPerPage = Number(number);
         }
     }
 

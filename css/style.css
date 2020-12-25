@@ -522,7 +522,6 @@ thead, tbody tr {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
-  margin-top: 20px;
 }
 
 .no-item-detail {
@@ -547,5 +546,9 @@ input[type=text]:focus {
   position: fixed;
   top: 0;
   right: 0;
+}
+
+.table-responsive-sm {
+  position: relative;
 }
 /*# sourceMappingURL=style.css.map */

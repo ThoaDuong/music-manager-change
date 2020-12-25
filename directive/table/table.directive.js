@@ -21,6 +21,7 @@
             },
             link: function(scope){
                 scope.listChecked = {};
+                scope.isCheckAll = false;
                 scope.array = [];
                 scope.arrTitle = [];
 
@@ -33,11 +34,13 @@
                 scope.$watch('array', function(newValue){
                     scope.isNoItem = newValue.length <= 0 ? true : false;
                 })
+                
                 scope.onSingleSelectChange = (song)=>{
-                    scope.multiSelect = selectService.onHandleSingleChange(song, scope.listChecked, scope.multiSelect, scope.array);
+                    scope.multiSelect = selectService.onHandleSingleChange(song, scope.listChecked, scope.isCheckAll, scope.multiSelect, scope.array);
                 }
                 scope.onCheckAllSelectChange = function () {
-                    scope.multiSelect = selectService.onHandleCheckAll(scope.listChecked, scope.multiSelect, scope.array);
+                    scope.isCheckAll = !scope.isCheckAll;
+                    scope.multiSelect = selectService.onHandleCheckAll(scope.listChecked, scope.isCheckAll, scope.multiSelect, scope.array);
                 }
                 scope.onViewDetailPlaylist = function(playlist){
                     if(playlist['songs']){
@@ -50,12 +53,15 @@
                         //Check if multiSelect is empty, check set false
                         if(scope.multiSelect.length <= 0){
                             oldVal.forEach(element => {
-                                scope.listChecked[element.id] = false;
+                                scope.listChecked[element._id] = false;
                             });
                             scope.listChecked['all'] = false;
                         }
                         
                     }
+                })
+                scope.$watch('arrPagination', function(){
+                    // console.log('pagination', scope.arrPagination);
                 })
             }
         }

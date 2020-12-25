@@ -36,7 +36,7 @@
 
                 $scope.isNoItemSelected = $scope.selectedSongs.length <= 0 ? true : false;
                 $scope.isNoItemDefault = $scope.defaultSongs.length <= 0 ? true : false;
-                if($rootScope.playlistEdit.id !== -1){
+                if($rootScope.playlistEdit._id !== -1){
                     $scope.selectedSongs = $rootScope.playlistEdit.songs;
                     $scope.playlistName = $rootScope.playlistEdit.name;
                     $scope.isNoItemSelected = $scope.selectedSongs.length <= 0 ? true : false;
@@ -44,7 +44,7 @@
     
                     $rootScope.playlistEdit.songs.forEach(root => {
                         $scope.defaultSongs.forEach((element, index) => {
-                            if(root.id === element.id){
+                            if(root._id === element._id){
                                 $scope.defaultSongs.splice(index, 1);
                             }
                         });
@@ -57,7 +57,7 @@
         $scope.onAddSelectedSong = function(){
             $scope.multiSelect.forEach(element => {
                 $scope.defaultSongs.forEach((item, index) => {
-                    if(element.id === item.id){
+                    if(element._id === item._id){
                         $scope.defaultSongs.splice(index, 1);
                     }
                 });
@@ -73,7 +73,7 @@
         $scope.onRemoveSelectedSong = function(){
             $scope.multiSelectRemove.forEach(element => {
                 $scope.selectedSongs.forEach((item, index) => {
-                    if(element.id === item.id){
+                    if(element._id === item._id){
                         $scope.selectedSongs.splice(index, 1);
                         $scope.defaultSongs.push(item);
                         // $scope.defaultSongs = $scope.defaultSongs.concat([item]);
@@ -105,14 +105,14 @@
         }
         var onApplyEditPlaylist = function(){
             var updatePlaylist = {
-                id: $rootScope.playlistEdit.id,
+                _id: $rootScope.playlistEdit._id,
                 kinds: $scope.playlistKinds,
                 name: $scope.playlistName,
                 songs: $scope.selectedSongs,
             }
             playlistService.updatePlaylist(updatePlaylist).then(() => {
                 $rootScope.playlistEdit = {
-                    id: -1,
+                    _id: -1,
                     name: '',
                     kinds: 'R&B',
                     songs: [],
@@ -123,7 +123,7 @@
             
         }
         $scope.onSubmitPlaylist = function(){
-            if($rootScope.playlistEdit.id === -1){
+            if($rootScope.playlistEdit._id === -1){
                 onCreatePlaylist();
             }else{
                 onApplyEditPlaylist();
@@ -133,7 +133,7 @@
             $scope.multiSelect = [];
             $scope.multiSelectRemove = [];
             $rootScope.playlistEdit = {
-                id: -1,
+                _id: -1,
                 name: '',
                 songs: [],
             }

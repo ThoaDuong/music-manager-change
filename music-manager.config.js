@@ -2,14 +2,14 @@ musicManager.run(function($rootScope) {
     $rootScope.linkName = 'Song';
     //Define song edit
     $rootScope.song = {
-        id: -1,
+        _id: -1,
         name: '',
         artist: ''
     }
     $rootScope.isEdit = false;
     $rootScope.resetSong = function(){
         $rootScope.song = {
-            id: -1,
+            _id: -1,
             name: '',
             artist: ''
         }
@@ -18,7 +18,7 @@ musicManager.run(function($rootScope) {
     
     //Define playlist edit
     $rootScope.playlistEdit = {
-        id: -1,
+        _id: -1,
         name: '',
         kinds: 'R&B',
         songs: [],
@@ -26,7 +26,7 @@ musicManager.run(function($rootScope) {
     $rootScope.isEditPlaylist = false;
     $rootScope.resetPlaylistEdit = function(){
         $rootScope.playlistEdit = {
-            id: -1,
+            _id: -1,
             name: '',
             kinds: 'R&B',
             songs: [],

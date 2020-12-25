@@ -48,24 +48,11 @@
                     current-page = 'currentPagePlaylist'
                     detail-playlist = 'detailPlaylist'
                 ></table-directive>
-                <div class="custom-pagination">
-                    <div class="form-group number-select">
-                        <label>{{'pagination' | i18next}}:</label>
-                        <select name="numberOfItems" ng-model="numberOfItems" ng-change="onChangeNumberOfItems(numberOfItems)">
-                            <option value="5">5</option>
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="50">50</option>
-                        </select>
-                    </div>
-                    <ul ng-change="pageChangedPlaylist(currentPagePlaylist)" 
-                        uib-pagination total-items="totalItems" 
-                        data-ng-model="currentPagePlaylist" 
-                        items-per-page="itemsPerPage"
-                        previous-text="{{'previous'|i18next}}"
-                        next-text="{{'next'|i18next}}">>
-                    </ul>
-                </div>
+                <pagination-directive
+                    total-items = "totalItems"
+                    items-per-page = "itemsPerPage"
+                    current-page = "currentPagePlaylist"
+                ></pagination-directive>
             </div>
             <!-- Model -->
             <div ng-include="'playlists/view/playlistDetail.html'"></div>

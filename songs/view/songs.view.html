@@ -48,34 +48,10 @@
             current-page = 'currentPage'
         ></table-directive>
 
-        <div class="custom-pagination">
-            <div class="form-group number-select">
-                <label>{{'pagination' | i18next}}:</label>
-                <select name="numberOfItems" ng-model="numberOfItems" ng-change="onChangeNumberOfItems(numberOfItems)">
-                    <option value="5">5</option>
-                    <option value="10">10</option>
-                    <option value="20">20</option>
-                    <option value="50">50</option>
-                </select>
-            </div>
-            <ul ng-change="pageChanged(currentPage)" 
-                uib-pagination total-items="totalItems" 
-                data-ng-model="currentPage"
-                items-per-page="itemsPerPage"
-                class="pagination"
-                boundary-link-numbers="true"
-                previous-text="{{'previous'|i18next}}"
-                next-text="{{'next'|i18next}}">
-            </ul>
-        </div>
-        <hr>
-        <div>
-            <pagination-directive
-                total-items = "totalItems"
-                items-per-page = "itemsPerPage"
-                current-page ="currentPage"
-            ></pagination-directive>
-        </div>
-
+        <pagination-directive
+            total-items = "totalItems"
+            items-per-page = "itemsPerPage"
+            current-page = "currentPage"
+        ></pagination-directive>
     </div>
 </section>

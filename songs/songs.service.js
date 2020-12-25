@@ -6,7 +6,7 @@ musicManager.service('songService', function($http, CONSTANT){
     this.getListSongs = function(){
 
         return  $http.get(this.url + '/song').then(function(res){
-            return res.data.reverse();
+            return res.data;
         })
     }
     this.addSong = function(song){
@@ -28,7 +28,7 @@ musicManager.service('songService', function($http, CONSTANT){
     this.updateSong = function(song){
         var request = {
             method: 'PUT',
-            url: this.url + '/song/' + song.id,
+            url: this.url + '/song/' + song._id,
             headers: {
                 'Content-Type': 'application/json'
             },

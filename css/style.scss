@@ -391,7 +391,6 @@ thead, tbody tr {
     padding: 3px 15px;
     background-color: $pink50;
     width: fit-content;
-    margin-top: 20px;
 }
 .no-item-detail{
     @extend .no-item;
@@ -413,5 +412,9 @@ input[type=text]:focus{
     position: fixed;
     top: 0;
     right: 0;
+}
+
+.table-responsive-sm{
+    position: relative;
 }
 

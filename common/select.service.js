@@ -8,35 +8,36 @@
     function Factory(){
         var factory = {};
 
-        factory.onHandleSingleChange = function(song, listChecked, arrMultiSelect, arrListSongs){
-            if(listChecked[song.id]){
+        factory.onHandleSingleChange = function(song, listChecked, isCheckAll, arrMultiSelect, arrListSongs){
+            if(listChecked[song._id]){
                 arrMultiSelect.push(song);
                 if(arrMultiSelect.length === arrListSongs.length){
-                    listChecked['all'] = true;
+                    console.log('length', arrM);
+                    isCheckAll = true;
                 }
             }
             else{
                 arrMultiSelect.forEach(function(ele, index){
-                    if(ele.id == song.id){
+                    if(ele._id == song._id){
                         arrMultiSelect.splice(index, 1);
                     }
                 })
-                listChecked['all'] = false;
+                isCheckAll = false;
             }
             return arrMultiSelect;
         }
-        factory.onHandleCheckAll = function(listChecked, arrMultiSelect, arrListSongs){
-            if(listChecked['all']){
+        factory.onHandleCheckAll = function(listChecked, isCheckAll, arrMultiSelect, arrListSongs){
+            if(isCheckAll){
                 arrMultiSelect = [];
                 arrListSongs.forEach(function(ele){
                     arrMultiSelect.push(ele);
-                    listChecked[ele.id] = true;
+                    listChecked[ele._id] = true;
                 })
             }
             else{
                 arrMultiSelect = [];
                 arrListSongs.forEach(function(ele){
-                    listChecked[ele.id] = false;
+                    listChecked[ele._id] = false;
                 })
             }
             return arrMultiSelect;

@@ -1,13 +1,28 @@
-<nav aria-label="Page navigation example">
-    <ul class="pagination justify-content-end">
-      <li class="page-item disabled">
-        <a class="page-link" href="#" tabindex="-1">{{previousText}}</a>
-      </li>
-      <li class="page-item {{currentPage===1? 'active':''}}"><a class="page-link" href="#">1</a></li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item">
-        <a class="page-link" href="#">{{nextText}}</a>
-      </li>
-    </ul>
-  </nav>
+<section class="custom-pagination">
+    <div class="form-group number-select">
+        <label> {{itemsPerPageText | i18next}}:</label>
+        <select name="selectNumberOfItems" ng-model="selectNumberOfItems">
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="50">50</option>
+        </select>
+    </div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-end">
+            <li class="page-item {{currentPage === 1 ? 'disabled': ''}}"
+                ng-click="onClickPrevious()">
+                <a class="page-link" tabindex="-1">{{previousText | i18next}}</a>
+            </li>
+            <li ng-repeat="item in arrValuePage" 
+            class="page-item {{currentPage === item.page ? 'active' : ''}}"
+            ng-click="onClickMovePage(item.page)">
+                <a class="page-link"> {{item.page}} </a>
+            </li>
+            <li class="page-item {{currentPage === numberOfPage ? 'disabled': ''}}"
+                ng-click="onClickNext()">
+                <a class="page-link">{{nextText | i18next}}</a>
+            </li>
+        </ul>
+    </nav>
+</section>

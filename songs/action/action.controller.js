@@ -26,7 +26,7 @@
             playlistService.getListPlaylists().then(data => {
                 data.forEach(playlist => {
                     playlist.songs.forEach((element) => {
-                        if (element.id === song.id) {
+                        if (element._id === song._id) {
                             element.name = song.name;
                             element.artist = song.artist;
                             playlistService.updatePlaylist(playlist);
@@ -39,7 +39,7 @@
             $location.path("/manager");
         }
         $scope.onSubmit = function(song){
-            if(song.id === -1){
+            if(song._id === -1){
                 onCreateSong(song);
             }else{
                 onApplyEditSong(song);
