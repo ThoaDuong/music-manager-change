@@ -5,7 +5,7 @@
         .directive ('tableDirective', directive);
 
     /** @ngInject */
-    function directive(selectService, CONSTANT) {
+    function directive(selectService) {
         return {
             restrict: 'AE',
             templateUrl: 'directive/table/table.template.html',
@@ -34,6 +34,9 @@
                         scope.data.isCheckAll = false;
                     }
                 }, true)
+                // scope.$watch('currentPage', function() {
+                //     scope.paginationSongs = scope.listSongsDefault.slice((scope.currentPage - 1) * scope.itemsPerPage, scope.currentPage * scope.itemsPerPage);
+                // }, true);
                 
                 scope.onSingleSelectChange = (song)=>{
                     var result = selectService.onHandleSingleChange(song, scope.listChecked, scope.data.isCheckAll, scope.multiSelect, scope.array);
