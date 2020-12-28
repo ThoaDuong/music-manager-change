@@ -1,7 +1,7 @@
 <section class="custom-pagination">
     <div class="form-group number-select">
         <label> {{itemsPerPageText | i18next}}:</label>
-        <select name="selectNumberOfItems" ng-model="selectNumberOfItems">
+        <select name=" | i18next" ng-model="selectNumberOfItems" ng-change="onChangeSelect(selectNumberOfItems)">
             <option value="5">5</option>
             <option value="10">10</option>
             <option value="20">20</option>

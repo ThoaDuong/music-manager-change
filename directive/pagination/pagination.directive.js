@@ -1,3 +1,4 @@
+
 (function () {
     'use strict';
 
@@ -9,9 +10,9 @@
     function directive() {
 
         function link(scope){
-            scope.previousText = 'Previous';
-            scope.nextText = 'Next';
-            scope.itemsPerPageText = 'Items per page';
+            scope.previousText = 'previous';
+            scope.nextText = 'next';
+            scope.itemsPerPageText = 'pagination';
             scope.$watch('itemsPerPage', function(newVal, oldVal){
                 //Check if first time, set default
                 if(newVal && !oldVal){
@@ -26,9 +27,10 @@
                     })
                 }
             })
-            scope.$watch('selectNumberOfItems', function(newVal){
-                scope.itemsPerPage = newVal;
-            })
+            
+            scope.onChangeSelect = function(value){
+                scope.itemsPerPage = value;
+            }
             scope.onClickMovePage = function(page){
                 scope.currentPage = page;
             }

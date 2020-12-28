@@ -12,57 +12,37 @@
             scope: {
                 array: '=',
                 multiSelect: '=',
-                detailPlaylist: '=',
-                type: '@',
-                searchKeyWord: '=',
+                arrTitle: '=',
                 arrPagination: '=',
+                searchKeyWord: '=',
                 itemsPerPage: '=',
                 currentPage : '=',
+                onViewDetailPlaylist: '&'
             },
             link: function(scope){
                 scope.listChecked = {};
-                scope.isCheckAll = false;
+                scope.data = {};
                 scope.array = [];
-                scope.arrTitle = [];
+                scope.$watch('array', function(defaultArray){
+                    scope.isNoItem = defaultArray.length <= 0 ? true : false;
 
-                if(scope.type === 'song'){
-                    scope.arrTitle = CONSTANT.TITLE_SONG;
-                }
-                if(scope.type === 'playlist'){
-                    scope.arrTitle = CONSTANT.TITLE_PLAYLIST;
-                }
-                scope.$watch('array', function(newValue){
-                    scope.isNoItem = newValue.length <= 0 ? true : false;
-                })
+                    //Set default for list checkbox
+                    if(defaultArray.length > 0){
+                        defaultArray.forEach(element => {
+                            scope.listChecked[element._id] = false;
+                        });
+                        scope.data.isCheckAll = false;
+                    }
+                }, true)
                 
                 scope.onSingleSelectChange = (song)=>{
-                    scope.multiSelect = selectService.onHandleSingleChange(song, scope.listChecked, scope.isCheckAll, scope.multiSelect, scope.array);
+                    var result = selectService.onHandleSingleChange(song, scope.listChecked, scope.data.isCheckAll, scope.multiSelect, scope.array);
+                    scope.multiSelect = result.array;
+                    scope.data.isCheckAll = result.checkAll;
                 }
                 scope.onCheckAllSelectChange = function () {
-                    scope.isCheckAll = !scope.isCheckAll;
-                    scope.multiSelect = selectService.onHandleCheckAll(scope.listChecked, scope.isCheckAll, scope.multiSelect, scope.array);
+                    scope.multiSelect = selectService.onHandleCheckAll(scope.listChecked, scope.data.isCheckAll, scope.multiSelect, scope.array);
                 }
-                scope.onViewDetailPlaylist = function(playlist){
-                    if(playlist['songs']){
-                        scope.detailPlaylist = playlist;
-                    }
-                }
-                //After add/remove -> set multiSelect = [] and this is newVal
-                scope.$watch('multiSelect', function(newVal, oldVal){
-                    if(oldVal && oldVal.length > 0){
-                        //Check if multiSelect is empty, check set false
-                        if(scope.multiSelect.length <= 0){
-                            oldVal.forEach(element => {
-                                scope.listChecked[element._id] = false;
-                            });
-                            scope.listChecked['all'] = false;
-                        }
-                        
-                    }
-                })
-                scope.$watch('arrPagination', function(){
-                    // console.log('pagination', scope.arrPagination);
-                })
             }
         }
     }

@@ -203,11 +203,6 @@ html, body{
             border: none;
             margin: 5px 0;
         }
-        tbody {
-            display:block;
-            height:32vh;
-            overflow:auto;
-        }
         thead, tbody tr {
             display:table;
             width:100%;
@@ -327,12 +322,21 @@ tbody {
     height: 40vh;
     overflow: auto;
 }
+.detail{
+    tbody{
+        display: block;
+        height: auto;
+        overflow: auto;
+        max-height: 40vh;
+        min-height: 80px;
+    }
+    .no-item{
+        top: 60%;
+        transform: translate(-50%, 0%);
+    }
+}
 .custom-tbody {
-    display: block;
-    height: auto;
-    overflow: auto;
-    max-height: 40vh;
-    min-height: 80px;
+   
 }
 thead, tbody tr {
     display:table;
@@ -416,5 +420,10 @@ input[type=text]:focus{
 
 .table-responsive-sm{
     position: relative;
+}
+
+[data-notify="container"] {
+    margin-top: 60px!important;
+    width: 350px;
 }
 

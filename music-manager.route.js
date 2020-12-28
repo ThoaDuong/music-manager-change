@@ -1,28 +1,23 @@
-musicManager.config(function($locationProvider, $stateProvider){
+musicManager.config(function($locationProvider, $routeProvider){
     $locationProvider.hashPrefix('');
-    $stateProvider
-    .state('home', {
-        url: '',
+    $routeProvider
+    .when('', {
         templateUrl: 'songs/view/songs.view.html',
         controller: 'songsController',
     })
-    .state('manager', {
-        url: '/manager',
+    .when('/manager', {
         templateUrl: 'songs/view/songs.view.html',
         controller: 'songsController',
     })
-    .state('song', {
-        url: '/song',
+    .when('/song', {
         templateUrl: 'songs/action/songs.form.html',
         controller: 'actionSongController',
     })
-    .state('playlist', {
-        url: '/playlist',
+    .when('/playlist', {
         templateUrl: 'playlists/view/playlists.html',
         controller: 'playlistsController',
     })
-    .state('create-playlist', {
-        url: '/create-playlist',
+    .when('/create-playlist', {
         templateUrl: 'playlists/action/playlist.template.html',
         controller: 'playlistActionController',
     })

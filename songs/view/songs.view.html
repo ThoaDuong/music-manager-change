@@ -39,19 +39,19 @@
     </div>
     <div class="table-responsive-sm mt-2">
         <table-directive
-            type = 'song'
+            arr-title = 'arrTitleSong'
             array = 'listSongsDefault'
             arr-pagination = 'paginationSongs'
             multi-select = 'multiSelect'
             search-key-word = 'searchKeyWord'
-            items-per-page = 'itemsPerPage'
-            current-page = 'currentPage'
+            items-per-page = 'pagination_song.itemsPerPage'
+            current-page = 'pagination_song.currentPage'
         ></table-directive>
 
         <pagination-directive
-            total-items = "totalItems"
-            items-per-page = "itemsPerPage"
-            current-page = "currentPage"
+            total-items = "pagination_song.totalItems"
+            items-per-page = "pagination_song.itemsPerPage"
+            current-page = "pagination_song.currentPage"
         ></pagination-directive>
     </div>
 </section>

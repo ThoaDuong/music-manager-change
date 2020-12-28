@@ -4,18 +4,25 @@
     musicManager.controller('playlistsController', ControllerCtrl)
 
     /** @ngInject */
-    function ControllerCtrl($scope, $rootScope, playlistService, $location) {
+    function ControllerCtrl($scope, $rootScope, playlistService, $location, CONSTANT) {
         $scope.isCheck = {};
         $scope.isAll = {};
         $scope.multiSelect = [];
         $scope.isSingleSelectPlaylist = false;
         $scope.isCheckAnyPlaylist = false;
         $scope.detailPlaylist = {};
+        $scope.arrTitlePlaylist = CONSTANT.TITLE_PLAYLIST;
+        $scope.arrTitleSong = CONSTANT.TITLE_SONG;
 
         $scope.$watch('multiSelect', function(){
             $scope.isSingleSelectPlaylist = $scope.multiSelect.length === 1 ? true : false;
             $scope.isCheckAnyPlaylist = $scope.multiSelect.length > 0 ? true : false;
         }, true)
+
+        $scope.onViewDetail = (param) =>{
+            $scope.detailPlaylist = param;
+        }
+        
         
         init();
         function init() {
@@ -23,12 +30,14 @@
                 $scope.listPlaylistsDefault = data.reverse();
     
                 //Pagination
-                $scope.totalItems = $scope.listPlaylistsDefault.length;
-                $scope.itemsPerPage = 10;
-                $scope.currentPagePlaylist = 1;
+                $scope.pagination_playlist = {
+                    totalItems: $scope.listPlaylistsDefault.length,
+                    itemsPerPage: 10,
+                    currentPage: 1,
+                }
             
-                $scope.$watch('currentPagePlaylist', function() {
-                    $scope.paginationPlaylists = $scope.listPlaylistsDefault.slice(($scope.currentPagePlaylist - 1) * $scope.itemsPerPage, $scope.currentPagePlaylist * $scope.itemsPerPage);
+                $scope.$watch('currentPage', function() {
+                    $scope.paginationPlaylists = $scope.listPlaylistsDefault.slice(($scope.currentPage - 1) * $scope.itemsPerPage, $scope.currentPage * $scope.itemsPerPage);
                 }, true);
             })
         }
@@ -38,7 +47,24 @@
         }
         $scope.onDeletePlaylistMultiSelected = function () {
             $scope.multiSelect.forEach(element => {
-                playlistService.deletePlaylist(element._id);
+                playlistService.deletePlaylist(element._id).then(res=>{
+                    playlistService.getListPlaylists().then(function(data){
+                        $scope.listPlaylistsDefault = data.reverse();
+                    });
+                    if(res){
+                        $.notify({
+                            message: 'Delete playlist <b>successfully</b>' 
+                        },{
+                            type: 'success'
+                        });
+                    }
+                }, ()=>{
+                    $.notify({
+                        message: 'Delete playlist <b>failure</b>' 
+                    },{
+                        type: 'danger'
+                    });
+                });
             });
         }
         $scope.onEditPlaylist = function () {

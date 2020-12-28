@@ -7,12 +7,10 @@
     /** @ngInject */
     function Factory(){
         var factory = {};
-
         factory.onHandleSingleChange = function(song, listChecked, isCheckAll, arrMultiSelect, arrListSongs){
             if(listChecked[song._id]){
                 arrMultiSelect.push(song);
                 if(arrMultiSelect.length === arrListSongs.length){
-                    console.log('length', arrM);
                     isCheckAll = true;
                 }
             }
@@ -24,7 +22,10 @@
                 })
                 isCheckAll = false;
             }
-            return arrMultiSelect;
+            return {
+                array: arrMultiSelect,
+                checkAll: isCheckAll,
+            }
         }
         factory.onHandleCheckAll = function(listChecked, isCheckAll, arrMultiSelect, arrListSongs){
             if(isCheckAll){
@@ -42,9 +43,6 @@
             }
             return arrMultiSelect;
         }
-
         return factory;
-
     }
-
 }());

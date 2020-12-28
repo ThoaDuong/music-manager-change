@@ -15,13 +15,8 @@
         $scope.isCheckRemove = {};
         $scope.isAllRemove = {};
         $scope.multiSelectRemove = [];
-        
         $scope.listKindsOfMusic = CONSTANT.LIST_KINDS_OF_MUSIC;
-
-        $scope.$watch('defaultSongs', function(){
-            $scope.isNoItemSelected = $scope.selectedSongs && $scope.selectedSongs.length <= 0 ? true : false;
-            $scope.isNoItemDefault = $scope.defaultSongs && $scope.defaultSongs.length <= 0 ? true : false;
-        }, true)
+        $scope.arrTitleSong = CONSTANT.TITLE_SONG;
         
         init();
 
@@ -55,6 +50,10 @@
         
 
         $scope.onAddSelectedSong = function(){
+            if($scope.multiSelect.length === $scope.defaultSongs.length){
+                $scope.onAddAllSongs();
+                return;
+            }
             $scope.multiSelect.forEach(element => {
                 $scope.defaultSongs.forEach((item, index) => {
                     if(element._id === item._id){
@@ -64,26 +63,34 @@
             });
             $scope.selectedSongs = $scope.selectedSongs.concat($scope.multiSelect);
             $scope.multiSelect = [];
+
         }
         $scope.onAddAllSongs = function(){
+            songService.getListSongs().then(data => {
+                $scope.selectedSongs = data;
+            })
             $scope.defaultSongs = [];
-            $scope.selectedSongs = [].concat($scope.listSongsDefault);
             $scope.multiSelect = [];
         }
         $scope.onRemoveSelectedSong = function(){
+            if($scope.multiSelectRemove.length === $scope.selectedSongs.length){
+                $scope.onRemoveAllSongs();
+                return;
+            }
             $scope.multiSelectRemove.forEach(element => {
                 $scope.selectedSongs.forEach((item, index) => {
                     if(element._id === item._id){
                         $scope.selectedSongs.splice(index, 1);
                         $scope.defaultSongs.push(item);
-                        // $scope.defaultSongs = $scope.defaultSongs.concat([item]);
                     }
                 });
             });
             $scope.multiSelectRemove = [];
         }
         $scope.onRemoveAllSongs = function(){
-            $scope.defaultSongs = [].concat($scope.listSongsDefault);
+            songService.getListSongs().then(data => {
+                $scope.defaultSongs = data;
+            })
             $scope.selectedSongs = [];
             $scope.multiSelectRemove = [];
         }
@@ -96,8 +103,21 @@
                 songs: $scope.selectedSongs,
             }
             playlistService.addPlaylist(newPlaylist).then(data => {
+                if(data){
+                    $.notify({
+                        message: 'Create playlist <b>successfully</b>' 
+                    },{
+                        type: 'success'
+                    });
+                }
                 $scope.listPlaylistsDefault.push(data);
                 $location.path('/playlist');
+            }, ()=>{
+                $.notify({
+                    message: 'Create playlist <b>failure</b>' 
+                },{
+                    type: 'danger'
+                });
             })
             
             $scope.multiSelect = [];
@@ -110,7 +130,14 @@
                 name: $scope.playlistName,
                 songs: $scope.selectedSongs,
             }
-            playlistService.updatePlaylist(updatePlaylist).then(() => {
+            playlistService.updatePlaylist(updatePlaylist).then((data) => {
+                if(data){
+                    $.notify({
+                        message: 'Update playlist <b>successfully</b>' 
+                    },{
+                        type: 'success'
+                    });
+                }
                 $rootScope.playlistEdit = {
                     _id: -1,
                     name: '',
@@ -119,6 +146,12 @@
                 }
                 $rootScope.isEditPlaylist = false;
                 $location.path('playlist');
+            }, ()=>{
+                $.notify({
+                    message: 'Update playlist <b>failure</b>' 
+                },{
+                    type: 'danger'
+                });
             });
             
         }

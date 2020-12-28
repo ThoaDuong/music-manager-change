@@ -298,12 +298,6 @@ html, body {
   margin: 5px 0;
 }
 
-.main-content .template tbody {
-  display: block;
-  height: 32vh;
-  overflow: auto;
-}
-
 .main-content .template thead, .main-content .template tbody tr {
   display: table;
   width: 100%;
@@ -442,12 +436,18 @@ tbody {
   overflow: auto;
 }
 
-.custom-tbody {
+.detail tbody {
   display: block;
   height: auto;
   overflow: auto;
   max-height: 40vh;
   min-height: 80px;
+}
+
+.detail .no-item, .detail .no-item-detail {
+  top: 60%;
+  -webkit-transform: translate(-50%, 0%);
+          transform: translate(-50%, 0%);
 }
 
 thead, tbody tr {
@@ -550,5 +550,10 @@ input[type=text]:focus {
 
 .table-responsive-sm {
   position: relative;
+}
+
+[data-notify="container"] {
+  margin-top: 60px !important;
+  width: 350px;
 }
 /*# sourceMappingURL=style.css.map */

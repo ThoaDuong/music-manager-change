@@ -39,19 +39,19 @@
         <div class="col-12">
             <div class="table-responsive-sm manage">
                 <table-directive
-                    type = 'playlist'
+                    arr-title = 'arrTitlePlaylist'
                     array = 'listPlaylistsDefault'
                     arr-pagination = 'paginationPlaylists'
                     multi-select = 'multiSelect'
                     search-key-word = 'keyWordPlaylist'
-                    items-per-page = 'itemsPerPage'
-                    current-page = 'currentPagePlaylist'
-                    detail-playlist = 'detailPlaylist'
+                    items-per-page = 'pagination_playlist.itemsPerPage'
+                    current-page = 'pagination_playlist.currentPage'
+                    on-view-detail-playlist = 'onViewDetail(param)'
                 ></table-directive>
                 <pagination-directive
-                    total-items = "totalItems"
-                    items-per-page = "itemsPerPage"
-                    current-page = "currentPagePlaylist"
+                    total-items = "pagination_playlist.totalItems"
+                    items-per-page = "pagination_playlist.itemsPerPage"
+                    current-page = "pagination_playlist.currentPage"
                 ></pagination-directive>
             </div>
             <!-- Model -->

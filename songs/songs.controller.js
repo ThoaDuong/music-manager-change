@@ -5,13 +5,13 @@
     musicManager.controller('songsController', ControllerCtrl)
 
     /** @ngInject */
-    function ControllerCtrl($scope, $location, songService, playlistService, $rootScope) {
+    function ControllerCtrl($scope, $location, songService, playlistService, $rootScope, CONSTANT) {
         $scope.isCheck = {};
         $scope.isAll = {};
         $scope.multiSelect = [];
         $scope.isSingleSelectSong = false;
-        $scope.isCheckAnySong = false;   
-
+        $scope.isCheckAnySong = false; 
+        $scope.arrTitleSong = CONSTANT.TITLE_SONG;  
 
         $scope.$watch('multiSelect', function(){
             $scope.isSingleSelectSong = $scope.multiSelect.length === 1 ? true : false;
@@ -24,9 +24,11 @@
                 $scope.listSongsDefault = data.reverse();
     
                 //Pagination
-                $scope.totalItems = $scope.listSongsDefault.length;
-                $scope.itemsPerPage = 10;
-                $scope.currentPage = 1;
+                $scope.pagination_song = {
+                    totalItems:  $scope.listSongsDefault.length,
+                    itemsPerPage: 10,
+                    currentPage: 1,
+                }
             
                 $scope.$watch('currentPage', function() {
                     $scope.paginationSongs = $scope.listSongsDefault.slice(($scope.currentPage - 1) * $scope.itemsPerPage, $scope.currentPage * $scope.itemsPerPage);
@@ -47,9 +49,22 @@
         }
 
         var onConfirmDeleteSong = function (id) {
-            songService.deleteSong(id).then(()=>{
+            songService.deleteSong(id).then((del)=>{
+                if(del){
+                    $.notify({
+                        message: 'Delete song <b>successfully</b>' 
+                    },{
+                        type: 'success'
+                    });
+                }
                 songService.getListSongs().then(data=>{
                     $scope.listSongsDefault = data.reverse();
+                });
+            }, ()=>{
+                $.notify({
+                    message: 'Delete song <b>failure</b>' 
+                },{
+                    type: 'danger'
                 });
             });
             playlistService.getListPlaylists().then(data => {
