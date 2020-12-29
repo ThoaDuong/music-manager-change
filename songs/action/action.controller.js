@@ -15,14 +15,14 @@
             songService.addSong(song).then((data)=>{
                 if(data){
                    $.notify({
-                        message: 'Create song <b>successfully</b>' 
+                        message: 'Create song <b>' + data.name + '</b> successfully' 
                     },{
                         type: 'success',
                     });
                 }
             }, ()=>{
                 $.notify({
-                    message: 'Create song <b>failure</b>' 
+                    message: 'Create song <b>' + song.name + '</b> failure' 
                 },{
                     type: 'danger'
                 });
@@ -34,14 +34,14 @@
             songService.updateSong(song).then(data=>{
                 if(data){
                     $.notify({
-                        message: 'Update song <b>successfully</b>' 
+                        message: 'Update song <b>' + data.name + '</b> successfully' 
                     },{
                         type: 'success'
                     });
                 }
             }, ()=>{
                 $.notify({
-                    message: 'Update song <b>failure</b>' 
+                    message: 'Update song <b>' + song.name + '</b> failure' 
                 },{
                     type: 'danger'
                 });

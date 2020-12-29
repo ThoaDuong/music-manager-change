@@ -409,7 +409,7 @@ input[type=text]:focus{
 .btn.btn-primary:disabled{
     background-color: #222222;
     border-color: #222222;
-    opacity: 0.2;
+    opacity: 0.4;
 }
 
 .notify{
@@ -424,6 +424,12 @@ input[type=text]:focus{
 
 [data-notify="container"] {
     margin-top: 60px!important;
-    width: 350px;
+    width: 420px;
+}
+.template__btn:disabled{
+    background-color: #222222;
+    border-color: #222222;
+    opacity: 0.4;
+    color: white;
 }
 

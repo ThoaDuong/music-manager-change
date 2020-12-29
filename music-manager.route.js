@@ -1,7 +1,7 @@
 musicManager.config(function($locationProvider, $routeProvider){
     $locationProvider.hashPrefix('');
     $routeProvider
-    .when('', {
+    .when('/', {
         templateUrl: 'songs/view/songs.view.html',
         controller: 'songsController',
     })

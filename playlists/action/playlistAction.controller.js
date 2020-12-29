@@ -17,7 +17,12 @@
         $scope.multiSelectRemove = [];
         $scope.listKindsOfMusic = CONSTANT.LIST_KINDS_OF_MUSIC;
         $scope.arrTitleSong = CONSTANT.TITLE_SONG;
-        
+        $scope.action = {
+            isDisableAdd: false,
+            isDisableAddAll: false,
+            isDisableRemove: false,
+            isDisableRemoveAll: false,
+        }
         init();
 
         function init(){
@@ -27,7 +32,6 @@
             songService.getListSongs().then(data => {
                 $scope.listSongsDefault = data;
                 $scope.defaultSongs = data;
-                $scope.arrTitle = Object.keys(data[0]);
 
                 $scope.isNoItemSelected = $scope.selectedSongs.length <= 0 ? true : false;
                 $scope.isNoItemDefault = $scope.defaultSongs.length <= 0 ? true : false;
@@ -48,6 +52,21 @@
             })
         }
         
+        $scope.$watch('multiSelect', function(){
+            $scope.action.isDisableAdd = $scope.multiSelect.length <= 0 ? true : false;
+            $scope.action.isDisableRemove = $scope.multiSelectRemove.length <= 0 ? true : false;
+        }, true)
+        $scope.$watch('multiSelectRemove', function(){
+            $scope.action.isDisableRemove = $scope.multiSelectRemove.length <= 0 ? true : false;
+            $scope.action.isDisableAdd = $scope.multiSelect.length <= 0 ? true : false;
+        }, true)
+        $scope.$watch('defaultSongs', function(){
+            $scope.action.isDisableAddAll = $scope.defaultSongs && $scope.defaultSongs.length <= 0 ? true : false;
+        }, true)
+        $scope.$watch('selectedSongs', function(){
+            $scope.action.isDisableRemoveAll = $scope.selectedSongs.length <= 0 ? true : false;
+        }, true)
+        
 
         $scope.onAddSelectedSong = function(){
             if($scope.multiSelect.length === $scope.defaultSongs.length){
@@ -63,7 +82,6 @@
             });
             $scope.selectedSongs = $scope.selectedSongs.concat($scope.multiSelect);
             $scope.multiSelect = [];
-
         }
         $scope.onAddAllSongs = function(){
             songService.getListSongs().then(data => {
@@ -105,7 +123,7 @@
             playlistService.addPlaylist(newPlaylist).then(data => {
                 if(data){
                     $.notify({
-                        message: 'Create playlist <b>successfully</b>' 
+                        message: 'Create playlist <b>' + data.name + '</b> successfully' 
                     },{
                         type: 'success'
                     });
@@ -114,7 +132,7 @@
                 $location.path('/playlist');
             }, ()=>{
                 $.notify({
-                    message: 'Create playlist <b>failure</b>' 
+                    message: 'Create playlist <b>' + newPlaylist.name + '</b> failure' 
                 },{
                     type: 'danger'
                 });
@@ -133,7 +151,7 @@
             playlistService.updatePlaylist(updatePlaylist).then((data) => {
                 if(data){
                     $.notify({
-                        message: 'Update playlist <b>successfully</b>' 
+                        message: 'Update playlist <b>' + data.name + '</b> successfully' 
                     },{
                         type: 'success'
                     });
@@ -148,7 +166,7 @@
                 $location.path('playlist');
             }, ()=>{
                 $.notify({
-                    message: 'Update playlist <b>failure</b>' 
+                    message: 'Update playlist <b>' + updatePlaylist.name + '</b> failure' 
                 },{
                     type: 'danger'
                 });

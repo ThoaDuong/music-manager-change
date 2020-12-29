@@ -2,10 +2,10 @@
     <div class="form-group number-select">
         <label> {{itemsPerPageText | i18next}}:</label>
         <select name=" | i18next" ng-model="selectNumberOfItems" ng-change="onChangeSelect(selectNumberOfItems)">
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="20">20</option>
-            <option value="50">50</option>
+            <option value="{{fixNumber}}"> {{fixNumber}} </option>
+            <option value="{{fixNumber*2}}"> {{fixNumber*2}} </option>
+            <option value="{{fixNumber*5}}"> {{fixNumber*5}} </option>
+            <option value="{{fixNumber*10}}"> {{fixNumber*10}} </option>
         </select>
     </div>
     <nav aria-label="Page navigation example">
@@ -14,10 +14,10 @@
                 ng-click="onClickPrevious()">
                 <a class="page-link" tabindex="-1">{{previousText | i18next}}</a>
             </li>
-            <li ng-repeat="item in arrValuePage" 
-            class="page-item {{currentPage === item.page ? 'active' : ''}}"
-            ng-click="onClickMovePage(item.page)">
-                <a class="page-link"> {{item.page}} </a>
+            <li ng-repeat="x in [].constructor(numberOfPage) track by $index" 
+            class="page-item {{currentPage === $index+1 ? 'active' : ''}}"
+            ng-click="onClickMovePage($index+1)">
+                <a class="page-link"> {{$index+1}} </a>
             </li>
             <li class="page-item {{currentPage === numberOfPage ? 'disabled': ''}}"
                 ng-click="onClickNext()">

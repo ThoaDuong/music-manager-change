@@ -19,22 +19,20 @@
             $scope.isCheckAnyPlaylist = $scope.multiSelect.length > 0 ? true : false;
         }, true)
 
-        $scope.onViewDetail = (param) =>{
+        $scope.onViewDetailPlaylist = (param) =>{
             $scope.detailPlaylist = param;
         }
         
-        
+        //Pagination
+        $scope.pagination_playlist = {
+            itemsPerPage: 5,
+            currentPage: 1,
+        }
         init();
         function init() {
             playlistService.getListPlaylists().then(function(data){
                 $scope.listPlaylistsDefault = data.reverse();
-    
-                //Pagination
-                $scope.pagination_playlist = {
-                    totalItems: $scope.listPlaylistsDefault.length,
-                    itemsPerPage: 10,
-                    currentPage: 1,
-                }
+                $scope.pagination_playlist.totalItems = $scope.listPlaylistsDefault.length;
             
                 $scope.$watch('currentPage', function() {
                     $scope.paginationPlaylists = $scope.listPlaylistsDefault.slice(($scope.currentPage - 1) * $scope.itemsPerPage, $scope.currentPage * $scope.itemsPerPage);
@@ -53,14 +51,14 @@
                     });
                     if(res){
                         $.notify({
-                            message: 'Delete playlist <b>successfully</b>' 
+                            message: 'Delete playlist <b>' + res.name + '</b> successfully' 
                         },{
                             type: 'success'
                         });
                     }
                 }, ()=>{
                     $.notify({
-                        message: 'Delete playlist <b>failure</b>' 
+                        message: 'Delete playlist <b>' + element.name + '</b> failure' 
                     },{
                         type: 'danger'
                     });

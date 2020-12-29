@@ -14,7 +14,7 @@
             <span ng-if="isNoItem" class="no-item">{{'noItem' | i18next}} </span>
             <tr
                 ng-repeat="item in arrPagination = (array | filter : searchKeyWord | limitTo: itemsPerPage : itemsPerPage*(currentPage-1)) track by $index"
-                ng-click="onViewDetailPlaylist({param: item})"
+                ng-click="onViewDetail({param: item})"
             >
                 <td ng-if="multiSelect" width="60px" class="text-center">
                     <input ng-change="onSingleSelectChange(item)" ng-model="listChecked[item._id]" type="checkbox">

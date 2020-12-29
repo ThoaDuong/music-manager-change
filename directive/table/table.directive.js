@@ -17,11 +17,11 @@
                 searchKeyWord: '=',
                 itemsPerPage: '=',
                 currentPage : '=',
-                onViewDetailPlaylist: '&'
+                onViewDetail: '&',
             },
             link: function(scope){
                 scope.listChecked = {};
-                scope.data = {};
+                scope.dataCheck = {};
                 scope.array = [];
                 scope.$watch('array', function(defaultArray){
                     scope.isNoItem = defaultArray.length <= 0 ? true : false;
@@ -31,20 +31,15 @@
                         defaultArray.forEach(element => {
                             scope.listChecked[element._id] = false;
                         });
-                        scope.data.isCheckAll = false;
+                        scope.dataCheck.isCheckAll = false;
                     }
                 }, true)
-                // scope.$watch('currentPage', function() {
-                //     scope.paginationSongs = scope.listSongsDefault.slice((scope.currentPage - 1) * scope.itemsPerPage, scope.currentPage * scope.itemsPerPage);
-                // }, true);
                 
                 scope.onSingleSelectChange = (song)=>{
-                    var result = selectService.onHandleSingleChange(song, scope.listChecked, scope.data.isCheckAll, scope.multiSelect, scope.array);
-                    scope.multiSelect = result.array;
-                    scope.data.isCheckAll = result.checkAll;
+                    scope.multiSelect = selectService.onHandleSingleChange(song, scope.listChecked, scope.dataCheck, scope.multiSelect, scope.array);
                 }
                 scope.onCheckAllSelectChange = function () {
-                    scope.multiSelect = selectService.onHandleCheckAll(scope.listChecked, scope.data.isCheckAll, scope.multiSelect, scope.array);
+                    scope.multiSelect = selectService.onHandleCheckAll(scope.listChecked, scope.dataCheck.isCheckAll, scope.multiSelect, scope.array);
                 }
             }
         }

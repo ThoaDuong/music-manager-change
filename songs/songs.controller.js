@@ -17,24 +17,25 @@
             $scope.isSingleSelectSong = $scope.multiSelect.length === 1 ? true : false;
             $scope.isCheckAnySong = $scope.multiSelect.length > 0 ? true : false;
         }, true)
+
+        $scope.pagination_song = {
+            itemsPerPage: 5,
+            currentPage: 1,
+        }
         
         init();
         function init() {
             songService.getListSongs().then(function(data){
                 $scope.listSongsDefault = data.reverse();
-    
-                //Pagination
-                $scope.pagination_song = {
-                    totalItems:  $scope.listSongsDefault.length,
-                    itemsPerPage: 10,
-                    currentPage: 1,
-                }
-            
+                $scope.pagination_song.totalItems = $scope.listSongsDefault.length;
+
                 $scope.$watch('currentPage', function() {
                     $scope.paginationSongs = $scope.listSongsDefault.slice(($scope.currentPage - 1) * $scope.itemsPerPage, $scope.currentPage * $scope.itemsPerPage);
                 }, true);
             })
         }
+
+        
 
         $scope.onEditSong = function () {
             var song = $scope.multiSelect[0];
@@ -48,11 +49,11 @@
             $location.path("/song");
         }
 
-        var onConfirmDeleteSong = function (id) {
-            songService.deleteSong(id).then((del)=>{
-                if(del){
+        var onConfirmDeleteSong = function (song) {
+            songService.deleteSong(song._id).then((data)=>{
+                if(data){
                     $.notify({
-                        message: 'Delete song <b>successfully</b>' 
+                        message: 'Delete song <b>' + data.name + '</b> successfully' 
                     },{
                         type: 'success'
                     });
@@ -62,7 +63,7 @@
                 });
             }, ()=>{
                 $.notify({
-                    message: 'Delete song <b>failure</b>' 
+                    message: 'Delete song  <b>' + song.name + '</b> failure' 
                 },{
                     type: 'danger'
                 });
@@ -70,7 +71,7 @@
             playlistService.getListPlaylists().then(data => {
                 data.forEach(playlist => {
                     playlist.songs.forEach((element, index) => {
-                        if (element._id === id) {
+                        if (element._id === song._id) {
                             playlist.songs.splice(index, 1);
                             playlistService.updatePlaylist(playlist);
                         }
@@ -80,7 +81,7 @@
         }
         $scope.onMultiDelete = function () {
             $scope.multiSelect.forEach(function (ele) {
-                onConfirmDeleteSong(ele._id);
+                onConfirmDeleteSong(ele);
                 $scope.multiSelect = [];
             })
         }
